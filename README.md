@@ -14,3 +14,5 @@ Vous connaissez Excel? Ben c'est nous en mieux.
 - Mohamed Koucha (Être humain (Je suppose))
 
 Balthazar : suis Balthazar hihi
+
+À faire : regarder la bibliothèque SpaCy
