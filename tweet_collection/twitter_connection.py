@@ -19,6 +19,3 @@ class TwitterConnection:
 
         # Return API with authentication:
         self.api = tweepy.API(auth)
-        
-
-
