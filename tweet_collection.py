@@ -14,6 +14,3 @@ class TweetCollection:
 
         # Return API with authentication:
         self.api = tweepy.API(auth)
-        
-
-    
