@@ -1,9 +1,8 @@
 # Project of the coding weeks 2020-2021 of the Uranus Team
-
+Salut
 
 ## Description
 
-This project is the XXXX project of the first week of the CentraleSupélec Coding weeks.
-
+Je suis Mohamed.
 
 ## The Uranus Team
