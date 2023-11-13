@@ -1,6 +1,8 @@
 from credentials import *
 import tweepy
 
+
+
 class TwitterConnection:
     """
     Object used to access the twitter API

@@ -7,5 +7,4 @@
 
 - Anas Lecaillon (Maitre de l'Univers (Entre autres))
 - Mohamed Koucha (Être humain (Je suppose))
-
-Balthazar : suis Balthazar hihi
+- Balthazar : suis Balthazar hihi
