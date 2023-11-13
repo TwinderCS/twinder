@@ -6,3 +6,5 @@ Salut
 Je suis Mohamed.
 
 ## The Uranus Team
+
+- Anas Lecaillon (Maitre de l'Univers (Entre autres))
