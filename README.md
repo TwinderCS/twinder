@@ -2,6 +2,11 @@
 
 ## Description
 
+Ceci n'a en faite rien avoir avec twitter,
+c'est une simple lecture de CSV + traitement de données
+
+Vous connaissez Excel? Ben c'est nous en mieux.
+
 
 ## The Uranus Team
 
