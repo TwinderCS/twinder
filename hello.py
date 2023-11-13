@@ -1,5 +1,11 @@
-from tweet_collection import twitter_connection as tc
+from tweet_collection.collection import TweetCollector
 
-connection = tc.TwitterConnection()
-
-print(connection.api)
+collector = TweetCollector()
+tweets = collector.search_collect("Emmanuel Macron")
+statuses = collector.user_collect("@elonmusk")
+print("Tweets")
+for tweet in tweets:
+    print(tweet.text)
+print("Statuses")
+for status in statuses:
+    print(status.text)
