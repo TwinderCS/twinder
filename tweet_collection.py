@@ -16,4 +16,4 @@ class TweetCollection:
         self.api = tweepy.API(auth)
         
 
-    
+
