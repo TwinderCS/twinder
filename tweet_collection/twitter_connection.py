@@ -1,7 +1,10 @@
 from credentials import *
 import tweepy
 
-class TweetCollection:
+class TwitterConnection:
+    """
+    Object used to access the twitter API
+    """
     def __init__(self):
         """
         Utility function to setup the Twitter's API
