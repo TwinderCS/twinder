@@ -24,13 +24,17 @@ def create_image(frequencies):
 
     wc = WordCloud(font_path="../dumps/font.ttf", max_words=1000, background_color="white", mask=twitter_mask, stopwords=STOPWORDS)
     wc.generate_from_frequencies(frequencies)
+    return wc
 
-    plt.imshow(wc, interpolation="bilinear")
+def show_wordcloud(cloud):
+    plt.imshow(cloud, interpolation="bilinear")
     plt.axis("off")
     plt.show()
   
     
-df = pd.read_pickle("../dumps/df.pkl")
-freq = word_freq(df['text'])
-create_image(freq)
+def test_wordcloud():
+    df = pd.read_pickle("../dumps/df.pkl")
+    freq = word_freq(df['text'])
+    cloud = create_image(freq)
+    show_wordcloud(cloud)
     
