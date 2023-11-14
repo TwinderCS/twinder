@@ -2,7 +2,7 @@ import pandas as pd
 from pandas import DataFrame
 from textblob import TextBlob, Word
 from nltk.corpus import stopwords
-from classifierData import *
+from classifier_data import *
 from textblob.classifiers import NaiveBayesClassifier
 
 
@@ -41,16 +41,3 @@ print(get_opinion_rate(["This is cool !"]))
 #print(cl.classify("This is cool"))
 #print(getLemmasFromTweets(['octopi are cool creatures', 'guys and girls']))
 #print(TextBlob("This is cool").classify())
-"""
-import nltk
-import ssl
-
-try:
-    _create_unverified_https_context = ssl._create_unverified_context
-except AttributeError:
-    pass
-else:
-    ssl._create_default_https_context = _create_unverified_https_context
-
-nltk.download()
-"""

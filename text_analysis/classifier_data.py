@@ -10,6 +10,7 @@ opinions = df['polarity'].to_numpy()
 train_from_df = [(tweets[i], opinions[i]) for i in range(len(tweets))]
 np.random.shuffle(train_from_df)
 train_from_df = train_from_df[0:10000]
+
 train = [('I love this sandwich.', 'pos'),
     ('this is an amazing place!', 'pos'),
     ('I feel very good about these beers.', 'pos'),
