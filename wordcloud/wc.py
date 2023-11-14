@@ -4,7 +4,7 @@ from matplotlib import pyplot as plt
 from wordcloud import WordCloud, STOPWORDS
 from PIL import Image
 
-# Generates a word cloud (taking into account the frequency of words in tweets)
+# Generates a word cloud (taking into account the frequency of hashtags in tweets)
 
 def word_freq(texts):
     freq = {}
