@@ -8,7 +8,7 @@ from nltk.corpus import stopwords
 wiki = TextBlob("I hated that guys octopi")
 
 
-def getLemmasFromTweets(tweets):
+def get_lemmas_from_tweets(tweets):
     ret = []
     for tweet in tweets:
         tB_tweet = TextBlob(tweet)
