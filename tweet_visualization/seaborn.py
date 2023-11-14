@@ -6,11 +6,11 @@ import pandas as pd
 #ou remplacer par dataset = pd.read_csv()
 dataset = pd.read_pickle("../dumps/df.pkl")
 
-cmap = sns.cubehelix_palette(rot=-.2, as_cmap=True)
+#cmap = sns.cubehelix_palette(8)
 graph = sns.relplot(
     data=dataset,
     x="date", y="positivity",
-    palette=cmap, sizes=(10, 200),
+    palette=None, sizes=(10, 200),
 )
 graph.set(xscale="log", yscale="log")
 graph.ax.xaxis.grid(True, "minor", linewidth=.25)
