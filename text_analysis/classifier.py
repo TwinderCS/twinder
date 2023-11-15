@@ -14,22 +14,32 @@ import pytorch_lightning as pl
 ## TOKENIZATION
 
 tokenizer = get_tokenizer('basic english')
-
 def yield_tokens(data):
     for text in data['text']:
         yield tokenizer(text)
 
-vocab = build_vocab_from_iterator(iterator=yield_tokens(DATAFRAME), specials=["<unk>", "<pad>"])
+vocab = build_vocab_from_iterator(iterator=yield_tokens(dataframe), specials=["<unk>", "<pad>"])
 vocab.set_default_index(vocab["<unk>"])
 
+def gen_dataset(dataframe, classes, class):
+    # assign an index to each class
+    dataframe['class'] = dataframe[class].map({classes[idx]: idx for idx in range(len(classes))})
+    dataframe['tokens'] = dataframe['text'].map(tokenizer)
+    max_len = dataframe['tokens'].map(lambda x: len(x)).max()
+    # add padding
+    dataframe['tokens'] = dataframe['tokens'].map(lambda tokens: tokens + ["<pad>"] * (max_len - len(tokens)))
+    dataframe['token_ids'] = dataframe['tokens'].map(vocab)
 
+    return dataframe['class'], dataframe['token_ids'].to_numpy()
 
-EPOCHS = 10
-LEARNING_RATE = 1e-3
-BATCH_SIZE = 64
-VOCAB_LEN = len(vocab)
-VOCAB = vocab
+def split_dataset(dataset, percent=0.7):
+    train_amount = int(len(data) * percent) # approx percent% des donnees
+    return dataset[:train_amount], dataset[train_amount:]
 
+def yield_batches(x, y):
+    for i in range(len(x)):
+        yield (x[i], y[i])
+   
 class NLPModel(nn.Module):
     def __init__(self):
         super().__init__(vocab_size, embedding_dim, hidden_dim, output_dim):
