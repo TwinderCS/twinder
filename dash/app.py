@@ -35,7 +35,7 @@ app.layout = dmc.Stack(
                 children=[
                     dmc.Stack(
                         children=[
-                            dmc.Text("Voici un compte bg"),
+                            dmc.Text("Tu as le choix, on prend les deux"),
                             dmc.SimpleGrid(
                                 cols=2,
                                 children=[
