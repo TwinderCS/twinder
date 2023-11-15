@@ -27,7 +27,7 @@ countdown_input = dcc.Input(
 
 button = dbc.Button(
     id="countdown-button",
-    children="Start Countdown",
+    children="Submit",
     n_clicks=0,
     size="lg",
     style={"font-size": "1.6rem"},
@@ -59,7 +59,7 @@ app.layout = dbc.Container(
         dbc.Row(
             [
                 dbc.Col(
-                    [html.H2("Enter countdown in seconds"), countdown_input, button],
+                    [html.H2("Enter a user ID"), countdown_input, button],
                     lg=6,
                 )
             ],
