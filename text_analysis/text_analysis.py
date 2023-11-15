@@ -47,8 +47,3 @@ def get_opinion_rate(tweets):
 
 
 
-#print(get_opinion_rate(["This is cool !"]))
-##cl = get_new_classifier()
-#save_classifier(cl)
-#print(cl.classify("This is cool"))
-#print("Done")
