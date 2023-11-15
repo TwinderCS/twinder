@@ -21,9 +21,9 @@ def yield_tokens(data):
 vocab = build_vocab_from_iterator(iterator=yield_tokens(dataframe), specials=["<unk>", "<pad>"])
 vocab.set_default_index(vocab["<unk>"])
 
-def gen_dataset(dataframe, classes, class):
+def gen_dataset(dataframe, classes, classname):
     # assign an index to each class
-    dataframe['class'] = dataframe[class].map({classes[idx]: idx for idx in range(len(classes))})
+    dataframe['class'] = dataframe[classname].map({classes[idx]: idx for idx in range(len(classes))})
     dataframe['tokens'] = dataframe['text'].map(tokenizer)
     max_len = dataframe['tokens'].map(lambda x: len(x)).max()
     # add padding

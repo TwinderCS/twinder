@@ -63,7 +63,6 @@ trainer = pl.Trainer(
 
 
 topic_model = Model(len(TOPICS))
-emotion_model = Model(len(EMOTIONS))
 
 trainer.fit(
     model=...,
