@@ -21,10 +21,20 @@ control_panel = dbc.Card(
     )
 )
 
-app.layout = html.Div(
-    [heading,dbc.Row([dbc.Col(control_panel, md = 4)])]
+
+button = dbc.Button(
+    id='submit',
+    children="Submit",
+    n_clicks=0,
+    size="lg",
+    className="mt-2",
 )
 
+app.layout = html.Div(
+    [heading,dbc.Row([dbc.Col(control_panel, md = 4)]), dbc.Row([dbc.Col(button,md=4)],justify="center"),
+    html.Div(id='my-output')]
+)
+#app.layout = html.Div([html.Div(id='my-output')])
 """app.layout = html.Div(
     html.Br(),
     html.Div(id='my-output'))"""
@@ -42,12 +52,12 @@ app.layout = html.Div(
 
 
 
-"""@callback(
+@callback(
     Output(component_id='my-output', component_property='children'),
     Input(component_id='user', component_property='value')
 )
 def update_output_div(input_value):
-    return f'Output: {input_value}'"""
+    return f'Output: {input_value}'
 
 
 if __name__ == '__main__':
