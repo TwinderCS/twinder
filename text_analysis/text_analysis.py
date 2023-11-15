@@ -7,7 +7,7 @@ from textblob.classifiers import NaiveBayesClassifier
 
 
 #train du classifier
-cl = NaiveBayesClassifier(train_from_df)
+cl = NaiveBayesClassifier(train) #NaiveBayesClassifier(train_from_df)
 df = pd.read_pickle("dumps/df.pkl")
 
 #wiki = TextBlob("I hated that guys octopi")

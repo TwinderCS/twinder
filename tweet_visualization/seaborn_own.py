@@ -10,7 +10,7 @@ print(dataset.columns)
 #cmap = sns.cubehelix_palette(8)
 graph = sns.relplot(
     data=dataset,
-    x="date", y="polarity",
+    x="polarity", y="polarity",
     palette=None, sizes=(10, 200),
 )
 graph.set(xscale="log", yscale="log")
