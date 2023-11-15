@@ -43,6 +43,7 @@ def create_emotion_dataframe(location = "dumps/emotion.csv", save = True):
     df = pd.read_csv(location)
     if save:
         df.to_pickle('dumps/emotion.pkl')
+    
 
 def create_topic_dataframe(location = "dumps/topic.csv", save = True):
     df = pd.read_csv(location)
