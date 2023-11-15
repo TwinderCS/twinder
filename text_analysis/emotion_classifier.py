@@ -3,9 +3,10 @@ from pytorch_lightning.loggers import WandbLogger
 import wandb
 from torch.utils.data import Dataset
 from torch.utils.data import DataLoader
+from torch import from_numpy
 from classifier_data import DATAFRAME
 import pytorch_lightning as pl
-from classifier import Model, tokenizer, gen_dataset, gen_batches, split_dataset, yield_batches
+from classifier import Model, tokenizer, gen_dataset, split_dataset, yield_batches
 from data_handling import create_emotion_dataframe
 from os.path import isfile
 import pandas as pd
@@ -20,6 +21,7 @@ EPOCHS = 10
 LEARNING_RATE = 1e-3
 BATCH_SIZE = 64
 EMOTIONS = ["joy", "sadness", "fear", "anger", "surprise", "neutral"]
+VOCAB_LEN = 10000
 
 data_y, data_x = gen_dataset(emotion, EMOTIONS, "emotion")
 
@@ -30,10 +32,10 @@ train_x = train_x.reshape(len(train_x) // BATCH_SIZE, BATCH_SIZE, len(train_x[0]
 test_x = test_x.reshape(len(test_x) // BATCH_SIZE, BATCH_SIZE, len(test_x[0]))
 train_y = train_y.reshape(len(train_y) // BATCH_SIZE, BATCH_SIZE, 1)
 test_y = test_y.reshape(len(test_y) // BATCH_SIZE, BATCH_SIZE, 1)
-train_x = torch.from_numpy(train_x).float()
-train_y = torch.from_numpy(train_y).float()
-test_x = torch.from_numpy(test_x).float()
-test_y = torch.from_numpy(test_y).float()
+train_x = from_numpy(train_x).float()
+train_y = from_numpy(train_y).float()
+test_x = from_numpy(test_x).float()
+test_y = from_numpy(test_y).float()
 
 train = [batch for batch in yield_batches(train_x, train_y)]
 test = [batch for batch in yield_batches(test_x, test_y)]
@@ -60,7 +62,7 @@ trainer = pl.Trainer(
 )
 
 
-emotion_model = Model(len(EMOTIONS))
+emotion_model = Model(VOCAB_LEN, len(EMOTIONS), LEARNING_RATE)
 
 trainer.fit(
     model=emotion_model,

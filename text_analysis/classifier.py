@@ -10,7 +10,6 @@ from torchtext.vocab import build_vocab_from_iterator
 from classifier_data import DATAFRAME
 import pytorch_lightning as pl
 
-
 ## TOKENIZATION
 
 tokenizer = get_tokenizer('basic english')
@@ -18,7 +17,7 @@ def yield_tokens(data):
     for text in data['text']:
         yield tokenizer(text)
 
-vocab = build_vocab_from_iterator(iterator=yield_tokens(dataframe), specials=["<unk>", "<pad>"])
+vocab = build_vocab_from_iterator(iterator=yield_tokens(DATAFRAME), specials=["<unk>", "<pad>"])
 vocab.set_default_index(vocab["<unk>"])
 
 def gen_dataset(dataframe, classes, classname):
@@ -33,7 +32,7 @@ def gen_dataset(dataframe, classes, classname):
     return dataframe['class'], dataframe['token_ids'].to_numpy()
 
 def split_dataset(dataset, percent=0.7):
-    train_amount = int(len(data) * percent) # approx percent% des donnees
+    train_amount = int(len(dataset) * percent) # approx percent% des donnees
     return dataset[:train_amount], dataset[train_amount:]
 
 def yield_batches(x, y):
@@ -41,8 +40,8 @@ def yield_batches(x, y):
         yield (x[i], y[i])
    
 class NLPModel(nn.Module):
-    def __init__(self):
-        super().__init__(vocab_size, embedding_dim, hidden_dim, output_dim):
+    def __init__(self, vocab_size, embedding_dim, hidden_dim, output_dim):
+        super().__init__()
         self.embedding = nn.Embedding(vocab_size, embedding_dim)
         self.hidden1 = nn.Linear(embedding_dim, hidden_dim)
         self.hidden2 = nn.Linear(hidden_dim, output_dim)
@@ -60,10 +59,11 @@ class NLPModel(nn.Module):
         return out
 
 class Model(pl.LightningModule):
-    def __init__(self, output_dim):
+    def __init__(self, vocab_len, output_dim, learning_rate):
         super().__init__()
-        self.model = NLPModel(VOCAB_LEN, 1000, 256, output_dim)
+        self.model = NLPModel(vocab_len, 1000, 256, output_dim)
         self.loss = nn.CrossEntropyLoss()
+        self.learning_rate = learning_rate
 
     def training_step(self, batch):
         x, y = batch
@@ -84,8 +84,8 @@ class Model(pl.LightningModule):
         loss = self.loss(y_hat, y)
         self.log("test_loss", loss, prog_bar=True)
 
-    def configure_optimizers(self, lr=LEARNING_RATE):
-        return optim.Adam(self.parameters(), lr=lr)
+    def configure_optimizers(self):
+        return optim.Adam(self.parameters(), lr=self.learning_rate)
 
 
 

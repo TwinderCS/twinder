@@ -2,18 +2,22 @@ import pandas as pd
 
 def get_hashtags(text):
     tgs = []
-    for word in text.split(" ")
+    for word in text.split(" "):
         try:
             if word[0] == "#":
                 tgs.append(word)
+        except:
+            pass
     return tgs
 
 def get_mentions(text):
     mts = []
-    for word in text.split(" ")
+    for word in text.split(" "):
         try:
             if word[0] == "@":
                 mts.append(word)
+        except:
+            pass
     return mts
 
 def polarity(num):
