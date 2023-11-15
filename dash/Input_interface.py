@@ -1,4 +1,4 @@
-from dash import Dash, dcc, html, Input, Output, callback
+from dash import Dash, dcc, html, Input, Output, State,callback
 import numpy as np
 import plotly.express as px
 import dash_bootstrap_components as dbc
@@ -55,12 +55,13 @@ app.layout = html.Div(
 @callback(
     Output(component_id='my-output', component_property='children'),
     Input(component_id='user', component_property='value'),
-    Input(component_id="submit", component_property="n_clicks")
+    [Input(component_id="submit", component_property="n_clicks")],
+    #state = [State(component_id="user",component_property="value")]
 )
-
 def update_output_div(input_value,n_clicks):
     if n_clicks > 0:
-        return f'Output: {input_value}'
+        if n_clicks is not None:
+            return f'Output: {input_value}'
 
 
 if __name__ == '__main__':
