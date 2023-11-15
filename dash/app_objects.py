@@ -8,6 +8,7 @@ import plotly.express as px
 import dash_mantine_components as dmc
 from dash_iconify import DashIconify
 import dash_ag_grid as dag
+import update_candidate as uc
 
 
 # BOUTONS
@@ -36,12 +37,12 @@ right_swipe_btn = html.Div([
     Output("left-swipe-action", "children"),
     Input("left-swipe-icon", "n_clicks"),
 )
-def update_aaa(n_clicks):
-    return f"AAA {n_clicks} times."
+def update_left(n_clicks):
+    return uc.main(-1, n_clicks)
 
 @callback(
     Output("right-swipe-action", "children"),
     Input("right-swipe-icon", "n_clicks"),
 )
 def update_clicks(n_clicks):
-    return f"Clicked {n_clicks} times."
+    return uc.main(1, n_clicks)
