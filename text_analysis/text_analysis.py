@@ -4,12 +4,24 @@ from textblob import TextBlob, Word
 from nltk.corpus import stopwords
 from classifier_data import *
 from textblob.classifiers import NaiveBayesClassifier
+import pickle
 
 
 #train du classifier
-def get_classifier():
+def get_new_classifier():
     cl = NaiveBayesClassifier(TRAIN_FROM_DF)
     return cl
+
+def get_classifier():
+    file = open('text_analysis/cl_data.obj', 'rb')
+    cl = pickle.load(file)
+    return cl
+
+def save_classifier(cl):
+    
+    file = open('text_analysis/cl_data.obj', 'wb')
+    pickle.dump(cl, file)
+    file.close()
 
 def get_lemmas_from_tweets(tweets):
     ret = []
@@ -36,4 +48,4 @@ def get_opinion_rate(tweets):
 
 
 print(get_opinion_rate(["This is cool !"]))
-
+#save_classifier(get_classifier())
