@@ -22,16 +22,13 @@ def yield_tokens(data):
 vocab = build_vocab_from_iterator(iterator=yield_tokens(DATAFRAME), specials=["<unk>", "<pad>"])
 vocab.set_default_index(vocab["<unk>"])
 
-# from matplotlib import pyplot as plt
-# import numpy as np
-# import pandas as pd
+
 
 EPOCHS = 10
 LEARNING_RATE = 1e-3
 BATCH_SIZE = 64
 VOCAB_LEN = len(vocab)
-
-
+VOCAB = vocab
 
 class NLPModel(nn.Module):
     def __init__(self):
@@ -80,33 +77,5 @@ class Model(pl.LightningModule):
     def configure_optimizers(self, lr=LEARNING_RATE):
         return optim.Adam(self.parameters(), lr=lr)
 
-wandb.login(key="68fded06a6651270206da4fc4c0f175085cadbd7")
-
-run = wandb.init(
-    project="twittos",
-    config={
-        "learning_rate": LEARNING_RATE,
-        "epochs": EPOCHS,
-    })
-wandb_logger = WandbLogger()
-
-trainer = pl.Trainer(
-    max_epochs=EPOCHS,
-    min_epochs=5,
-    devices=1,
-    accelerator="gpu",
-    logger=wandb_logger
-)
-
-TOPICS = ["politics", "health", "emotion", "financial", "sport", "science"]
-EMOTIONS = ["joy", "sadness", "fear", "anger", "surprise"]
-
-topic_model = Model(len(TOPICS))
-emotion_model = Model(len(EMOTIONS))
-
-trainer.fit(
-    model=...,
-    train_dataloaders=DataLoader(dataset=.., shuffle=True)
-)
 
 
