@@ -5,7 +5,7 @@ import plotly.express as px
 import dash_mantine_components as dmc
 from dash_iconify import DashIconify
 import dash_ag_grid as dag
-
+import app_objects as ao
 # Incorporate data
 df = pd.read_csv('https://raw.githubusercontent.com/plotly/datasets/master/gapminder2007.csv')
 
@@ -39,8 +39,8 @@ app.layout = dmc.Stack(
                             dmc.SimpleGrid(
                                 cols=2,
                                 children=[
-                                    DashIconify(icon="streamline:tinder", width=100),
-                                    DashIconify(icon="streamline:disable-heart", width=100)
+                                    ao.left_swipe_btn,
+                                    ao.right_swipe_btn
                                 ]
                             )
                         ]
@@ -50,8 +50,10 @@ app.layout = dmc.Stack(
         ],
         align="center"
     )
- 
 
+#@callback(
+#    Output("")
+#)
 
 # Run the App
 if __name__ == '__main__':
