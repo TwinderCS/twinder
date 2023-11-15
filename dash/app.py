@@ -26,7 +26,7 @@ dag.AgGrid(
 app.layout = dmc.Stack(
         spacing="xs",
         children=[
-            dmc.Title('Le truc Twitter.'),
+            dmc.Title('Twinder'),
             dmc.Card(    
                 withBorder=True,
                 shadow="sm",
