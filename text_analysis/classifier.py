@@ -44,20 +44,19 @@ class NLPModel(nn.Module):
     def __init__(self):
         super().__init__(vocab_size, embedding_dim, hidden_dim, output_dim):
         self.embedding = nn.Embedding(vocab_size, embedding_dim)
-        self.hidden1 = nn.Linear(embedding_dim, hidden_dim)
-        self.hidden2 = nn.Linear(hidden_dim, output_dim)
-        self.relu = nn.ReLU()
+        self.dense = nn.Sequential(
+            nn.Linear(embedding_dim, hidden_dim),
+            nn.ReLU(),
+            nn.Linear(hidden_dim, output_dim)
+            nn.ReLU(),
+        )
 
     def forward(self, x):
         embedded = self.embedding(x)
         mask = (x != vocab["<pad>"])
         embedded = embedded * mask.float()
         embedded = embedded.mean(dim=...)
-        out = self.hidden1(embedded)
-        out = self.relu(out)
-        out = self.hidden2(out)
-        out = self.relu(out)
-        return out
+        return self.dense(embedded)
 
 class Model(pl.LightningModule):
     def __init__(self, output_dim):
