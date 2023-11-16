@@ -46,8 +46,8 @@ class NLPModel(nn.Module):
         self.dense = nn.Sequential(
             nn.Linear(embedding_dim, hidden_dim),
             nn.ReLU(),
-            nn.Linear(hidden_dim, output_dim)
-            nn.ReLU(),
+            nn.Linear(hidden_dim, output_dim),
+            nn.ReLU()
         )
 
     def forward(self, x):

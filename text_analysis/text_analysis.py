@@ -2,7 +2,7 @@ import pandas as pd
 from pandas import DataFrame
 from textblob import TextBlob, Word
 from nltk.corpus import stopwords
-from classifier_data import *
+from .classifier_data import *
 from textblob.classifiers import NaiveBayesClassifier
 import pickle
 
