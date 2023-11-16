@@ -37,14 +37,14 @@ def get_lemmas_from_tweets(tweets):
     ret = list(set(ret))
     return ret
 
-def get_opinion_rate(tweets):
+def get_opinion_rate(tweets, cl):
     """obsolete ? -> given an array of tweets, 
         give the average of tweets being positive, neutral and negative
         with the classifier. 
         However we now have more than 3 labels"""
     pos_rate, neu_rate, neg_rate = 0, 0, 0
     for tweet in tweets:
-        cl = get_classifier()
+        #cl = get_new_classifier()
         classified = cl.classify(tweet)
         if classified == 'positive':
             pos_rate += 1
@@ -54,5 +54,6 @@ def get_opinion_rate(tweets):
             neg_rate +=1
     return (pos_rate/len(tweets), neu_rate/len(tweets), neg_rate/len(tweets))
 
-cl = get_classifier()
-cl.accuracy(TRAIN_FROM_DF_ALL)
+cl = get_new_classifier()
+print(get_opinion_rate(['this is cool'], cl))
+print(cl.accuracy(TRAIN_FROM_DF_ALL[2000::]))
