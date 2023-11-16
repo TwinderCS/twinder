@@ -2,4 +2,4 @@
 
 
 def norme_1(vecteur_1,vecteur_2):
-    
+    n = len(vec)
