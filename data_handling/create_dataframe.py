@@ -2,6 +2,7 @@
 Program that takes in input the interesting data and adds it to a dataframe.
 '''
 import pandas as pd
+import nltk
 
 def get_hashtags(text):
     '''
@@ -12,11 +13,7 @@ def get_hashtags(text):
         try:
             if word[0] == "#":
                 tgs.append(word)
-<<<<<<< HEAD
-        except:
-=======
         except ValueError:
->>>>>>> main
             pass
     return tgs
 
@@ -26,11 +23,7 @@ def get_mentions(text):
         try:
             if word[0] == "@":
                 mts.append(word)
-<<<<<<< HEAD
-        except:
-=======
         except ValueError:
->>>>>>> main
             pass
     return mts
 
@@ -63,3 +56,4 @@ def create_topic_dataframe(location = "dumps/topic.csv", save = True):
     df = pd.read_csv(location)
     if save:
         df.to_pickle('dumps/topic.pkl')
+
