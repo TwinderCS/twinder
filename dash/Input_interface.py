@@ -4,7 +4,8 @@ from dash import Dash, html, Input, Output, State, ctx, callback
 app = Dash(__name__, external_stylesheets=[dbc.themes.SPACELAB])
 
 heading = html.H4(
-    "Twinder, l'application qui réunit passion et amour", className="bg-primary text-white p-2", style={'textAlign': 'center'}
+    "Twinder, l'application qui réunit passion et amour",
+    className="bg-primary text-white p-2", style={'textAlign': 'center'}
 )
 
 user_id = html.Div(
@@ -29,17 +30,18 @@ button = dbc.Button(
 )
 
 app.layout = html.Div(
-    [heading,dbc.Row([dbc.Col(control_panel, md = 4)],justify = "center"), dbc.Row([dbc.Col(button,md=4)],justify="center"),
+    [heading, 
+    dbc.Row([dbc.Col(control_panel, md = 4)],justify = "center"),
+    dbc.Row([dbc.Col(button,md=4)],justify="center"),
     html.Div(id='my-output')]
 )
 
 @callback(
     Output(component_id='my-output', component_property='children'),
-    #Input(component_id='user', component_property='value'),
     Input(component_id="submit", component_property="n_clicks"),
     State(component_id="user",component_property="value")
 )
-def update_output_div(__,name):
+def update_output_div(__,name: "string") -> "string":
     button_clicked = ctx.triggered_id
     if button_clicked == 'submit':
         return f'Output: {name}'
