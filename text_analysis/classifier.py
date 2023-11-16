@@ -10,11 +10,9 @@ from torchtext.vocab import build_vocab_from_iterator
 from data_handling import DATAFRAME
 import pytorch_lightning as pl
 
-
 ## TOKENIZATION
 
 tokenizer = get_tokenizer('basic english')
-
 def yield_tokens(data):
     for text in data['text']:
         yield tokenizer(text)
@@ -28,30 +26,49 @@ BATCH_SIZE = 64
 VOCAB_LEN = len(vocab)
 VOCAB = vocab
 
+def gen_dataset(dataframe, classes, classname):
+    # assign an index to each class
+    dataframe['class'] = dataframe[classname].map({classes[idx]: idx for idx in range(len(classes))})
+    dataframe['tokens'] = dataframe['text'].map(tokenizer)
+    max_len = dataframe['tokens'].map(lambda x: len(x)).max()
+    # add padding
+    dataframe['tokens'] = dataframe['tokens'].map(lambda tokens: tokens + ["<pad>"] * (max_len - len(tokens)))
+    dataframe['token_ids'] = dataframe['tokens'].map(vocab)
+
+    return dataframe['class'], dataframe['token_ids'].to_numpy()
+
+def split_dataset(dataset, percent=0.7):
+    train_amount = int(len(dataset) * percent) # approx percent% des donnees
+    return dataset[:train_amount], dataset[train_amount:]
+
+def yield_batches(x, y):
+    for i in range(len(x)):
+        yield (x[i], y[i])
+   
 class NLPModel(nn.Module):
-    def __init__(self):
-        super().__init__(vocab_size, embedding_dim, hidden_dim, output_dim):
+    def __init__(self, vocab_size, embedding_dim, hidden_dim, output_dim):
+        super().__init__()
         self.embedding = nn.Embedding(vocab_size, embedding_dim)
-        self.hidden1 = nn.Linear(embedding_dim, hidden_dim)
-        self.hidden2 = nn.Linear(hidden_dim, output_dim)
-        self.relu = nn.ReLU()
+        self.dense = nn.Sequential(
+            nn.Linear(embedding_dim, hidden_dim),
+            nn.ReLU(),
+            nn.Linear(hidden_dim, output_dim),
+            nn.ReLU(),
+        )
 
     def forward(self, x):
         embedded = self.embedding(x)
         mask = (x != vocab["<pad>"])
         embedded = embedded * mask.float()
         embedded = embedded.mean(dim=...)
-        out = self.hidden1(embedded)
-        out = self.relu(out)
-        out = self.hidden2(out)
-        out = self.relu(out)
-        return out
+        return self.dense(embedded)
 
 class Model(pl.LightningModule):
-    def __init__(self, output_dim):
+    def __init__(self, vocab_len, output_dim, learning_rate):
         super().__init__()
-        self.model = NLPModel(VOCAB_LEN, 1000, 256, output_dim)
+        self.model = NLPModel(vocab_len, 1000, 256, output_dim)
         self.loss = nn.CrossEntropyLoss()
+        self.learning_rate = learning_rate
 
     def training_step(self, batch):
         x, y = batch
@@ -72,8 +89,8 @@ class Model(pl.LightningModule):
         loss = self.loss(y_hat, y)
         self.log("test_loss", loss, prog_bar=True)
 
-    def configure_optimizers(self, lr=LEARNING_RATE):
-        return optim.Adam(self.parameters(), lr=lr)
+    def configure_optimizers(self):
+        return optim.Adam(self.parameters(), lr=self.learning_rate)
 
 
 

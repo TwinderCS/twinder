@@ -1,6 +1,5 @@
 from models import emotion_model, topic_model
 from metrics import emotions, topics
-from data_handling import create_dataframe
 import pandas as pd
 
 original = pd.read_csv("dumps/tweets.csv")

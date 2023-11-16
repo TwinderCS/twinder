@@ -1,22 +1,21 @@
 import torch
 import pytorch_lighting as pl
 from text_analysis.classifier import Model, vocab, tokenizer
-from metrics import emotions, topics
-from text_analysis.text_analysis import get_lemmas_from_tweet as lemmatizer
-from text_analysis.classifier_data import max_len
+from metrics import emotions, topics, max_len
+from text_analysis.text_analysis import cleaner
 
 topic = Model.load_from_checkpoint("dumps/topic_model.ckpt")
 emotion = Model.load_from_checkpoint("dumps/emotion_model.ckpt")
 
-def topic_model(tweet, argmax=True, lemmatize=True, vocab=vocab, int_output=False):
+def topic_model(tweet, argmax=True, clean=True, vocab=vocab, int_output=False):
     global topics
     global topic
     global tokenizer
-    global lemmatizer
+    global cleaner
     global vocab
     global max_len
-    if lemmatize:
-        tweet = lemmatizer(tweet)
+    if clean:
+        tweet = cleaner(tweet)
 
     tokens = tokenizer(tweet)
     tokens += ["<pad>"] * (max_len - len(tokens))
@@ -33,15 +32,15 @@ def topic_model(tweet, argmax=True, lemmatize=True, vocab=vocab, int_output=Fals
     else:
         return topics[out.argmax()]
     
-def emotion_model(tweet, argmax=True, lemmatize=True, lemmatizer=get_lemmas_from_tweet, vocab=vocab, int_output=False):
+def emotion_model(tweet, argmax=True, clean=True, vocab=vocab, int_output=False):
     global emotions
     global emotion
     global tokenizer
-    global lemmatizer
+    global cleaner
     global vocab
     global max_len
-    if lemmatize:
-        tweet = lemmatizer(tweet)
+    if clean:
+        tweet = cleaner(tweet)
 
     tokens = tokenizer(tweet)
     tokens += ["<pad>"] * (max_len - len(tokens))

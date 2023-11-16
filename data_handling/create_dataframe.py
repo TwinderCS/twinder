@@ -2,10 +2,11 @@
 Program that takes in input the interesting data and adds it to a dataframe.
 '''
 import pandas as pd
+from text_analysis.text_analysis import cleaner
 
 def get_hashtags(text):
     '''
-    Take a text in argument, return its hashtags in a list.
+    Take a text in argument, return its #hashtags in a list.
     '''
     tgs = []
     for word in text.split(" "):
@@ -17,6 +18,9 @@ def get_hashtags(text):
     return tgs
 
 def get_mentions(text):
+    '''
+    Take a text in argument, return its @mentions in a list.
+    '''
     mts = []
     for word in text.split(" "):
         try:
@@ -47,11 +51,14 @@ def create_dataframe(location="../dumps/tweets.csv", save=True):
 
 def create_emotion_dataframe(location = "dumps/emotion.csv", save = True):
     df = pd.read_csv(location)
+    df['text'] = df['text'].map(cleaner)
     if save:
         df.to_pickle('dumps/emotion.pkl')
     
 
 def create_topic_dataframe(location = "dumps/topic.csv", save = True):
     df = pd.read_csv(location)
+    df['text'] = df['text'].map(cleaner)
     if save:
         df.to_pickle('dumps/topic.pkl')
+
