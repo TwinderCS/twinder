@@ -1,18 +1,14 @@
-# Project of the coding weeks 2020-2021 of the Uranus Team
+# Project of the coding weeks 2020-2021 of the Twinder® Team
 
 ## Description
 
-Ceci n'a en faite rien avoir avec twitter,
-c'est une simple lecture de CSV + traitement de données
-
-Vous connaissez Excel? Ben c'est nous en mieux.
+Create a programm that propose some Twitter profiles to the user from its tweets.
 
 
-## The Uranus Team
+## The Twinder® Team
 
 - Anas Lecaillon (Maitre de l'Univers (Entre autres))
 - Mohamed Koucha (Être humain (Je suppose))
-
-Balthazar : suis Balthazar hihi
-
-À faire : regarder la bibliothèque SpaCy
+- Balthazar
+- Sarah
+- Léna

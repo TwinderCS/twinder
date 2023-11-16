@@ -1,2 +1,5 @@
 import classifier_data
 import text_analysis
+import classifier
+import emotion_classifier
+import topic_classifier
