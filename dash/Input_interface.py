@@ -1,7 +1,5 @@
-from dash import Dash, dcc, html, Input, Output, State, ctx,callback
-import numpy as np
-import plotly.express as px
 import dash_bootstrap_components as dbc
+from dash import Dash, html, Input, Output, State, ctx, callback
 
 app = Dash(__name__, external_stylesheets=[dbc.themes.SPACELAB])
 
