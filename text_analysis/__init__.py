@@ -1,5 +1,5 @@
-import classifier_data
-import text_analysis
-import classifier
-import emotion_classifier
-import topic_classifier
+from . import classifier_data
+from . import text_analysis
+from . import classifier
+from . import emotion_classifier
+from . import topic_classifier

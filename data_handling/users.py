@@ -1,12 +1,7 @@
-from data_handling import create_dataframe
 import pandas as pd
-from os.path import isfile
 from metrics import topics, emotions
 
-if isfile("dumps/data.pkl"):
-    tweets = pd.read_pickle("dumps/tweets.pkl")
-else:
-    tweets = create_dataframe()
+tweets = pd.read_pickle("dumps/tweets.pkl")
 
 users = pd.DataFrame()
 users['user'] = tweets['user'].unique()

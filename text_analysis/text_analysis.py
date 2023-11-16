@@ -1,9 +1,22 @@
 import pickle
 from textblob import TextBlob
 from nltk.corpus import stopwords
-from classifier_data import *
+import nltk
+from text_analysis.classifier_data import *
 from textblob.classifiers import NaiveBayesClassifier
+from autocorrect import Speller
+import re
 
+
+def cleaner(text):
+    speller = Speller(lang='en')
+    unpunctuated = re.sub("[^a-zA-Z\s]+", " ", text)
+    lowered = unpunctuated.lower()
+    words = lowered.split(" ")
+    corrected = [speller(word) for word in words]
+    lm = nltk.stem.WordNetLemmatizer()
+    lemmatized = [lm.lemmatize(word) for word in corrected]
+    return lemmatized.join(" ")
 
 
 def get_new_classifier():
