@@ -7,7 +7,7 @@ from torch.utils.data import Dataset
 from torch.utils.data import DataLoader
 from torchtext.data.utils import get_tokenizer
 from torchtext.vocab import build_vocab_from_iterator
-from classifier_data import DATAFRAME
+from data_handling import DATAFRAME
 import pytorch_lightning as pl
 
 
@@ -21,8 +21,6 @@ def yield_tokens(data):
 
 vocab = build_vocab_from_iterator(iterator=yield_tokens(DATAFRAME), specials=["<unk>", "<pad>"])
 vocab.set_default_index(vocab["<unk>"])
-
-
 
 EPOCHS = 10
 LEARNING_RATE = 1e-3

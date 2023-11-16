@@ -3,6 +3,8 @@ import wordcloud
 import text_analysis
 import data_handling
 import pandas as pd
+import metrics
+import models
 
 # Lets present various functionalities
 
@@ -21,5 +23,3 @@ print("Opinion Rate:", text_analysis.get_opinion_rate(df['text']))
 print("Example:")
 print("I love Ice Cream!", cl("I Love Ice Cream!"))
 print("I hate Death!", cl("I hate Death!"))
-
-
