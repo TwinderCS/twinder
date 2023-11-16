@@ -1,3 +1,4 @@
+"""Module providing a function that send a message when the button is clicked"""
 import dash_bootstrap_components as dbc
 from dash import Dash, html, Input, Output, State, ctx, callback
 
@@ -30,7 +31,7 @@ button = dbc.Button(
 )
 
 app.layout = html.Div(
-    [heading, 
+    [heading,
     dbc.Row([dbc.Col(control_panel, md = 4)],justify = "center"),
     dbc.Row([dbc.Col(button,md=4)],justify="center"),
     html.Div(id='my-output')]
@@ -42,6 +43,9 @@ app.layout = html.Div(
     State(component_id="user",component_property="value")
 )
 def update_output_div(__,name: "string") -> "string":
+    """
+    Update the output with the current text when the button is clicked
+    """
     button_clicked = ctx.triggered_id
     if button_clicked == 'submit':
         return f'Output: {name}'
