@@ -9,6 +9,6 @@ Create a programm that propose some Twitter profiles to the user from its tweets
 
 - Anas Lecaillon (Maitre de l'Univers (Entre autres))
 - Mohamed Koucha (Être humain (Je suppose))
-- Baltazar
+- Balthazar
 - Sarah
 - Léna
