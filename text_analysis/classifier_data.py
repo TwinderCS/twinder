@@ -1,6 +1,10 @@
+'''
+Module generating classifier data.
+'''
+
+# import random
 import pandas as pd
 import numpy as np
-import random
 
 DATAFRAME = pd.read_pickle("dumps/emotion.pkl")
 
