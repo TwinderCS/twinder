@@ -1,2 +1,1 @@
-import classifier_data
-import text_analysis
+from . import classifier_data, text_analysis
