@@ -1,21 +1,27 @@
+<<<<<<< HEAD
 '''
 Module generating classifier data.
 '''
 
 # import random
+=======
+"""Pour lire les db et numpy"""
+>>>>>>> readmeBalthazar
 import pandas as pd
 import numpy as np
 
-DATAFRAME = pd.read_pickle("dumps/emotion.pkl")
+DATAFRAME = pd.read_pickle("dumps/df.pkl")
 
-#print(df['user'].to_numpy()[0])
+
 TWEETS = DATAFRAME['text'].to_numpy()
-EMOTIONS = DATAFRAME['emotion'].to_numpy()
-TRAIN_FROM_DF = [(TWEETS[i], EMOTIONS[i]) for i in range(len(TWEETS))]
+EMOTIONS = DATAFRAME['polarity'].to_numpy()
+TRAIN_FROM_DF_ALL = [(TWEETS[i], EMOTIONS[i]) for i in range(len(TWEETS))]
 
-np.random.shuffle(TRAIN_FROM_DF)
-TRAIN_FROM_DF = TRAIN_FROM_DF[0:10]
+np.random.shuffle(TRAIN_FROM_DF_ALL)
 
+
+TRAIN_FROM_DF = TRAIN_FROM_DF_ALL[0:2000] #Otherwise it takes wayyy to long
+print(TRAIN_FROM_DF[0])
 train = [('I love this sandwich.', 'pos'),
     ('this is an amazing place!', 'pos'),
     ('I feel very good about these beers.', 'pos'),
