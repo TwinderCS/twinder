@@ -1,28 +1,32 @@
-import pandas as pd
-from pandas import DataFrame
-from textblob import TextBlob, Word
+import pickle
+from textblob import TextBlob
 from nltk.corpus import stopwords
 from classifier_data import *
 from textblob.classifiers import NaiveBayesClassifier
-import pickle
+
 
 
 def get_new_classifier():
+    """Creates a new classifier from scratch"""
     cl = NaiveBayesClassifier(TRAIN_FROM_DF)
     return cl
 
 def get_classifier():
-    file = open('text_analysis/cl_data.obj', 'rb')
-    cl = pickle.load(file)
+    """Gets the trained classifier from the file"""
+    with open('text_analysis/cl_data.obj', 'rb') as file:
+        cl = pickle.load(file)
     return cl
 
 def save_classifier(cl):
-
-    file = open('text_analysis/cl_data.obj', 'wb')
-    pickle.dump(cl, file)
-    file.close()
+    """Saves the classifier after the training
+    in a file"""
+    with open('text_analysis/cl_data.obj', 'wb') as file:
+        pickle.dump(cl, file)
+    #file.close()
 
 def get_lemmas_from_tweets(tweets):
+    """gets all the lemmas from the array tweets
+    Example : octopi are blue -> octupus is blue"""
     ret = []
     for tweet in tweets:
         tB_tweet = TextBlob(tweet).correct()
@@ -33,6 +37,8 @@ def get_lemmas_from_tweets(tweets):
     return ret
 
 def get_opinion_rate(tweets):
+    """gives the average of positive, neutral, negative tweets
+        thanks to the classifier"""
     pos_rate, neu_rate, neg_rate = 0, 0, 0
     for tweet in tweets:
         cl = get_classifier()
