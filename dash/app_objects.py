@@ -2,13 +2,13 @@
 # Ils sont nommés "ao.<nom de l'objet>"
 
 
+import dash_ag_grid as dag
+import update_candidate as uc
+from dash_iconify import DashIconify
 from dash import Dash, html, dash_table, dcc, callback, Output, Input
 import pandas as pd
 import plotly.express as px
 import dash_mantine_components as dmc
-from dash_iconify import DashIconify
-import dash_ag_grid as dag
-import update_candidate as uc
 
 
 # BOUTONS
