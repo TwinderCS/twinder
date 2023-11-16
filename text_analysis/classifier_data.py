@@ -1,13 +1,17 @@
+'''
+Module generating classifier data.
+'''
+
+# import random
 import pandas as pd
 import numpy as np
-import random
 
-DATAFRAME = pd.read_pickle("dumps/df.pkl")
+DATAFRAME = pd.read_pickle("dumps/emotion.pkl")
 
 #print(df['user'].to_numpy()[0])
 TWEETS = DATAFRAME['text'].to_numpy()
-OPINIONS = DATAFRAME['polarity'].to_numpy()
-TRAIN_FROM_DF = [(TWEETS[i], OPINIONS[i]) for i in range(len(TWEETS))]
+EMOTIONS = DATAFRAME['emotion'].to_numpy()
+TRAIN_FROM_DF = [(TWEETS[i], EMOTIONS[i]) for i in range(len(TWEETS))]
 
 np.random.shuffle(TRAIN_FROM_DF)
 TRAIN_FROM_DF = TRAIN_FROM_DF[0:10]

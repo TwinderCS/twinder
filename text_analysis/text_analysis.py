@@ -7,7 +7,6 @@ from textblob.classifiers import NaiveBayesClassifier
 import pickle
 
 
-#train du classifier
 def get_new_classifier():
     cl = NaiveBayesClassifier(TRAIN_FROM_DF)
     return cl
@@ -18,7 +17,7 @@ def get_classifier():
     return cl
 
 def save_classifier(cl):
-    
+
     file = open('text_analysis/cl_data.obj', 'wb')
     pickle.dump(cl, file)
     file.close()
@@ -47,5 +46,4 @@ def get_opinion_rate(tweets):
     return (pos_rate/len(tweets), neu_rate/len(tweets), neg_rate/len(tweets))
 
 
-print(get_opinion_rate(["This is cool !"]))
-#save_classifier(get_classifier())
+
