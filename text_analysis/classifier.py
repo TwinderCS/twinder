@@ -1,4 +1,3 @@
-import torch
 from torch import nn, optim
 import pytorch_lightning as pl
 from pytorch_lightning.loggers import WandbLogger

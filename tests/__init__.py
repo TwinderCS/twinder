@@ -1,1 +1,1 @@
-from . import test_text_analysis
+from . import test_text_analysis, test_classifier, test_emotion_classifier, test_topic_classifier
