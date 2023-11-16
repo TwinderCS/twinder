@@ -1,12 +1,22 @@
+'''
+Program that takes in input the interesting data and adds it to a dataframe.
+'''
 import pandas as pd
 
 def get_hashtags(text):
+    '''
+    Take a text in argument, return its hashtags in a list.
+    '''
     tgs = []
     for word in text.split(" "):
         try:
             if word[0] == "#":
                 tgs.append(word)
+<<<<<<< HEAD
         except:
+=======
+        except ValueError:
+>>>>>>> main
             pass
     return tgs
 
@@ -16,7 +26,11 @@ def get_mentions(text):
         try:
             if word[0] == "@":
                 mts.append(word)
+<<<<<<< HEAD
         except:
+=======
+        except ValueError:
+>>>>>>> main
             pass
     return mts
 
@@ -38,3 +52,14 @@ def create_dataframe(location="../dumps/tweets.csv", save=True):
     if save:
         df.to_pickle("../dumps/df.pkl")
     return df
+
+def create_emotion_dataframe(location = "dumps/emotion.csv", save = True):
+    df = pd.read_csv(location)
+    if save:
+        df.to_pickle('dumps/emotion.pkl')
+    
+
+def create_topic_dataframe(location = "dumps/topic.csv", save = True):
+    df = pd.read_csv(location)
+    if save:
+        df.to_pickle('dumps/topic.pkl')
