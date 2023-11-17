@@ -11,7 +11,7 @@ from text_analysis import *
 import pandas as pd
 
 max_len = 280
-emotions = ["joy", "sadness", "fear", "anger", "surprise", "neutral", ""]
+emotions = ["joy", "sadness", "fear", "anger", "surprise", "neutral", "shame", "disgust"]
 polarity = ['negative', 'neutral', 'positive']
 topics = ["politics", "health", "emotion", "financial", "sport", "science"]
 alpha = 0.7
@@ -19,15 +19,21 @@ alpha = 0.7
 def emotion_to_vector(emotion : str):
     match emotion:
         case 'joy':
-            return np.array([1, 0, 0, 0, 0], dtype = float)
+            return np.array([1, 0, 0, 0, 0, 0, 0, 0], dtype = float)
         case 'surprise':
-            return np.array([0, 1, 0, 0, 0], dtype = float)
-        case 'anger':
-            return np.array([0, 0, 1, 0, 0], dtype = float)
+            return np.array([0, 1, 0, 0, 0, 0, 0, 0], dtype = float)
+        case 'neutral':
+            return np.array([0, 0, 1, 0, 0, 0, 0, 0], dtype = float)
         case 'fear':
-            return np.array([0, 0, 0, 1, 0], dtype = float)
+            return np.array([0, 0, 0, 1, 0, 0, 0, 0], dtype = float)
         case 'anger':
-            return np.array([0, 0, 0, 0, 1], dtype = float)
+            return np.array([0, 0, 0, 0, 1, 0, 0, 0], dtype = float)
+        case 'shame':
+            return np.array([0, 0, 0, 0, 0, 1, 0, 0], dtype = float)
+        case 'disgust':
+            return np.array([0, 0, 0, 0, 0, 0, 1, 0], dtype = float)
+        case "sadness":
+            return np.array([0, 0, 0, 0, 0, 0, 0, 1], dtype = float)
     return "Warning: emotion_to_vector : wrong emotion"
 
 def topic_to_vector(topic : str):
@@ -41,11 +47,11 @@ def topic_to_vector(topic : str):
 def polarity_to_vector(polarity : str):
     match polarity:
         case "positive":
-            return np.array([1, 1, 0, 0, 0], dtype = float)
+            return np.array([1, 1, 0, 0, 0, 0, 0, 0], dtype = float)
         case "neutral":
-            return np.array([0, 0, 0, 0, 0], dtype = float)
+            return np.array([0, 0, 1, 0, 0, 0, 0, 0], dtype = float)
         case "negative":
-            return np.array([0, 0, 1, 1, 1], dtype = float)
+            return np.array([0, 0, 0, 1, 1, 1, 1, 1], dtype = float)
     return "Warning : polarity_to_vector : wrong polarity"
     return topic_vector
 
@@ -69,7 +75,7 @@ def get_metric_from_user(user : str):
     user_tweets_df = df[df['user'] == user]
     #print(user_tweets_df.head(8))
     nb_tweets = 0
-    user_metric = np.zeros(11, dtype=float)
+    user_metric = np.zeros(14, dtype=float)
     for tweet in user_tweets_df['text']:
         nb_tweets += 1
         user_metric += get_metric_from_tweet(tweet)
