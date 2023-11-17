@@ -23,7 +23,16 @@ def cleaner(text):
 
 def get_new_classifier():
     """Creates a new classifier from scratch"""
+
+    DATAFRAME = pd.read_pickle("dumps/df.pkl")
+    TWEETS = DATAFRAME['text'].to_numpy()
+    POLARITY = DATAFRAME['polarity'].to_numpy()
+    TRAIN_FROM_DF_ALL = [(TWEETS[i], POLARITY[i]) for i in range(len(TWEETS))]
+
+    np.random.shuffle(TRAIN_FROM_DF_ALL)
+    TRAIN_FROM_DF = TRAIN_FROM_DF_ALL[0:1000] #Otherwise it takes wayyy to long
     cl = NaiveBayesClassifier(TRAIN_FROM_DF)
+    
     return cl
 
 def get_classifier():
