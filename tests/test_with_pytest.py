@@ -36,3 +36,12 @@ def test_is_string(string):
 ])
 def test_is_string_not_string(non_string):
     assert not isinstance(non_string, str)
+
+@pytest.mark.parametrize("test_parametrize", [
+    [1, 2],
+    [-4, -3],
+    [102, 103],
+    [0, 1]
+])
+def test_multiple_parametrize(test_parametrize):
+    assert test_parametrize[0] + 1 == test_parametrize[1]

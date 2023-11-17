@@ -6,8 +6,9 @@ Module generating classifier data.
 import pandas as pd
 import numpy as np
 
-DATAFRAME = pd.read_pickle("dumps/df.pkl")
 
+
+DATAFRAME = pd.read_pickle("dumps/emotion.pkl")
 
 TWEETS = DATAFRAME['text'].to_numpy()
 EMOTIONS = DATAFRAME['polarity'].to_numpy()

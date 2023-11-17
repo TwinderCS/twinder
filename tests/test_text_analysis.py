@@ -1,5 +1,6 @@
 import pytest
-from text_analysis.text_analysis import get_opinion_rate
+from textblob.classifiers import NaiveBayesClassifier
+from text_analysis.text_analysis import get_opinion_rate, get_new_classifier, get_classifier
 
 @pytest.mark.parametrize("positive_opinions", [
     #"It was amazing !",    -> 2
@@ -30,3 +31,10 @@ def test_neutral_opinion_rate(neutral_opinions):
 def test_negative_opinion_rate(negative_opinions):
     rate = get_opinion_rate(negative_opinions)
     assert rate.index(max(rate)) == 2
+
+def test_get_new_classifier():
+    assert isinstance(get_new_classifier(), NaiveBayesClassifier)
+
+def test_get_classifier():
+    assert isinstance(get_new_classifier(), NaiveBayesClassifier)
+

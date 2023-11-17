@@ -1,4 +1,3 @@
-import torch
 from torch import nn, optim
 import pytorch_lightning as pl
 from pytorch_lightning.loggers import WandbLogger
@@ -12,19 +11,13 @@ import pytorch_lightning as pl
 
 ## TOKENIZATION
 
-tokenizer = get_tokenizer('basic english')
+
 def yield_tokens(data):
     for text in data['text']:
         yield tokenizer(text)
 
 vocab = build_vocab_from_iterator(iterator=yield_tokens(DATAFRAME), specials=["<unk>", "<pad>"])
 vocab.set_default_index(vocab["<unk>"])
-
-EPOCHS = 10
-LEARNING_RATE = 1e-3
-BATCH_SIZE = 64
-VOCAB_LEN = len(vocab)
-VOCAB = vocab
 
 def gen_dataset(dataframe, classes, classname):
     # assign an index to each class
@@ -95,6 +88,12 @@ class Model(pl.LightningModule):
 
     def configure_optimizers(self):
         return optim.Adam(self.parameters(), lr=self.learning_rate)
+
+if __name__ == "__main__":
+    tokenizer = get_tokenizer('basic english')
+
+    vocab = build_vocab_from_iterator(iterator=yield_tokens(DATAFRAME), specials=["<unk>", "<pad>"])
+    vocab.set_default_index(vocab["<unk>"])
 
 
 
