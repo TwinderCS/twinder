@@ -2,7 +2,7 @@ import pickle
 from textblob import TextBlob
 from nltk.corpus import stopwords
 import nltk
-from text_analysis.classifier_data import *
+from classifier_data import *
 from textblob.classifiers import NaiveBayesClassifier
 from autocorrect import Speller
 import re
@@ -49,7 +49,7 @@ def get_lemmas_from_tweets(tweets):
     ret = list(set(ret))
     return ret
 
-def get_opinion_rate(tweets):
+def get_opinion_rate(tweets, cl):
     """gives the average of positive, neutral, negative tweets
         thanks to the classifier"""
     pos_rate, neu_rate, neg_rate = 0, 0, 0
@@ -64,6 +64,7 @@ def get_opinion_rate(tweets):
             neg_rate +=1
     return (pos_rate/len(tweets), neu_rate/len(tweets), neg_rate/len(tweets))
 
-cl = get_new_classifier()
-print(get_opinion_rate(['this is cool'], cl))
-print(cl.accuracy(TRAIN_FROM_DF_ALL[2000::]))
+#cl = get_classifier()
+#save_classifier(cl)
+#print(get_opinion_rate(['this is cool'], cl))
+#print(cl.accuracy(TRAIN_FROM_DF))
