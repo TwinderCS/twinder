@@ -2,7 +2,9 @@
 Program that takes in input the interesting data and adds it to a dataframe.
 '''
 import pandas as pd
+import numpy as np
 import sys
+import time
 sys.path.append('dumps')
 sys.path.append('metrics_handlers')
 from metrics import *
@@ -72,17 +74,33 @@ def create_tweets_dataframe(location = 'dumps/tweets.csv', save = True):
 
 def create_metrics_dataframe(save = True):
     df_tweets = pd.read_pickle('dumps/tweets.pkl')
-    usernames = df_tweets['user'].unique()
-    print(df_tweets['user'].nunique())
+    usernames = np.array(df_tweets['user'].unique())
+    print(len(usernames))
     #print(usernames[0:10])
     data = []
+    
+    
+    vfunc = np.vectorize(get_metric_from_user, otypes=[np.ndarray])
+    begin = time.time()
+    vectors = vfunc(usernames[0:20])
+    df_metric = pd.DataFrame({'username' : usernames[:20], 'metric' : vectors})
+    """
     for username in usernames[0:20]:
         data.append([username, get_metric_from_user(username)])
     
     df_metric = pd.DataFrame(data, columns = ['username', 'metric'])
+    
+    df_metric = pd.DataFrame(columns = ['username', 'metric'])
+    begin = time.time()
+    
+    df_metric['username'] = usernames[0:20]
+    df_metric['metric'] = df_metric['username'].map(lambda x: get_metric_from_user(x))
 
+    """
+    end = time.time()
     if save:
         df_metric.to_pickle('dumps/metrics.pkl')
+    return end - begin
 
 
-create_metrics_dataframe()
+print(create_metrics_dataframe())
