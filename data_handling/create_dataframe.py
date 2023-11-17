@@ -54,16 +54,30 @@ def create_dataframe(location="../dumps/tweets.csv", save=True):
         df.to_pickle("../dumps/df.pkl")
     return df
 
+i = 0
+j = 0
 def create_emotion_dataframe(location = "dumps/emotion.csv", save = True):
     df = pd.read_csv(location)
-    df['text'] = df['text'].map(cleaner)
+    tot = len(df['text'])
+    def print_cleaner(text):
+        global i
+        print(i, "/", tot)
+        i += 1
+        return cleaner(text)
+    df['text'] = df['text'].map(print_cleaner)
     if save:
         df.to_pickle('dumps/emotion.pkl')
     
 
 def create_topic_dataframe(location = "dumps/topic.csv", save = True):
     df = pd.read_csv(location)
-    df['text'] = df['text'].map(cleaner)
+    tot = len(df['text'])
+    def print_cleaner(text):
+        global j
+        print(j, "/", tot)
+        j += 1
+        return cleaner(text)
+    df['text'] = df['text'].map(print_cleaner)
     if save:
         df.to_pickle('dumps/topic.pkl')
 
