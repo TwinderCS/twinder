@@ -2,10 +2,12 @@ import pickle
 from textblob import TextBlob
 from nltk.corpus import stopwords
 import nltk
-from classifier_data import *
+from . import classifier_data
 from textblob.classifiers import NaiveBayesClassifier
 from autocorrect import Speller
 import re
+
+nltk.download('stopwords')
 
 
 def cleaner(text):
@@ -23,7 +25,7 @@ def cleaner(text):
 
 def get_new_classifier():
     """Creates a new classifier from scratch"""
-    cl = NaiveBayesClassifier(TRAIN_FROM_DF)
+    cl = NaiveBayesClassifier(classifier_data.TRAIN_FROM_DF)
     return cl
 
 def get_classifier():
