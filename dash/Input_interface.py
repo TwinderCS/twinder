@@ -26,6 +26,7 @@ button = dbc.Button(
     id='submit',
     children="Submit",
     n_clicks=0,
+    href = "", #mettre le lien de la deuxième page
     size="lg",
     className="mt-2",
 )
