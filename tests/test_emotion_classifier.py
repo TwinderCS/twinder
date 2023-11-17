@@ -86,3 +86,6 @@ def test_hateful_tweets(hateful_tweets):
     assert True
 
 
+#negation
+#robustness to noise (pronum, surname, time conjugaison)
+
