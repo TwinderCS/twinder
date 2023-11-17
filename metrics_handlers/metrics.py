@@ -79,9 +79,9 @@ def get_metric_from_user(user : str):
     for tweet in user_tweets_df['text']:
         nb_tweets += 1
         user_metric += get_metric_from_tweet(tweet)
-    print(user_metric/nb_tweets)
+    #print(user_metric/nb_tweets)
 
 #get_metric_from_tweet("this is cool")
 #print(emotion_to_vector('fear'))
 #print(topic_to_vector("politics"))
-get_metric_from_user('scotthamilton')
+#get_metric_from_user('scotthamilton')
