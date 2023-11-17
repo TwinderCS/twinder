@@ -5,6 +5,7 @@ import nltk
 from textblob.classifiers import NaiveBayesClassifier
 from autocorrect import Speller
 import re
+import numpy as np
 
 nltk.download('stopwords')
 
