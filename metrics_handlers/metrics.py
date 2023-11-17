@@ -15,6 +15,7 @@ emotions = ["joy", "sadness", "fear", "anger", "surprise", "neutral", "shame", "
 polarity = ['negative', 'neutral', 'positive']
 topics = ["politics", "health", "emotion", "financial", "sport", "science"]
 alpha = 0.7
+
 cl = get_classifier()
 df = pd.read_csv('dumps/tweets.csv')
 
@@ -74,6 +75,7 @@ def get_metric_from_tweet(tweet : str, alpha = alpha, cl = cl):
 
 def get_metric_from_user(user : str, df = df):
     
+    
     user_tweets_df = df[df['user'] == user]
     #print(user_tweets_df.head(8))
     nb_tweets = 0
@@ -81,9 +83,10 @@ def get_metric_from_user(user : str, df = df):
     for tweet in user_tweets_df['text']:
         nb_tweets += 1
         user_metric += get_metric_from_tweet(tweet)
-    metric_mean = user_metric/nb_tweets
-    #print(metric_mean)
-    return metric_mean
+    mean_vector = user_metric/nb_tweets
+    return mean_vector
+    #print(user_metric/nb_tweets)
+
 #get_metric_from_tweet("this is cool")
 #print(emotion_to_vector('fear'))
 #print(topic_to_vector("politics"))
