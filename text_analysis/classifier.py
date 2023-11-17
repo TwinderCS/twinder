@@ -12,14 +12,10 @@ import pytorch_lightning as pl
 ## TOKENIZATION
 
 
-if __name__ == "__main__":
-    tokenizer = get_tokenizer('basic english')
 def yield_tokens(data):
     for text in data['text']:
         yield tokenizer(text)
 
-vocab = build_vocab_from_iterator(iterator=yield_tokens(DATAFRAME), specials=["<unk>", "<pad>"])
-vocab.set_default_index(vocab["<unk>"])
 
 def gen_dataset(dataframe, classes, classname):
     # assign an index to each class
@@ -86,6 +82,12 @@ class Model(pl.LightningModule):
 
     def configure_optimizers(self):
         return optim.Adam(self.parameters(), lr=self.learning_rate)
+
+if __name__ == "__main__":
+    tokenizer = get_tokenizer('basic english')
+
+    vocab = build_vocab_from_iterator(iterator=yield_tokens(DATAFRAME), specials=["<unk>", "<pad>"])
+    vocab.set_default_index(vocab["<unk>"])
 
 
 
