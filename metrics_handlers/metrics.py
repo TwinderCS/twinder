@@ -6,6 +6,7 @@ sys.path.append('text_analysis')
 sys.path.append('dumps')
 sys.path.append('data_handling')
 #from models import *
+import time
 import numpy as np
 from text_analysis import *
 import pandas as pd
@@ -75,7 +76,7 @@ def get_metric_from_tweet(tweet : str, alpha = alpha, cl = cl):
 
 def get_metric_from_user(user : str, df = df):
     
-    
+    begin = time.time()
     user_tweets_df = df[df['user'] == user]
     #print(user_tweets_df.head(8))
     nb_tweets = 0
@@ -84,10 +85,12 @@ def get_metric_from_user(user : str, df = df):
         nb_tweets += 1
         user_metric += get_metric_from_tweet(tweet)
     mean_vector = user_metric/nb_tweets
+    end = time.time()
+    print(end-begin)
     return mean_vector
     #print(user_metric/nb_tweets)
 
 #get_metric_from_tweet("this is cool")
 #print(emotion_to_vector('fear'))
 #print(topic_to_vector("politics"))
-#get_metric_from_user('scotthamilton')
+#print(get_metric_from_user('scotthamilton'))
