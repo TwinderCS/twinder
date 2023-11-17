@@ -6,14 +6,7 @@ import dash
 import dash_bootstrap_components as dbc
 from dash import Dash, html, Input, Output, State, ctx, callback, dcc
 
-
-dash.register_page(__name__)
-
-<<<<<<< HEAD
-#creation of a fake test dataset to be used by my app bc the AI dataset hasn't been downloaded yet 
-=======
 #creation of a fake test dataset to be used by my app bc the AI dataset hasn't been downloaded yet
->>>>>>> d10ff4a2cf6bb53cfa8e240869b5325fcc8ff7cd
 
 user_data = {
     'user_id': range(1, 101),
@@ -26,34 +19,29 @@ user_data = {
 
 users_df = pd.DataFrame(user_data)
 
-<<<<<<< HEAD
-#to create my interface im using the dash module from python and its functions
-
-=======
->>>>>>> d10ff4a2cf6bb53cfa8e240869b5325fcc8ff7cd
 app = dash.Dash(__name__, external_stylesheets=[dbc.themes.BOOTSTRAP])
 
-#i need to create a graphic function showing off the pretendant profile after tking the original user id as an argument
-
+# Improved user profile display using Bootstrap cards
 def display_user_profile(user):
-    return html.Div([
-        html.H3(user['name']),
-        html.P(f"Age: {user['age']}"),
-        html.P(user['bio'])
-    ])
+    return dbc.Card([
+        dbc.CardBody([
+            html.H4(user['name'], className='card-title'),
+            html.P(f"Age: {user['age']}", className='card-text'),
+            html.P(user['bio'], className='card-text')
+        ])
+    ], className='mb-3')
+    
+user_index=0
 
-user_index = 0
+# Enhance buttons with Tinder-like style
+yes_button = dbc.Button("Yes", id='yes-button', color="success", className="mr-2", style={"border-radius": "50%"})
+no_button = dbc.Button("No", id='no-button', color="danger", style={"border-radius": "50%"})
 
-#im adjusting the layout so as to make it more beautiful or in the current extent at least acceptable
-
-layout = html.Div([
+app.layout = html.Div([
     dcc.Store(id='user-index', data=user_index),
     html.Div(id='user-profile', children=display_user_profile(users_df.iloc[user_index])),
-    dbc.Button("Yes", id='yes-button', color="success", className="mr-2"),
-    dbc.Button("No", id='no-button', color="danger")
-])
-
-#im implementing a callback function which updates the page whenever the button yes or no is pushed. If the yes button is pushed, then the pretendant user id is put in an additional dataset
+    html.Div([yes_button, no_button], className='d-flex justify-content-center')
+], className='container')
 
 @callback(
     Output('user-profile', 'children'),
@@ -64,10 +52,7 @@ layout = html.Div([
 )
 
 # i adjust my callback function so as to limit the suggestions to 50 profiles (to improve the quality of the AI generated selection)
-<<<<<<< HEAD
-=======
 
->>>>>>> d10ff4a2cf6bb53cfa8e240869b5325fcc8ff7cd
 def update_user_profile(yes_clicks, no_clicks, current_index):
     new_index = (current_index + 1) % len(users_df)
 
@@ -77,5 +62,3 @@ def update_user_profile(yes_clicks, no_clicks, current_index):
 
 if __name__ == '__main__':
     app.run_server(debug=True)
-
-    
