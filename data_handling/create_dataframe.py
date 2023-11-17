@@ -66,6 +66,10 @@ def create_emotion_dataframe(location = "dumps/emotion.csv", save = True):
     if save:
         df.to_pickle('dumps/emotion.pkl')
     
+def create_basic_dataframe(location, save_location=None, save = True):
+    df = pd.read_csv(location)
+    if save:
+        df.to_pickle(save_location)
 
 def create_topic_dataframe(location = "dumps/topic.csv", save = True):
     df = pd.read_csv(location)
@@ -97,6 +101,3 @@ def create_metrics_dataframe(save = True):
 
     if save:
         df_metric.to_pickle('dumps/metrics.pkl')
-
-
-create_metrics_dataframe()
