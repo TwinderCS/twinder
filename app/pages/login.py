@@ -1,8 +1,11 @@
 """Module providing a function that send a message when the button is clicked"""
+import dash
 import dash_bootstrap_components as dbc
-from dash import Dash, html, Input, Output, State, ctx, callback
+from dash import Dash, html, Input, Output, State, ctx, callback, dcc
 
-app = Dash(__name__, external_stylesheets=[dbc.themes.SPACELAB])
+dash.register_page(__name__)
+
+#app = Dash(__name__, external_stylesheets=[dbc.themes.SPACELAB])
 
 heading = html.H4(
     "Twinder, l'application qui réunit passion et amour",
@@ -21,17 +24,16 @@ control_panel = dbc.Card(
     )
 )
 
-
 button = dbc.Button(
     id='submit',
     children="Submit",
     n_clicks=0,
-    href = "", #mettre le lien de la deuxième page
+    href="feed",
     size="lg",
     className="mt-2",
 )
 
-app.layout = html.Div(
+layout = html.Div(
     [heading,
     dbc.Row([dbc.Col(control_panel, md = 4)],justify = "center"),
     dbc.Row([dbc.Col(button,md=4)],justify="center"),
@@ -50,7 +52,3 @@ def update_output_div(__,name: "string") -> "string":
     button_clicked = ctx.triggered_id
     if button_clicked == 'submit':
         return f'Output: {name}'
-
-
-if __name__ == '__main__':
-    app.run(debug=True)
