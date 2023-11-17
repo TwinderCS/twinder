@@ -9,6 +9,7 @@ from dash import Dash, html, Input, Output, State, ctx, callback, dcc
 
 dash.register_page(__name__)
 
+#creation of a fake test dataset to be used by my app bc the AI dataset hasn't been downloaded yet
 
 user_data = {
     'user_id': range(1, 101),
@@ -16,9 +17,14 @@ user_data = {
     'age': [20 + i % 10 for i in range(1, 101)],
     'bio': [f'This is a bio of User {i}' for i in range(1, 101)]
 }
+
+#to create my interface im using the dash module from python and its functions
+
 users_df = pd.DataFrame(user_data)
 
-# app = dash.Dash(__name__, external_stylesheets=[dbc.themes.BOOTSTRAP])
+app = dash.Dash(__name__, external_stylesheets=[dbc.themes.BOOTSTRAP])
+
+#i need to create a graphic function showing off the pretendant profile after tking the original user id as an argument
 
 def display_user_profile(user):
     return html.Div([
@@ -28,6 +34,8 @@ def display_user_profile(user):
     ])
 
 user_index = 0
+
+#im adjusting the layout so as to make it more beautiful or in the current extent at least acceptable
 
 layout = html.Div([
     dcc.Store(id='user-index', data=user_index),
@@ -43,6 +51,9 @@ layout = html.Div([
     Input('no-button', 'n_clicks'),
     State('user-index', 'data'),
 )
+
+# i adjust my callback function so as to limit the suggestions to 50 profiles (to improve the quality of the AI generated selection)
+
 def update_user_profile(yes_clicks, no_clicks, current_index):
     new_index = (current_index + 1) % len(users_df)
 
