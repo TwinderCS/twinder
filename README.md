@@ -22,6 +22,10 @@ Create a programm that propose some Twitter profiles to the user from its tweets
 - `autocorrect`
 - `wandb`
 - `pytorch_lightning`
+- `numpy`
+- `pandas`
+- `sys`
+
 
 ## To Execute
 ```bash
