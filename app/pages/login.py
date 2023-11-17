@@ -24,12 +24,11 @@ control_panel = dbc.Card(
     )
 )
 
-
 button = dbc.Button(
     id='submit',
     children="Submit",
     n_clicks=0,
-    href="",
+    href="feed",
     size="lg",
     className="mt-2",
 )
