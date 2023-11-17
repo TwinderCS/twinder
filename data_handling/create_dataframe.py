@@ -2,7 +2,10 @@
 Program that takes in input the interesting data and adds it to a dataframe.
 '''
 import pandas as pd
-from text_analysis.text_analysis import cleaner
+import sys
+sys.path.append('dumps')
+sys.path.append('metrics_handlers')
+from metrics import *
 
 def get_hashtags(text):
     '''
@@ -76,3 +79,24 @@ def create_topic_dataframe(location = "dumps/topic.csv", save = True):
     if save:
         df.to_pickle('dumps/topic.pkl')
 
+def create_tweets_dataframe(location = 'dumps/tweets.csv', save = True):
+    df = pd.read_csv(location)
+    if save:
+        df.to_pickle('dumps/tweets.pkl')
+
+def create_metrics_dataframe(save = True):
+    df_tweets = pd.read_pickle('dumps/tweets.pkl')
+    usernames = df_tweets['user'].unique()
+    print(df_tweets['user'].nunique())
+    #print(usernames[0:10])
+    data = []
+    for username in usernames[0:20]:
+        data.append([username, get_metric_from_user(username)])
+    
+    df_metric = pd.DataFrame(data, columns = ['username', 'metric'])
+
+    if save:
+        df_metric.to_pickle('dumps/metrics.pkl')
+
+
+create_metrics_dataframe()
