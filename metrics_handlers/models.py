@@ -12,7 +12,7 @@ def topic_model(tweet, argmax=True, clean=True, vocab=vocab, int_output=False):
     global topic
     global tokenizer
     global cleaner
-    global vocab
+    #global vocab
     global max_len
     if clean:
         tweet = cleaner(tweet)
@@ -37,7 +37,7 @@ def emotion_model(tweet, argmax=True, clean=True, vocab=vocab, int_output=False)
     global emotion
     global tokenizer
     global cleaner
-    global vocab
+    #global vocab
     global max_len
     if clean:
         tweet = cleaner(tweet)
