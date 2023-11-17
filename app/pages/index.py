@@ -1,9 +1,10 @@
 import dash
-from dash import html
+from dash import html, dcc
 
 dash.register_page(__name__, path='/')
 
-layout = html.Div([
-    html.H1('Bienvenue sur Twinder'),
-    html.Div('This is our Home page content.'),
-])
+layout = dcc.Markdown('''
+# Bienvenue sur Twinder !
+
+[Cliquez ici pour vous connecter](login).
+''')
