@@ -17,7 +17,7 @@ np.random.shuffle(TRAIN_FROM_DF_ALL)
 
 
 TRAIN_FROM_DF = TRAIN_FROM_DF_ALL[0:1000] #Otherwise it takes wayyy to long
-print(TRAIN_FROM_DF[0])
+#print(TRAIN_FROM_DF[0])
 train = [('I love this sandwich.', 'pos'),
     ('this is an amazing place!', 'pos'),
     ('I feel very good about these beers.', 'pos'),
