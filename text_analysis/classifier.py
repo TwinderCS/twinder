@@ -53,11 +53,7 @@ class NLPModel(nn.Module):
             nn.Linear(embedding_dim, hidden_dim),
             nn.ReLU(),
             nn.Linear(hidden_dim, output_dim),
-<<<<<<< HEAD
-            nn.ReLU(),
-=======
             nn.ReLU()
->>>>>>> ml
         )
 
     def forward(self, x):
