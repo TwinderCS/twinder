@@ -8,16 +8,18 @@ from torch.utils.data import DataLoader
 from torchtext.data.utils import get_tokenizer
 from torchtext.vocab import build_vocab_from_iterator
 import pytorch_lightning as pl
+import spacy
+import pandas as pd
 
 ## TOKENIZATION
-def gen_vocab(data):
-    tokenizer = get_tokenizer('basic english')
-    def yield_tokens(data):
-        for text in data['text']:
-            yield tokenizer(text)
+df = pd.read_pickle("dumps/df.pkl")
+tokenizer = get_tokenizer('spacy')
+def yield_tokens(data):
+    for text in data['text']:
+        yield tokenizer(text)
 
-    vocab = build_vocab_from_iterator(iterator=yield_tokens(data), specials=["<unk>", "<pad>"])
-    vocab.set_default_index(vocab["<unk>"])
+vocab = build_vocab_from_iterator(iterator=yield_tokens(df), specials=["<unk>", "<pad>"])
+vocab.set_default_index(vocab["<unk>"])
 
 EPOCHS = 10
 LEARNING_RATE = 1e-3

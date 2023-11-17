@@ -13,6 +13,21 @@ Create a programm that propose some Twitter profiles to the user from its tweets
 - Sarah
 - Léna
 
+## Dependencies
+- `torch`
+- `torchtext`
+- `nltk`
+- `dash`
+- `spacy`
+- `autocorrect`
+- `wandb`
+- `pytorch_lightning`
+
+## To Execute
+```bash
+python3 -m spacy download en
+```
+
 ## Current Project Structure
 ```
 ├── 1er_essai_interface_sarah.py
