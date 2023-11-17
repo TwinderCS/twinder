@@ -1,12 +1,15 @@
-# Project of the coding weeks 2020-2021 of the Uranus Team
+# Project of the coding weeks 2020-2021 of the Twinder® Team
 
 ## Description
 
+Create a programm that propose some Twitter profiles to the user from its tweets.
 
-## The Uranus Team
+
+## The Twinder® Team
 
 - Anas Lecaillon (Maitre de l'Univers (Entre autres))
 - Mohamed Koucha (Être humain (Je suppose))
-git commit jjjjj
-git push jjjj
-git merge jjjjj
+- Balthazar
+- Sarah
+- Léna
+>>>>>>> 933282492f5e158ecbf4622f5a35bbef688eba57
