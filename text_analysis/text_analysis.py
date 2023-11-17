@@ -2,7 +2,6 @@ import pickle
 from textblob import TextBlob
 from nltk.corpus import stopwords
 import nltk
-from . import classifier_data
 from textblob.classifiers import NaiveBayesClassifier
 from autocorrect import Speller
 import re
@@ -25,8 +24,15 @@ def cleaner(text):
 
 def get_new_classifier():
     """Creates a new classifier from scratch"""
-    cl = NaiveBayesClassifier(classifier_data.TRAIN_FROM_DF)
-    return cl
+    df = pd.read_pickle("dumps/df.pkl")
+    tweets = df['text'].to_numpy()
+    polarity = df['polarity'].to_numpy()
+    df_all = [(tweets[i], polarity[i]) for i in range(len(tweets))]
+
+    np.random.shuffle(df_all)
+    train = df_all[0:1000] #Otherwise it takes wayyy to long
+    return NaiveBayesClassifier(train)
+    
 
 def get_classifier():
     """Gets the trained classifier from the file"""
