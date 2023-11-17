@@ -4,10 +4,10 @@ import wandb
 from torch.utils.data import Dataset
 from torch.utils.data import DataLoader
 from torch import from_numpy
-from text_analysis.classifier_data import DATAFRAME
+from .classifier_data import DATAFRAME
 import pytorch_lightning as pl
-from classifier import Model, tokenizer, gen_dataset, split_dataset, yield_batches
-from data_handling import create_emotion_dataframe
+from .classifier import Model, gen_dataset, split_dataset, yield_batches
+from data_handling import create_dataframe #create_emotion_dataframe
 from os.path import isfile
 import pandas as pd
 
@@ -16,7 +16,7 @@ if __name__ == "__main__":
     if isfile("dumps/emotion.pkl"):
         emotion = pd.read_pickle("dumps/emotion.pkl")
     else:
-        emotion = create_emotion_dataframe()
+        emotion = create_dataframe()    #create_emotion_dataframe
 
 
     EPOCHS = 10

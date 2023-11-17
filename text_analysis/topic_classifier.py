@@ -6,10 +6,10 @@ from torch.utils.data import DataLoader
 from torchtext.data.utils import get_tokenizer
 from torchtext.vocab import build_vocab_from_iterator
 from torch import from_numpy
-from classifier_data import DATAFRAME
+from .classifier_data import DATAFRAME
 import pytorch_lightning as pl
-from classifier import  Model, tokenizer, gen_dataset, split_dataset, yield_batches
-from data_handling import create_topic_dataframe
+from .classifier import  Model, gen_dataset, split_dataset, yield_batches
+from data_handling import create_dataframe    #create_topic_dataframe
 from os.path import isfile
 import pandas as pd
 
@@ -18,7 +18,7 @@ if __name__ == "__main__":
     if isfile("dumps/topic.pkl"):
         topic = pd.read_pickle("dumps/topic.pkl")
     else:
-        topic = create_topic_dataframe()
+        topic = create_dataframe()      #create_topic_dataframe
 
     EPOCHS = 10
     LEARNING_RATE = 1e-3

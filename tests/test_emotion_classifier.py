@@ -13,8 +13,11 @@ convert to tensor
 input_tensor = torch.tensor(processed_phrase).unsqueeze(0)
 
 """
+@pytest.mark.parametrize("positive_tweets", [
+    "Life is so great !"
+])
 
-def test_positive_opinion_rate(positive_opinions):
+def test_positive_opinion_rate(positive_tweets):
     #rate = get_opinion_rate(positive_opinions)
     #assert rate.index(max(rate)) == 0
     assert True
