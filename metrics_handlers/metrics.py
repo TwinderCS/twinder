@@ -11,7 +11,7 @@ from text_analysis import *
 import pandas as pd
 
 max_len = 280
-emotions = ["joy", "sadness", "fear", "anger", "surprise"]
+emotions = ["joy", "sadness", "fear", "anger", "surprise", "neutral", ""]
 polarity = ['negative', 'neutral', 'positive']
 topics = ["politics", "health", "emotion", "financial", "sport", "science"]
 alpha = 0.7
@@ -43,9 +43,9 @@ def polarity_to_vector(polarity : str):
         case "positive":
             return np.array([1, 1, 0, 0, 0], dtype = float)
         case "neutral":
-            return np.array([1, 1, 0, 0, 0], dtype = float)
+            return np.array([0, 0, 0, 0, 0], dtype = float)
         case "negative":
-            return np.array([0, 0, 0, 1, 1], dtype = float)
+            return np.array([0, 0, 1, 1, 1], dtype = float)
     return "Warning : polarity_to_vector : wrong polarity"
     return topic_vector
 
