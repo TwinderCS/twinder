@@ -2,7 +2,7 @@
 Program that takes in input the interesting data and adds it to a dataframe.
 '''
 import pandas as pd
-from text_analysis.text_analysis import cleaner
+
 
 def get_hashtags(text):
     '''
@@ -62,3 +62,7 @@ def create_topic_dataframe(location = "dumps/topic.csv", save = True):
     if save:
         df.to_pickle('dumps/topic.pkl')
 
+def create_tweets_dataframe(location = 'dumps/tweets.csv', save = True):
+    df = pd.read_csv(location)
+    if save:
+        df.to_pickle('dumps/tweets.pkl')
