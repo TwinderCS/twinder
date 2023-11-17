@@ -6,12 +6,14 @@ from torch.utils.data import Dataset
 from torch.utils.data import DataLoader
 from torchtext.data.utils import get_tokenizer
 from torchtext.vocab import build_vocab_from_iterator
-from classifier_data import DATAFRAME
+from .classifier_data import DATAFRAME
 import pytorch_lightning as pl
 
 ## TOKENIZATION
 
-tokenizer = get_tokenizer('basic english')
+
+if __name__ == "__main__":
+    tokenizer = get_tokenizer('basic english')
 def yield_tokens(data):
     for text in data['text']:
         yield tokenizer(text)

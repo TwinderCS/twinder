@@ -4,7 +4,7 @@ import wandb
 from torch.utils.data import Dataset
 from torch.utils.data import DataLoader
 from torch import from_numpy
-from classifier_data import DATAFRAME
+from text_analysis.classifier_data import DATAFRAME
 import pytorch_lightning as pl
 from classifier import Model, tokenizer, gen_dataset, split_dataset, yield_batches
 from data_handling import create_emotion_dataframe
