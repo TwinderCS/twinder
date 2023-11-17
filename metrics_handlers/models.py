@@ -1,5 +1,5 @@
 import torch
-import pytorch_lighting as pl
+import pytorch_lightning as pl
 from text_analysis.classifier import Model, vocab, tokenizer
 from metrics import emotions, topics, max_len
 from text_analysis.text_analysis import cleaner
