@@ -3,9 +3,9 @@ import wordcloud
 import text_analysis
 import data_handling
 import tests
+import metrics_handlers
 import pandas as pd
-import metrics
-import models
+
 
 # Lets present various functionalities
 

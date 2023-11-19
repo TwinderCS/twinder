@@ -7,24 +7,23 @@ from torch.utils.data import Dataset
 from torch.utils.data import DataLoader
 from torchtext.data.utils import get_tokenizer
 from torchtext.vocab import build_vocab_from_iterator
-from data_handling import DATAFRAME
 import pytorch_lightning as pl
+import spacy
+import pandas as pd
 
 ## TOKENIZATION
-
-tokenizer = get_tokenizer('basic english')
+df = pd.read_pickle("dumps/df.pkl")
+tokenizer = get_tokenizer('spacy')
 def yield_tokens(data):
     for text in data['text']:
         yield tokenizer(text)
 
-vocab = build_vocab_from_iterator(iterator=yield_tokens(DATAFRAME), specials=["<unk>", "<pad>"])
+vocab = build_vocab_from_iterator(iterator=yield_tokens(df), specials=["<unk>", "<pad>"])
 vocab.set_default_index(vocab["<unk>"])
 
 EPOCHS = 10
 LEARNING_RATE = 1e-3
 BATCH_SIZE = 64
-VOCAB_LEN = len(vocab)
-VOCAB = vocab
 
 def gen_dataset(dataframe, classes, classname):
     # assign an index to each class
@@ -50,34 +49,36 @@ class NLPModel(nn.Module):
         super().__init__()
         self.embedding = nn.Embedding(vocab_size, embedding_dim)
         self.dense = nn.Sequential(
-            nn.Linear(embedding_dim, hidden_dim),
+            nn.Linear(embedding_dim, hidden_dim*10),
             nn.ReLU(),
-            nn.Linear(hidden_dim, output_dim),
-<<<<<<< HEAD
+            nn.Linear(hidden_dim*10, hidden_dim),
             nn.ReLU(),
-=======
-            nn.ReLU()
->>>>>>> ml
+            nn.Linear(hidden_dim, output_dim)
         )
 
     def forward(self, x):
         embedded = self.embedding(x)
         mask = (x != vocab["<pad>"])
+        mask = mask.unsqueeze(-1)
         embedded = embedded * mask.float()
-        embedded = embedded.mean(dim=...)
+        embedded = embedded.mean(dim=2)
         return self.dense(embedded)
 
 class Model(pl.LightningModule):
-    def __init__(self, vocab_len, output_dim, learning_rate):
+    def __init__(self, vocab_len, output_dim):
         super().__init__()
-        self.model = NLPModel(vocab_len, 1000, 256, output_dim)
+        self.model = NLPModel(vocab_len, 100, 256, output_dim)
         self.loss = nn.CrossEntropyLoss()
-        self.learning_rate = learning_rate
+        self.tests = 0
+        self.correct = 0
 
     def training_step(self, batch):
         x, y = batch
         y_hat = self.model(x)
-        loss = self.loss(y, y_hat)
+        y = y.squeeze(0)
+        y = y.squeeze(-1)
+        y_hat = y_hat.squeeze(0)
+        loss = self.loss(y_hat, y)
         self.log("train_loss", loss, prog_bar=True)
         return loss
 
@@ -90,11 +91,14 @@ class Model(pl.LightningModule):
     def test_step(self, batch):
         x, y = batch
         y_hat = self.model(x)
+        y = y.squeeze(0)
+        y = y.squeeze(-1)
+        y_hat = y_hat.squeeze(0)
+        self.tests += BATCH_SIZE
         loss = self.loss(y_hat, y)
         self.log("test_loss", loss, prog_bar=True)
+        self.correct += (y_hat.argmax(dim=-1) == y).float().sum()
+        self.log("accuracy", self.correct/self.tests, prog_bar=True)
 
-    def configure_optimizers(self):
-        return optim.Adam(self.parameters(), lr=self.learning_rate)
-
-
-
+    def configure_optimizers(self, lr=LEARNING_RATE):
+        return optim.Adam(self.parameters(), lr=lr)

@@ -2,27 +2,38 @@ import pickle
 from textblob import TextBlob
 from nltk.corpus import stopwords
 import nltk
-from classifier_data import *
 from textblob.classifiers import NaiveBayesClassifier
 from autocorrect import Speller
 import re
+import numpy as np
+
+nltk.download('stopwords')
 
 
 def cleaner(text):
     speller = Speller(lang='en')
     unpunctuated = re.sub("[^a-zA-Z\s]+", " ", text)
     lowered = unpunctuated.lower()
-    words = lowered.split(" ")
+    text = lowered
+    stops = nltk.corpus.stopwords.words('english')
+    words = [word for word in text.split(" ") if word not in stops]
     corrected = [speller(word) for word in words]
     lm = nltk.stem.WordNetLemmatizer()
     lemmatized = [lm.lemmatize(word) for word in corrected]
-    return lemmatized.join(" ")
+    return " ".join(lemmatized)
 
 
 def get_new_classifier():
     """Creates a new classifier from scratch"""
-    cl = NaiveBayesClassifier(TRAIN_FROM_DF)
-    return cl
+    df = pd.read_pickle("dumps/df.pkl")
+    tweets = df['text'].to_numpy()
+    polarity = df['polarity'].to_numpy()
+    df_all = [(tweets[i], polarity[i]) for i in range(len(tweets))]
+
+    np.random.shuffle(df_all)
+    train = df_all[0:1000] #Otherwise it takes wayyy to long
+    return NaiveBayesClassifier(train)
+    
 
 def get_classifier():
     """Gets the trained classifier from the file"""

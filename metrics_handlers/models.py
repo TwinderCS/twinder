@@ -1,5 +1,5 @@
 import torch
-import pytorch_lighting as pl
+import pytorch_lightning as pl
 from text_analysis.classifier import Model, vocab, tokenizer
 from metrics import emotions, topics, max_len
 from text_analysis.text_analysis import cleaner
@@ -7,7 +7,7 @@ from text_analysis.text_analysis import cleaner
 topic = Model.load_from_checkpoint("dumps/topic_model.ckpt")
 emotion = Model.load_from_checkpoint("dumps/emotion_model.ckpt")
 
-def topic_model(tweet, argmax=True, clean=True, vocab=vocab, int_output=False):
+def topic_model(tweet, argmax=True, clean=True, int_output=False):
     global topics
     global topic
     global tokenizer
@@ -32,7 +32,7 @@ def topic_model(tweet, argmax=True, clean=True, vocab=vocab, int_output=False):
     else:
         return topics[out.argmax()]
     
-def emotion_model(tweet, argmax=True, clean=True, vocab=vocab, int_output=False):
+def emotion_model(tweet, argmax=True, clean=True, int_output=False):
     global emotions
     global emotion
     global tokenizer
