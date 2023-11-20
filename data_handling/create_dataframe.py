@@ -68,10 +68,14 @@ def create_emotion_dataframe(location = "dumps/emotion.csv", save = True):
     if save:
         df.to_pickle('dumps/emotion.pkl')
     
-def create_basic_dataframe(location, save_location=None, save = True):
-    df = pd.read_csv(location)
+def create_basic_dataframe(location, save_location=None, save = True, idx_col=None):
+    if not idx_col is None:
+        df = pd.read_csv(location)
+    else:
+        df = pd.read_csv(location, index_col = idx_col)
     if save:
         df.to_pickle(save_location)
+    return df
 
 def create_topic_dataframe(location = "dumps/topic.csv", save = True):
     df = pd.read_csv(location)
