@@ -72,3 +72,4 @@ if __name__ == "__main__":
         train_dataloaders=DataLoader(dataset=train_set, shuffle=True),
         test_dataloaders=DataLoader(dataset=test_set, shuffle=True)
     )
+

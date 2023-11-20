@@ -77,7 +77,7 @@ def test_joyful_tweets(joyful_tweets):
     assert True
 
 @pytest.mark.parametrize("hateful_tweets", [
-    "How dare he ! Don't worry, you will get what you deserve before Christmas... "
+    "How dare you ! Don't worry, you will get what you deserve before Christmas... "
 ])
 
 def test_hateful_tweets(hateful_tweets):
@@ -89,3 +89,11 @@ def test_hateful_tweets(hateful_tweets):
 #negation
 #robustness to noise (pronum, surname, time conjugaison)
 
+
+@pytest.mark.parametrize("negation_tweets", [
+   ["I haven't failed this test, my parents are going to be happy !", "I failed this test, my parents aren't going to be happy !"]
+])
+
+@pytest.mark.parametrize("noised_tweets", [
+    "How dare he ! Don't worry, you will get what you deserve before Christmas... "
+])
