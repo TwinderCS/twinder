@@ -90,6 +90,14 @@ def get_metric_from_user(user : str, df = df):
     return mean_vector
     #print(user_metric/nb_tweets)
 
+def get_closest_users(username, n = 10):
+    df_metric = pd.read_pickle("dumps/metrics.pkl")
+    #print(df.head(10))
+    usernames = []
+    print(df_metric[df_metric['username' == 'scotthamilton']])
+    return usernames
+#get_closest_users("scotthamilton")
+#print(get_metric_from_user("scotthamilton"))
 #get_metric_from_tweet("this is cool")
 #print(emotion_to_vector('fear'))
 #print(topic_to_vector("politics"))
