@@ -7,8 +7,11 @@ from torchtext.data.utils import get_tokenizer
 from torchtext.vocab import build_vocab_from_iterator
 from torch import from_numpy
 import pytorch_lightning as pl
-from .classifier import  Model, gen_dataset, split_dataset, yield_batches
-from data_handling import create_dataframe    #create_topic_dataframe
+import sys
+sys.path.append("data_handling")
+sys.path.append("text_analysis")
+from classifier import  Model, gen_dataset, split_dataset, yield_batches
+from create_dataframe import *   #create_topic_dataframe
 from os.path import isfile
 import pandas as pd
 

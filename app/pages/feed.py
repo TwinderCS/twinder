@@ -5,8 +5,10 @@ import pandas as pd
 import dash
 import dash_bootstrap_components as dbc
 from dash import Dash, html, Input, Output, State, ctx, callback, dcc
-from metrics_handlers import metrics
+import sys
 
+sys.path.append("metrics_handlers/metrics")
+from metrics import *
 dash.register_page(__name__)
 
 #creation of a fake test dataset to be used by my app bc the AI dataset hasn't been downloaded yet 
