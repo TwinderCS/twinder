@@ -102,23 +102,8 @@ def create_metrics_dataframe(save = True):
     begin = time.time()
     vectors = vfunc(usernames[0:20])
     df_metric = pd.DataFrame({'username' : usernames[:20], 'metric' : vectors})
-    """
-    for username in usernames[0:20]:
-        data.append([username, get_metric_from_user(username)])
-    
-    df_metric = pd.DataFrame(data, columns = ['username', 'metric'])
-    
-    df_metric = pd.DataFrame(columns = ['username', 'metric'])
-    begin = time.time()
-    
-    df_metric['username'] = usernames[0:20]
-    df_metric['metric'] = df_metric['username'].map(lambda x: get_metric_from_user(x))
-
-    """
     end = time.time()
     if save:
         df_metric.to_pickle('dumps/metrics.pkl')
         df_metric.to_csv('dumps/metrics.csv')
     return end - begin
-
-create_metrics_dataframe()
