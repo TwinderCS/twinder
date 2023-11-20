@@ -90,15 +90,32 @@ def get_metric_from_user(user : str, df = df):
     return mean_vector
     #print(user_metric/nb_tweets)
 
-def get_closest_users(username, n = 10):
+def distance(v1, v2):
+    """Distance euclidienne pour l'instant"""
+    if len(v1) != len(v2):
+        print("Error distance : vectors with different sizes")
+    if len(v1) == 0:
+        print("Error distance : empty vector")
+
+    return np.sum([(v1[i] - v2[i])**2 for i in range(len(v1))])**(0.5)
+
+def get_closest_users(username, n = 10, N = 100):
     df_metric = pd.read_pickle("dumps/metrics.pkl")
     #print(df.head(10))
-    usernames = []
-    print(df_metric[df_metric['username' == 'scotthamilton']])
-    return usernames
-#get_closest_users("scotthamilton")
-#print(get_metric_from_user("scotthamilton"))
-#get_metric_from_tweet("this is cool")
-#print(emotion_to_vector('fear'))
-#print(topic_to_vector("politics"))
-#print(get_metric_from_user('scotthamilton'))
+     
+    metric = df_metric[df_metric['username'] == username]['metric'].iloc[0]
+    
+    """Les 10 premiers users différents de celui donné en arg"""
+    users_with_metric = list(df_metric[df_metric['username'] != username][['username', 'metric']].itertuples(index=False, name=None))
+    
+
+    user_with_dist = np.array([[distance(metric, user_metric), username] for (username, user_metric) in users_with_metric[0:N]])
+    print(len(user_with_dist))
+
+    closest_arg = np.argpartition(user_with_dist, n, axis = 0)[:,0][:n]
+
+    closest_users = user_with_dist[closest_arg, 1]
+
+    return closest_users
+
+
