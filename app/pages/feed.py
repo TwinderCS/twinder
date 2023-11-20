@@ -5,7 +5,7 @@ import pandas as pd
 import dash
 import dash_bootstrap_components as dbc
 from dash import Dash, html, Input, Output, State, ctx, callback, dcc
-import metrics
+from metrics_handlers import metrics
 
 dash.register_page(__name__)
 
