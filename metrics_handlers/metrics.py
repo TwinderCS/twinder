@@ -9,7 +9,7 @@ import numpy as np
 from text_analysis import *
 import pandas as pd
 
-max_len = 280
+
 emotions = ["joy", "sadness", "fear", "anger", "surprise", "neutral", "shame", "disgust"]
 polarity = ['negative', 'neutral', 'positive']
 topics = ["politics", "health", "emotion", "financial", "sport", "science"]
