@@ -5,22 +5,27 @@ import pandas as pd
 import dash
 import dash_bootstrap_components as dbc
 from dash import Dash, html, Input, Output, State, ctx, callback, dcc
-
+import metrics
 
 dash.register_page(__name__)
 
-#creation of a fake test dataset to be used by my app bc the AI dataset hasn't been downloaded yet
+#creation of a fake test dataset to be used by my app bc the AI dataset hasn't been downloaded yet 
 
-user_data = {
-    'user_id': range(1, 101),
-    'name': [f'User {i}' for i in range(1, 101)],
-    'age': [20 + i % 10 for i in range(1, 101)],
-    'bio': [f'This is a bio of User {i}' for i in range(1, 101)]
-}
+def user_data_creation(username, n = 10):
+    user_array = metrics.get_closest_users(username, n)
+    user_data = {
+        'user_id' : [user_array[i][1] for i in range(n)],
+        'name' : [user_array[i][1] for i in range(n)],
+        'age': [20 + i % 10 for i in range(1, 101)],
+        'bio': [f'This is a bio of User {i}' for i in range(1, 101)]
+    }
+    users_df = pd.DataFrame(user_data)
+    return users_df
+
 
 #to create my interface im using the dash module from python and its functions
 
-users_df = pd.DataFrame(user_data)
+users_df = user_data_creation("scotthamilton")
 
 #to create my interface im using the dash module from python and its functions
 
@@ -66,5 +71,3 @@ def update_user_profile(yes_clicks, no_clicks, current_index):
 
 if __name__ == '__main__':
     app.run_server(debug=True)
-
-    
