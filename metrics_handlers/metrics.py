@@ -5,7 +5,6 @@ sys.path.append('text_analysis')
 sys.path.append('dumps')
 sys.path.append('data_handling')
 #from models import *
-import time
 import numpy as np
 from text_analysis import *
 import pandas as pd
@@ -42,7 +41,7 @@ topic_dict = {topics[i] : np.array([0] * i + [1] + (len(topics)-i - 1) * [0], dt
 
 
 cl = get_classifier()
-df = pd.read_csv('dumps/tweets.csv')
+df_tweets = pd.read_csv('dumps/tweets.csv')
 
 def topic_to_vector(topic : str):
     """
@@ -53,7 +52,7 @@ def topic_to_vector(topic : str):
             arg = i
     topic_vector = np.zeros(len(topics))
     topic_vector[arg] = 1
-    return topic_vector    
+    return topic_vector
 
 def get_metric_from_tweet(tweet : str, alpha = alpha, cl = cl):
     """
@@ -79,12 +78,11 @@ def get_metric_from_tweet(tweet : str, alpha = alpha, cl = cl):
     metrics = np.concatenate((mind_state_vector, topic_vector))
     return metrics
 
-def get_metric_from_user(user : str, df = df):
+def get_metric_from_user(user : str, df = df_tweets):
     """
     Iterates over all of the user's tweets to return the average of get_metric_from_tweet
     """
-    
-    begin = time.time()
+
     user_tweets_df = df[df['user'] == user]
     #print(user_tweets_df.head(8))
     nb_tweets = 0
@@ -93,8 +91,7 @@ def get_metric_from_user(user : str, df = df):
         nb_tweets += 1
         user_metric += get_metric_from_tweet(tweet)
     mean_vector = user_metric/nb_tweets
-    end = time.time()
-    print(end-begin)
+
     return mean_vector
     #print(user_metric/nb_tweets)
 
@@ -115,13 +112,12 @@ def get_closest_users(username, n = 10, N = 100):
     """
 
     df_metric = pd.read_pickle("dumps/metrics.pkl")
-    #print(df.head(10))
-     
+
     metric = df_metric[df_metric['username'] == username]['metric'].iloc[0]
     
     """Les 10 premiers users différents de celui donné en arg"""
     users_with_metric = list(df_metric[df_metric['username'] != username][['username', 'metric']].itertuples(index=False, name=None))
-    
+
 
     user_with_dist = np.array([[distance(metric, user_metric), username] for (username, user_metric) in users_with_metric[0:N]])
     print(len(user_with_dist))
@@ -131,4 +127,3 @@ def get_closest_users(username, n = 10, N = 100):
     closest_users = user_with_dist[closest_arg, 1]
 
     return closest_users
-
