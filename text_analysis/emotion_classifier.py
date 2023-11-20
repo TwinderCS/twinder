@@ -5,8 +5,11 @@ from torch.utils.data import Dataset
 from torch.utils.data import DataLoader
 from torch import from_numpy
 import pytorch_lightning as pl
+import sys
+sys.path.append("text_analysis")
+sys.path.append("data_handling")
 from classifier import Model, gen_dataset, split_dataset, yield_batches
-from data_handling import create_dataframe #create_emotion_dataframe
+from create_dataframe import * #create_emotion_dataframe
 from os.path import isfile
 import pandas as pd
 

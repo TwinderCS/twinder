@@ -1,6 +1,8 @@
+import pandas as pd
+import sys
+sys.path.append("metrics_handlers")
 from models import emotion_model, topic_model
 from metrics import emotions, topics
-import pandas as pd
 
 original = pd.read_csv("dumps/tweets.csv")
 

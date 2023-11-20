@@ -1,8 +1,11 @@
 import torch
 import pytorch_lightning as pl
-from text_analysis.classifier import Model, vocab, tokenizer
+import sys
+sys.path.append("metrics_handlers")
+sys.path.append("text_analysis")
+from classifier import Model, vocab, tokenizer
 from metrics import emotions, topics, max_len
-from text_analysis.text_analysis import cleaner
+from text_analysis import cleaner
 
 topic = Model.load_from_checkpoint("dumps/topic_model.ckpt")
 emotion = Model.load_from_checkpoint("dumps/emotion_model.ckpt")

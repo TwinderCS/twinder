@@ -1,4 +1,6 @@
 import pandas as pd
+import sys
+sys.path.append("metrics_handlers")
 from metrics import topics, emotions
 
 tweets = pd.read_pickle("dumps/tweets.pkl")
