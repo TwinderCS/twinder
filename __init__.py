@@ -5,7 +5,7 @@ import data_handling
 import tests
 import metrics_handlers
 import pandas as pd
-
+import app
 
 # Lets present various functionalities
 
