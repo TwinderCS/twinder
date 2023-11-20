@@ -41,7 +41,7 @@ app.layout = html.Div([
     dcc.Store(id='user-index', data=user_index),
     html.Div(id='user-profile', children=display_user_profile(users_df.iloc[user_index])),
     html.Div([yes_button, no_button], className='d-flex justify-content-center')
-], className='container')
+], className='container', style={'textAlign': 'center', 'font-family': 'Comic Sans Ms', 'background-image': 'url(/assets/sarahwallpaper.png)'})
 
 @callback(
     Output('user-profile', 'children'),
