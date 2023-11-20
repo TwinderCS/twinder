@@ -1,5 +1,5 @@
 import tweet_visualization
-import wordcloud
+#import wordcloud
 import text_analysis
 import data_handling
 import tests

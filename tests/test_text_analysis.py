@@ -1,6 +1,6 @@
 import pytest
 from textblob.classifiers import NaiveBayesClassifier
-from text_analysis.text_analysis import get_opinion_rate, get_new_classifier, get_classifier
+from text_analysis.text_analysis import get_opinion_rate, get_new_classifier, get_classifier, cleaner
 
 @pytest.mark.parametrize("positive_opinions", [
     #"It was amazing !",    -> 2
@@ -36,5 +36,11 @@ def test_get_new_classifier():
     assert isinstance(get_new_classifier(), NaiveBayesClassifier)
 
 def test_get_classifier():
-    assert isinstance(get_new_classifier(), NaiveBayesClassifier)
+    assert isinstance(get_classifier(), NaiveBayesClassifier)
 
+@pytest.mark.parametrize("noisy_texts", [
+    ["DOGS AND CATS !!!!!", "dog cat"]
+])
+
+def test_cleaner(noisy_texts):
+    assert cleaner(noisy_texts[0]) == noisy_texts[1]
