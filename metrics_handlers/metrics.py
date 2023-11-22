@@ -133,4 +133,3 @@ def get_random_tweet_user(user : str, df = df_tweets):
     tweet = df[df['user'] == user]['text'].iloc[0]
     return tweet
 
-#print(get_metric_from_user("mattycus"))
