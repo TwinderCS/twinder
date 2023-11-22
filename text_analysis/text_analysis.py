@@ -8,8 +8,8 @@ import re
 import numpy as np
 import pandas as pd
 
-nltk.download('stopwords')
-nltk.download('wordnet')
+#nltk.download('stopwords')
+#nltk.download('wordnet')
 
 def cleaner(text : str):
     '''cleans the text'''

@@ -53,9 +53,4 @@ def update_output_div(__,name):
     print(name)
     button_clicked = ctx.triggered_id
     if button_clicked == 'submit':
-<<<<<<< HEAD
-        with open("app/cookie.txt", "w") as cookie:
-            cookie.write(name)
-=======
         return f'Output: {name}'
->>>>>>> 758060842ff64b59a8c87fbcb81ab4eea003b007

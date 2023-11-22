@@ -17,6 +17,7 @@ sys.path.append("metrics_handlers")
 from metrics import get_closest_users, get_random_tweet_user
 
 
+
 global layout_id
 layout_id = "login"
 print("bonjour")
