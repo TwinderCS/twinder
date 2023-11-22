@@ -94,7 +94,7 @@ def get_metric_from_user(user : str, df = df_tweets):
     return mean_vector
     #print(user_metric/nb_tweets)
 
-def distance(v1, v2):
+def distance(v1 : list, v2 : list):
     """Returns the euclidian distance of v1 and v2"""
     if len(v1) != len(v2):
         print("Error distance : vectors with different sizes")
@@ -103,7 +103,7 @@ def distance(v1, v2):
 
     return np.sum([(v1[i] - v2[i])**2 for i in range(len(v1))])**(0.5)
 
-def get_closest_users(username, n = 10, N = 100):
+def get_closest_users(username : str, n = 10, N = 100):
     """
     Will only consider the first N users 
     Go throught the users and calculate the distances to the user's vector
@@ -127,8 +127,6 @@ def get_closest_users(username, n = 10, N = 100):
 
     return closest_users
 
-def get_random_tweet_user(user, df = df_tweets):
+def get_random_tweet_user(user : str, df = df_tweets):
     tweet = df[df['user'] == user]['text'].iloc[0]
     return tweet
-
-print(get_random_tweet_user("scotthamilton"))

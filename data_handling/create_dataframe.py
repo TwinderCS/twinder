@@ -10,7 +10,7 @@ sys.path.append('metrics_handlers')
 sys.path.append("text_analysis")
 from metrics import *
 
-def get_hashtags(text):
+def get_hashtags(text : str):
     '''
     Take a text in argument, return its #hashtags in a list.
     '''

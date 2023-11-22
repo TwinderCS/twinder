@@ -50,5 +50,7 @@ def update_output_div(__,name: "string") -> "string":
     Update the output with the current text when the button is clicked
     """
     button_clicked = ctx.triggered_id
+    with open("cookie.txt", "w") as cookie:
+        cookie.write(name)
     if button_clicked == 'submit':
         return f'Output: {name}'
