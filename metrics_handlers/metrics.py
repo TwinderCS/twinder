@@ -8,7 +8,6 @@ sys.path.append('data_handling')
 import numpy as np
 from text_analysis import get_classifier
 import pandas as pd
-from text_analysis.text_analysis import get_classifier
 
 
 emotions = ["joy", "sadness", "fear", "anger", "surprise", "neutral", "shame", "disgust"]
