@@ -127,6 +127,7 @@ def display_user_profile(user):
 
 user_index = 0
 
+#skibidi
 #im adjusting the layout so as to make it more beautiful or in the current extent at least acceptable
 #im implementing a callback function which updates the page whenever the button yes or no is pushed. If the yes button is pushed, then the pretendant user id is put in an additional dataset
 

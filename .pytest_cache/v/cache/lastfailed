@@ -1,3 +1,4 @@
 {
-  "tests/test_text_analysis.py": true
+  "tests/test_text_analysis.py": true,
+  "tests/test_metrics.py": true
 }
