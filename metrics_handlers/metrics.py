@@ -126,3 +126,10 @@ def get_closest_users(username, n = 10, N = 100):
     closest_users = user_with_dist[closest_arg, 1]
 
     return closest_users
+
+def get_random_tweet_users(users, df = df_tweets):
+    tweets = []
+    for user in users:
+        tweet = df[df['user'] == user]['text'].iloc[0]
+        tweets.append(tweet)
+    return tweets
