@@ -7,9 +7,10 @@ import sys
 import time
 sys.path.append('dumps')
 sys.path.append('metrics_handlers')
+sys.path.append("text_analysis")
 from metrics import *
 
-def get_hashtags(text):
+def get_hashtags(text : str):
     '''
     Take a text in argument, return its #hashtags in a list.
     '''
@@ -104,11 +105,11 @@ def create_metrics_dataframe(save = True):
     
     vfunc = np.vectorize(get_metric_from_user, otypes=[np.ndarray])
     begin = time.time()
-    vectors = vfunc(usernames[0:1000])
-    df_metric = pd.DataFrame({'username' : usernames[:1000], 'metric' : vectors})
+    vectors = vfunc(usernames[0:80])
+    df_metric = pd.DataFrame({'username' : usernames[:80], 'metric' : vectors})
     end = time.time()
     if save:
         df_metric.to_pickle('dumps/metrics.pkl')
         df_metric.to_csv('dumps/metrics.csv')
     return end - begin
-#create_metrics_dataframe()
+#reate_metrics_dataframe()

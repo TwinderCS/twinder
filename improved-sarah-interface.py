@@ -3,16 +3,13 @@ from dash import html, dcc, Output, Input, State
 import dash_bootstrap_components as dbc
 import pandas as pd
 import dash
-import dash_bootstrap_components as dbc
 from dash import Dash, html, Input, Output, State, ctx, callback, dcc
 
 #creation of a fake test dataset to be used by my app bc the AI dataset hasn't been downloaded yet
 
 user_data = {
-    'user_id': range(1, 101),
-    'name': [f'User {i}' for i in range(1, 101)],
-    'age': [20 + i % 10 for i in range(1, 101)],
-    'bio': [f'This is a bio of User {i}' for i in range(1, 101)]
+    'user_id' : [user_array[i][1] for i in range(n)],
+        'user_id_closest' : [user_array[i] for i in range(n)]
 }
 
 #to create my interface im using the dash module from python and its functions

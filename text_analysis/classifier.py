@@ -1,5 +1,5 @@
-import torch
 from torch import nn, optim
+import torch
 import pytorch_lightning as pl
 from pytorch_lightning.loggers import WandbLogger
 import wandb
@@ -12,14 +12,25 @@ import spacy
 import pandas as pd
 
 ## TOKENIZATION
-df = pd.read_pickle("dumps/emotion.pkl")
 tokenizer = get_tokenizer('spacy')
-def yield_tokens(data):
-    for text in data['text']:
-        yield tokenizer(text)
+def create_vocabs(tokenizer=tokenizer):
+    emotion_df = pd.read_pickle("dumps/emotion.pkl")
+    topic_df = pd.read_pickle("dumps/topic.pkl")
+    topic_df['text'] = topic_df['text'].map(str)
+    topic_df.reset_index(inplace=True)
+    def yield_tokens(data):
+        for text in data['text']:
+            yield tokenizer(text)
 
-vocab = build_vocab_from_iterator(iterator=yield_tokens(df), specials=["<unk>", "<pad>"])
-vocab.set_default_index(vocab["<unk>"])
+    emotion_vocab = build_vocab_from_iterator(iterator=yield_tokens(emotion_df), specials=["<unk>", "<pad>"])
+    emotion_vocab.set_default_index(emotion_vocab["<unk>"])
+    topic_vocab = build_vocab_from_iterator(iterator=yield_tokens(topic_df), specials=["<unk>", "<pad>"])
+    topic_vocab.set_default_index(topic_vocab["<unk>"])
+    torch.save(emotion_vocab, 'dumps/emotion.vocab')
+    torch.save(topic_vocab, 'dumps/topic.vocab')
+
+emotion_vocab = torch.load('dumps/emotion.vocab')
+topic_vocab = torch.load('dumps/topic.vocab')
 
 EPOCHS = 10
 LEARNING_RATE = 1e-3
@@ -32,7 +43,7 @@ def gen_dataset(dataframe, classes, classname):
     max_len = dataframe['tokens'].map(lambda x: len(x)).max()
     # add padding
     dataframe['tokens'] = dataframe['tokens'].map(lambda tokens: tokens + ["<pad>"] * (max_len - len(tokens)))
-    dataframe['token_ids'] = dataframe['tokens'].map(vocab)
+    dataframe['token_ids'] = dataframe['tokens'].map(emotion_vocab)
 
     return dataframe['class'], dataframe['token_ids'].to_numpy()
 
@@ -45,9 +56,10 @@ def yield_batches(x, y):
         yield (x[i], y[i])
    
 class NLPModel(nn.Module):
-    def __init__(self, vocab_size, embedding_dim, hidden_dim, output_dim):
+    def __init__(self, vocab, embedding_dim, hidden_dim, output_dim):
         super().__init__()
-        self.embedding = nn.Embedding(vocab_size, embedding_dim)
+        self.vocab = vocab
+        self.embedding = nn.Embedding(len(vocab), embedding_dim)
         self.dense = nn.Sequential(
             nn.Linear(embedding_dim, hidden_dim),
             nn.ReLU(),
@@ -58,16 +70,16 @@ class NLPModel(nn.Module):
 
     def forward(self, x):
         embedded = self.embedding(x)
-        mask = (x != vocab["<pad>"])
+        mask = (x != self.vocab["<pad>"])
         mask = mask.unsqueeze(-1)
         embedded = embedded * mask.float()
         embedded = embedded.mean(dim=0)
         return self.dense(embedded)
 
 class Model(pl.LightningModule):
-    def __init__(self, vocab_len, output_dim):
+    def __init__(self, vocab, output_dim):
         super().__init__()
-        self.model = NLPModel(vocab_len, 1000, 256, output_dim)
+        self.model = NLPModel(vocab, 1000, 256, output_dim)
         self.loss = nn.CrossEntropyLoss()
         self.tests = 0
         self.correct = 0

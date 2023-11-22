@@ -1,1 +1,1 @@
-import wc
+from . import wc
