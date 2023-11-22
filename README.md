@@ -3,15 +3,18 @@
 ## Description
 
 Create a programm that propose some Twitter profiles to the user from its tweets.
-
+**add infos**
 
 ## The Twinder® Team
+**add work distribution**
 
 - Anas Lecaillon (Maitre de l'Univers (Entre autres))
 - Mohamed Koucha (Être humain (Je suppose))
-- Balthazar
+- Balthazar (TextBlob classifier implementation for polarity (pos, neu, neg), training of the classifier, 
+            combination of the classifier, the emotion model and the topic model to create each user's metric,
+            calculating closest users, and a little of dataframe cleaning, and create the metric dataframe)
 - Sarah
-- Léna
+- Léna (Tests and global problems, create the metric dataframe)
 
 ## Dependencies
 - `torch`
@@ -27,7 +30,8 @@ Create a programm that propose some Twitter profiles to the user from its tweets
 - `sys`
 
 
-## To Execute
+## To Execute       
+**explain how to run the project (git clone then what ?)**
 ```bash
 python3 -m spacy download en
 ```
@@ -37,18 +41,18 @@ python3 -m spacy download en
 ├── 1er_essai_interface_sarah.py
 ├── app
 │   ├── app.py
-│   ├── __init__.py
 │   └── pages
-│       ├── __init__.py
 │       ├── feed.py
 │       ├── index.py
-│       ├── __init__.py
 │       └── login.py
 ├── assets
 │   ├── fond-degrade-saint-valentin_23-2149242406.avif
 │   ├── newsarahcss.css
 │   ├── sarahdesign.png
 │   └── sarahwallpaper.png
+├── coverage_reports
+├── coverage_reports_metrics_handlers
+├── coverage_reports_text_analysis
 ├── dash
 │   ├── app_objects.py
 │   ├── app.py
@@ -86,29 +90,28 @@ python3 -m spacy download en
 │   ├── twinder8192.png
 │   └── twinder.svg
 ├── improved-sarah-interface.py
-├── __init__.py
 ├── metrics_handlers
-│   ├── __init__.py
 │   ├── metrics.py
 │   └── models.py
 ├── model_notebooks
 │   └── emotion.ipynb
 ├── README.md
 ├── tests
-│   ├── __init__.py
+│   └── test_classifier.py
+│   └── test_emotion_classifer.py
+│   └── test_metrics.py
 │   ├── test_text_analysis.py
 │   └── test_with_pytest.py
 ├── text_analysis
 │   ├── classifier.py
 │   ├── cl_data.obj
-│   ├── __init__.py
+│   └── emotion_classifier.py
 │   └── text_analysis.py
+│   └── topic_classifier.py
 ├── textblob
 │   └── blob.py
 ├── tweet_collection
 │   ├── collection.py
-│   ├── credentials.py
-│   ├── __init__.py
 │   ├── tweet_collection.py
 │   └── twitter_connection.py
 ├── tweet_visualization
@@ -118,3 +121,15 @@ python3 -m spacy download en
     ├── __init__.py
     └── wc.py
 ```
+
+## Informations about tests
+
+## MVC
+
+## What else could we have done if the Coding Weeks were longer ?
+
+- Limitations of the database : geolocalisation, if all users are active (date of the last tweet)
+- Work on the classifier models
+- Limitations of the API, instead add an implementation fonctionnality : an user can upload its tweets and get the compatibility with all the users in the database and is added to the database
+- adaptive metric depending on the choice previously made by the user
+- if the following system is taken into account, add it to the metric system
