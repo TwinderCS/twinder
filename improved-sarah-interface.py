@@ -3,7 +3,6 @@ from dash import html, dcc, Output, Input, State
 import dash_bootstrap_components as dbc
 import pandas as pd
 import dash
-import dash_bootstrap_components as dbc
 from dash import Dash, html, Input, Output, State, ctx, callback, dcc
 
 #creation of a fake test dataset to be used by my app bc the AI dataset hasn't been downloaded yet
@@ -41,7 +40,7 @@ app.layout = html.Div([
     dcc.Store(id='user-index', data=user_index),
     html.Div(id='user-profile', children=display_user_profile(users_df.iloc[user_index])),
     html.Div([yes_button, no_button], className='d-flex justify-content-center')
-], className='container')
+], className='container', style={'textAlign': 'center', 'font-family': 'Comic Sans Ms', 'background-image': 'url(/assets/sarahwallpaper.png)'})
 
 @callback(
     Output('user-profile', 'children'),

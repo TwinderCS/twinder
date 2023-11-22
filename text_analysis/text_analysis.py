@@ -7,7 +7,6 @@ from autocorrect import Speller
 import re
 import numpy as np
 
-nltk.download('stopwords')
 
 
 def cleaner(text):

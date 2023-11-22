@@ -37,10 +37,18 @@ python3 -m spacy download en
 ├── 1er_essai_interface_sarah.py
 ├── app
 │   ├── app.py
+│   ├── __init__.py
 │   └── pages
+│       ├── __init__.py
 │       ├── feed.py
 │       ├── index.py
+│       ├── __init__.py
 │       └── login.py
+├── assets
+│   ├── fond-degrade-saint-valentin_23-2149242406.avif
+│   ├── newsarahcss.css
+│   ├── sarahdesign.png
+│   └── sarahwallpaper.png
 ├── dash
 │   ├── app_objects.py
 │   ├── app.py
@@ -54,16 +62,20 @@ python3 -m spacy download en
 │   ├── __init__.py
 │   ├── tweets.py
 │   └── users.py
+├── designsarah.css
 ├── dumps
 │   ├── check_topic.py
 │   ├── df.pkl
 │   ├── emotion.csv
 │   ├── emotion_lemmatized.pkl
+│   ├── emotion_model.ckpt
 │   ├── emotion.pkl
 │   ├── font.ttf
+│   ├── metrics.csv
 │   ├── metrics.pkl
 │   ├── tinder_logo.png
 │   ├── topic.csv
+│   ├── topic.pkl
 │   ├── tweet_emotions.csv
 │   ├── tweets.csv
 │   ├── tweets.pkl
@@ -73,12 +85,12 @@ python3 -m spacy download en
 │   ├── twinder1024.png
 │   ├── twinder8192.png
 │   └── twinder.svg
+├── improved-sarah-interface.py
 ├── __init__.py
 ├── metrics_handlers
 │   ├── __init__.py
 │   ├── metrics.py
 │   └── models.py
-├── metrics.py
 ├── model_notebooks
 │   └── emotion.ipynb
 ├── README.md
@@ -87,13 +99,10 @@ python3 -m spacy download en
 │   ├── test_text_analysis.py
 │   └── test_with_pytest.py
 ├── text_analysis
-│   ├── classifier_data.py
 │   ├── classifier.py
 │   ├── cl_data.obj
-│   ├── emotion_classifier.py
 │   ├── __init__.py
-│   ├── text_analysis.py
-│   └── topic_classifier.py
+│   └── text_analysis.py
 ├── textblob
 │   └── blob.py
 ├── tweet_collection

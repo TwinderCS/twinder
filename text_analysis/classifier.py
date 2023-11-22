@@ -1,4 +1,3 @@
-import torch
 from torch import nn, optim
 import pytorch_lightning as pl
 from pytorch_lightning.loggers import WandbLogger
@@ -12,7 +11,7 @@ import spacy
 import pandas as pd
 
 ## TOKENIZATION
-df = pd.read_pickle("dumps/df.pkl")
+df = pd.read_pickle("dumps/emotion.pkl")
 tokenizer = get_tokenizer('spacy')
 def yield_tokens(data):
     for text in data['text']:
@@ -49,9 +48,9 @@ class NLPModel(nn.Module):
         super().__init__()
         self.embedding = nn.Embedding(vocab_size, embedding_dim)
         self.dense = nn.Sequential(
-            nn.Linear(embedding_dim, hidden_dim*10),
+            nn.Linear(embedding_dim, hidden_dim),
             nn.ReLU(),
-            nn.Linear(hidden_dim*10, hidden_dim),
+            nn.Linear(hidden_dim, hidden_dim),
             nn.ReLU(),
             nn.Linear(hidden_dim, output_dim)
         )
@@ -61,13 +60,13 @@ class NLPModel(nn.Module):
         mask = (x != vocab["<pad>"])
         mask = mask.unsqueeze(-1)
         embedded = embedded * mask.float()
-        embedded = embedded.mean(dim=2)
+        embedded = embedded.mean(dim=0)
         return self.dense(embedded)
 
 class Model(pl.LightningModule):
     def __init__(self, vocab_len, output_dim):
         super().__init__()
-        self.model = NLPModel(vocab_len, 100, 256, output_dim)
+        self.model = NLPModel(vocab_len, 1000, 256, output_dim)
         self.loss = nn.CrossEntropyLoss()
         self.tests = 0
         self.correct = 0
@@ -87,6 +86,9 @@ class Model(pl.LightningModule):
         y_hat = self.model(x)
         loss = self.loss(y_hat, y)
         self.log("val_loss", loss, prog_bar=True)
+
+    def forward(self, x):
+        return self.model(x)
 
     def test_step(self, batch):
         x, y = batch
