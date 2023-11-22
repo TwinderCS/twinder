@@ -8,11 +8,11 @@ sys.path.append('data_handling')
 import numpy as np
 from text_analysis import get_classifier
 import pandas as pd
+from models import *
+import time
 
 
-emotions = ["joy", "sadness", "fear", "anger", "surprise", "neutral", "shame", "disgust"]
 polarity = ['negative', 'neutral', 'positive']
-topics = ["politics", "health", "emotion", "financial", "sport", "science"]
 alpha = 0.7
 
 #Having dictionnaries is faster than implementing functions (only created once)
@@ -66,8 +66,8 @@ def get_metric_from_tweet(tweet : str, alpha = alpha, cl = cl):
     mind_state_vector = alpha * polarity_vector + (1-alpha) * emotion_vector
     with alpha between 0.5 and 1 (more power to the polarity)
     """
-    emotion = 'joy' #emotion_model(tweet)
-    topic = 'politics' #topic_model(tweet)
+    emotion = emotion_model(tweet)
+    topic = topic_model(tweet)
     polarity = cl.classify(tweet)
 
     emotion_vector = emotion_dict[emotion]
@@ -82,7 +82,7 @@ def get_metric_from_user(user : str, df = df_tweets):
     """
     Iterates over all of the user's tweets to return the average of get_metric_from_tweet
     """
-
+    begin = time.time()
     user_tweets_df = df[df['user'] == user]
     #print(user_tweets_df.head(8))
     nb_tweets = 0
@@ -91,11 +91,12 @@ def get_metric_from_user(user : str, df = df_tweets):
         nb_tweets += 1
         user_metric += get_metric_from_tweet(tweet)
     mean_vector = user_metric/nb_tweets
-
+    end = time.time()
+    print(end - begin)
     return mean_vector
     #print(user_metric/nb_tweets)
 
-def distance(v1, v2):
+def distance(v1 : list, v2 : list):
     """Returns the euclidian distance of v1 and v2"""
     if len(v1) != len(v2):
         print("Error distance : vectors with different sizes")
@@ -104,7 +105,7 @@ def distance(v1, v2):
 
     return np.sum([(v1[i] - v2[i])**2 for i in range(len(v1))])**(0.5)
 
-def get_closest_users(username, n = 10, N = 100):
+def get_closest_users(username : str, n = 10, N = 100):
     """
     Will only consider the first N users 
     Go throught the users and calculate the distances to the user's vector
@@ -127,3 +128,9 @@ def get_closest_users(username, n = 10, N = 100):
     closest_users = user_with_dist[closest_arg, 1]
 
     return closest_users
+
+def get_random_tweet_user(user : str, df = df_tweets):
+    tweet = df[df['user'] == user]['text'].iloc[0]
+    return tweet
+
+#print(get_metric_from_user("mattycus"))
