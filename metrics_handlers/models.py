@@ -16,7 +16,7 @@ emotion = Model.load_from_checkpoint("dumps/emotion_model.ckpt", vocab_len = len
 emotion.eval()
 max_len = 280
 
-def topic_model(tweet, argmax=True, clean=True, int_output=False):
+def topic_model(tweet : str, argmax=True, clean=True, int_output=False):
     global topics
     global topic
     global tokenizer
@@ -40,7 +40,7 @@ def topic_model(tweet, argmax=True, clean=True, int_output=False):
     else:
         return topics[out.argmax()]
     
-def emotion_model(tweet, argmax=True, clean=True, int_output=False):
+def emotion_model(tweet : str, argmax=True, clean=True, int_output=False):
     global emotions
     global emotion
     global tokenizer
