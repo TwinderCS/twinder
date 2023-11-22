@@ -1,4 +1,5 @@
 {
+<<<<<<< HEAD
   "tests/test_text_analysis.py": true,
   "tests/test_with_pytest.py::test_always_passes": true,
   "tests/test_with_pytest.py::test_always_not_fails": true,
@@ -17,4 +18,7 @@
   "tests/test_with_pytest.py::test_multiple_parametrize[test_parametrize1]": true,
   "tests/test_with_pytest.py::test_multiple_parametrize[test_parametrize2]": true,
   "tests/test_with_pytest.py::test_multiple_parametrize[test_parametrize3]": true
+=======
+  "tests/test_text_analysis.py": true
+>>>>>>> 570803007398fdd52ed6a5dc5f21c61d1eeae54c
 }
