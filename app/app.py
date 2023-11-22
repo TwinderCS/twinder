@@ -24,7 +24,16 @@ print("bonjour")
 
 app = Dash(__name__, use_pages=True, external_stylesheets=[dbc.themes.SPACELAB])
 
-
+def user_data_creation(username, n = 10):
+    user_array = get_closest_users(username, n)
+    user_data = {
+        'user_id_closest' : [user_array[i] for i in range(n)],
+        #'name' : [user_array[i][1] for i in range(n)],
+        #'age': [20 + i % 10 for i in range(1, 101)],
+        #'bio': [f'This is a bio of User {i}' for i in range(1, 101)]
+    }
+    users_df = pd.DataFrame(user_data)
+    return users_df
 user_id = html.Div(
     [dbc.Label("User ID",html_for="User"), dbc.Input(id ="user_state", type="text",value="")],
     className="mt-2",
@@ -48,6 +57,7 @@ button = dbc.Button(
     className="mt-2",
 )
 
+users_df = user_data_creation("scotthamilton")
 
 def serve_layout():
     if layout_id == "login":
@@ -59,6 +69,7 @@ def serve_layout():
             html.Div(id='my-output')]
         )
     if layout_id == "feed":
+        global users_df
         print("feed")
         name_d = ""
         with open("app/cookie.txt", "r") as cookie:
@@ -98,16 +109,7 @@ def update_output_div(n_clicks,name):
         print("AAAAAA")
         app.run(debug=True)
 
-def user_data_creation(username, n = 10):
-    user_array = get_closest_users(username, n)
-    user_data = {
-        'user_id_closest' : [user_array[i] for i in range(n)],
-        #'name' : [user_array[i][1] for i in range(n)],
-        #'age': [20 + i % 10 for i in range(1, 101)],
-        #'bio': [f'This is a bio of User {i}' for i in range(1, 101)]
-    }
-    users_df = pd.DataFrame(user_data)
-    return users_df
+
 
 
 #to create my interface im using the dash module from python and its functions
