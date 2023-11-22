@@ -5,7 +5,7 @@ import sys
 sys.path.append("metrics_handlers")
 sys.path.append("text_analysis")
 from classifier import Model, vocab, tokenizer
-from metrics import emotions, topics, max_len
+from metrics import emotions, topics
 from text_analysis import cleaner
 
 topic= Model.load_from_checkpoint("dumps/topic_model.ckpt", vocab_len = len(vocab), output_dim = len(topics))
