@@ -1,10 +1,15 @@
+import sys
+sys.path.append('text_analysis')
+sys.path.append('dumps')
+sys.path.append('data_handling')
 import torch
 import pytorch_lightning as pl
-from text_analysis.classifier import Model, vocab, tokenizer
-from text_analysis.text_analysis import cleaner
-from metrics_handlers.metrics import emotions, topics
+from classifier import Model, vocab, tokenizer
+from text_analysis import cleaner
 import numpy as np
 
+emotions = ["joy", "sadness", "fear", "anger", "surprise", "neutral", "shame", "disgust"]
+topics = ["politics", "health", "emotion", "financial", "sport", "science"]
 topic= Model.load_from_checkpoint("dumps/topic_model.ckpt", vocab_len = len(vocab), output_dim = len(topics))
 topic.eval()
 emotion = Model.load_from_checkpoint("dumps/emotion_model.ckpt", vocab_len = len(vocab), output_dim = len(emotions))
