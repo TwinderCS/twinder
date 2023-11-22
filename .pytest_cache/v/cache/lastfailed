@@ -1,24 +1,3 @@
 {
-<<<<<<< HEAD
-  "tests/test_text_analysis.py": true,
-  "tests/test_with_pytest.py::test_always_passes": true,
-  "tests/test_with_pytest.py::test_always_not_fails": true,
-  "tests/test_with_pytest.py::test_uppercase": true,
-  "tests/test_with_pytest.py::test_reversed": true,
-  "tests/test_with_pytest.py::test_some_primes": true,
-  "tests/test_with_pytest.py::test_is_string[]": true,
-  "tests/test_with_pytest.py::test_is_string[a]": true,
-  "tests/test_with_pytest.py::test_is_string[Bob]": true,
-  "tests/test_with_pytest.py::test_is_string[Never odd or even]": true,
-  "tests/test_with_pytest.py::test_is_string[Do geese see God?]": true,
-  "tests/test_with_pytest.py::test_is_string_not_string[-4.36]": true,
-  "tests/test_with_pytest.py::test_is_string_not_string[3]": true,
-  "tests/test_with_pytest.py::test_is_string_not_string[non_string2]": true,
-  "tests/test_with_pytest.py::test_multiple_parametrize[test_parametrize0]": true,
-  "tests/test_with_pytest.py::test_multiple_parametrize[test_parametrize1]": true,
-  "tests/test_with_pytest.py::test_multiple_parametrize[test_parametrize2]": true,
-  "tests/test_with_pytest.py::test_multiple_parametrize[test_parametrize3]": true
-=======
   "tests/test_text_analysis.py": true
->>>>>>> 570803007398fdd52ed6a5dc5f21c61d1eeae54c
 }
