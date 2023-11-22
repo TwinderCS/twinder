@@ -15,7 +15,7 @@ from dash import Dash, html, Input, Output, State, ctx, callback, dcc
 import sys
 sys.path.append("metrics_handlers")
 from metrics import get_closest_users, get_random_tweet_user
-
+from random import randint 
 
 
 global layout_id
@@ -75,13 +75,27 @@ def serve_layout():
         with open("app/cookie.txt", "r") as cookie:
             name_d = cookie.readline()
             users_df = user_data_creation(name_d)
+        
+        yes_button = dbc.Button("Yes", id='yes-button', color="success", className="mr-2", style={"border-radius": "50%"})
+        no_button = dbc.Button("No", id='no-button', color="danger", style={"border-radius": "50%"})
 
-        return html.Div([
+        display =  html.Div([
             dcc.Store(id='user-index', data=user_index),
             html.Div(id='user-profile', children=display_user_profile(users_df.iloc[user_index])),
-            dbc.Button("Yes", id='yes-button', color="success", className="mr-2"),
-            dbc.Button("No", id='no-button', color="danger")
-        ])
+            html.Div([yes_button, no_button], className='d-flex justify-content-center')
+            ], className='mt-2', style={'textAlign': 'center'})
+        
+        display_panel = dbc.Card(
+            dbc.CardBody(
+                [display],
+                className="bg-light",
+                )
+        )
+        
+        return html.Div(
+            [heading,
+            dbc.Row([dbc.Col(display_panel, md = 4)],justify = "center"),]
+        )
     return html.H1("AAAA")
 
 heading = html.H4(
@@ -124,7 +138,7 @@ app = dash.Dash(__name__, external_stylesheets=[dbc.themes.BOOTSTRAP])
 def display_user_profile(user):
     return html.Div([
         html.H3(user["user_id_closest"]),
-        html.P(f"Age: 17"),  #html.P(f"Age: {user['age']}"),
+        html.P(f"Age: {randint(15,30)}"),  #html.P(f"Age: {user['age']}"),
         html.P(get_random_tweet_user(user['user_id_closest'])) #html.P(user['bio'])
     ])
 
