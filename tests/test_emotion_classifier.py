@@ -94,14 +94,15 @@ def test_hateful_tweets(hateful_tweets):
    ["I haven't failed this test, my parents are going to be happy !", "I failed this test, my parents aren't going to be happy !"]
 ])
 
-@pytest.mark.parametrize("noised_tweets", [
-    ["I just come from a shopping session with Sarah, she was so funny", "I just come from a shopping session with William, he was so funny"]
-])
-
 def test_negation(negation_tweets):
     #negation_tweets[0] != negation_tweets[1]
     assert True
 
-def test_negation(noised_tweets):
+
+@pytest.mark.parametrize("noised_tweets", [
+    ["I just come from a shopping session with Sarah, she was so funny", "I just come from a shopping session with William, he was so funny"]
+])
+
+def test_noised(noised_tweets):
     #noised_tweets[0] != noised_tweets[1]
     assert True

@@ -7,7 +7,7 @@ sys.path.append('data_handling')
 #from models import *
 import time
 import numpy as np
-from text_analysis import *
+from text_analysis import get_classifier
 import pandas as pd
 
 max_len = 280
