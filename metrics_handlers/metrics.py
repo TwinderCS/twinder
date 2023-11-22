@@ -6,7 +6,7 @@ sys.path.append('dumps')
 sys.path.append('data_handling')
 #from models import *
 import numpy as np
-from text_analysis import *
+from text_analysis import get_classifier
 import pandas as pd
 from text_analysis.text_analysis import get_classifier
 

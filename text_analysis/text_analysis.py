@@ -1,13 +1,15 @@
 import pickle
 from textblob import TextBlob
-from nltk.corpus import stopwords
+#from nltk.corpus import stopwords
 import nltk
 from textblob.classifiers import NaiveBayesClassifier
 from autocorrect import Speller
 import re
 import numpy as np
+import pandas as pd
 
-
+nltk.download('stopwords')
+nltk.download('wordnet')
 
 def cleaner(text):
     speller = Speller(lang='en')
