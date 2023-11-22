@@ -39,6 +39,7 @@ python3 -m spacy download en
 │   ├── app.py
 │   ├── __init__.py
 │   └── pages
+│       ├── __init__.py
 │       ├── feed.py
 │       ├── index.py
 │       ├── __init__.py

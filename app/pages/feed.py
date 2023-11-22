@@ -5,19 +5,21 @@ import pandas as pd
 import dash
 import dash_bootstrap_components as dbc
 from dash import Dash, html, Input, Output, State, ctx, callback, dcc
-import metrics
+import sys
 
+sys.path.append("metrics_handlers")
+from metrics import get_closest_users
 dash.register_page(__name__)
 
 #creation of a fake test dataset to be used by my app bc the AI dataset hasn't been downloaded yet 
 
 def user_data_creation(username, n = 10):
-    user_array = metrics.get_closest_users(username, n)
+    user_array = get_closest_users(username, n)
     user_data = {
         'user_id' : [user_array[i][1] for i in range(n)],
-        'name' : [user_array[i][1] for i in range(n)],
-        'age': [20 + i % 10 for i in range(1, 101)],
-        'bio': [f'This is a bio of User {i}' for i in range(1, 101)]
+        #'name' : [user_array[i][1] for i in range(n)],
+        #'age': [20 + i % 10 for i in range(1, 101)],
+        #'bio': [f'This is a bio of User {i}' for i in range(1, 101)]
     }
     users_df = pd.DataFrame(user_data)
     return users_df
@@ -35,9 +37,9 @@ app = dash.Dash(__name__, external_stylesheets=[dbc.themes.BOOTSTRAP])
 
 def display_user_profile(user):
     return html.Div([
-        html.H3(user['name']),
-        html.P(f"Age: {user['age']}"),
-        html.P(user['bio'])
+        html.H3("Martin"), #html.H3(user['name']),
+        html.P(f"Age: 17"),  #html.P(f"Age: {user['age']}"),
+        html.P("Bio") #html.P(user['bio'])
     ])
 
 user_index = 0

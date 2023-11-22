@@ -3,7 +3,6 @@ from dash import html, dcc, Output, Input, State
 import dash_bootstrap_components as dbc
 import pandas as pd
 import dash
-import dash_bootstrap_components as dbc
 from dash import Dash, html, Input, Output, State, ctx, callback, dcc
 
 #creation of a fake test dataset to be used by my app bc the AI dataset hasn't been downloaded yet
