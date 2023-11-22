@@ -4,7 +4,12 @@ sys.path.append('dumps')
 sys.path.append('data_handling')
 import torch
 import pytorch_lightning as pl
-from classifier import Model, emotion_vocab, topic_vocab, tokenizer
+import numpy as np
+import sys
+sys.path.append("metrics_handlers")
+sys.path.append("text_analysis")
+from classifier import Model, vocab, tokenizer
+from metrics import emotions, topics
 from text_analysis import cleaner
 import numpy as np
 
