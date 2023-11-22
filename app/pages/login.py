@@ -20,7 +20,7 @@ user_id = html.Div(
 control_panel = dbc.Card(
     dbc.CardBody(
         [user_id],
-        className="bg-light",
+        className="bg-primary text-white p-2",
     )
 )
 

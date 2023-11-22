@@ -5,7 +5,7 @@ from dash import html, dcc
 dash.register_page(__name__, path='/')
 
 heading = html.H4(
-    "Bienvenu sur Twinder",
+    "Bienvenue sur Twinder",
     className="bg-primary text-white p-2", style={'textAlign': 'center'}
 )
 
@@ -18,7 +18,7 @@ user_id = html.Div(
 control_panel = dbc.Card(
     dbc.CardBody(
         [user_id],
-        className="bg-light",
+        className="bg-primary text-white p-2",
     )
 )
 
