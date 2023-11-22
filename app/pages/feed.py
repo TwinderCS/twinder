@@ -11,6 +11,10 @@ sys.path.append("metrics_handlers")
 from metrics import get_closest_users, get_random_tweet_user
 dash.register_page(__name__)
 
+name = ""
+with open("cookie.txt", "r") as cookie:
+    name = cookie.readlines()
+
 #creation of a fake test dataset to be used by my app bc the AI dataset hasn't been downloaded yet 
 
 def user_data_creation(username, n = 10):
@@ -27,7 +31,7 @@ def user_data_creation(username, n = 10):
 
 #to create my interface im using the dash module from python and its functions
 
-users_df = user_data_creation("scotthamilton")
+users_df = user_data_creation(name)
 
 #to create my interface im using the dash module from python and its functions
 
