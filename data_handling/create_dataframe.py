@@ -105,11 +105,11 @@ def create_metrics_dataframe(save = True):
     
     vfunc = np.vectorize(get_metric_from_user, otypes=[np.ndarray])
     begin = time.time()
-    vectors = vfunc(usernames[0:20])
-    df_metric = pd.DataFrame({'username' : usernames[:20], 'metric' : vectors})
+    vectors = vfunc(usernames[0:80])
+    df_metric = pd.DataFrame({'username' : usernames[:80], 'metric' : vectors})
     end = time.time()
     if save:
         df_metric.to_pickle('dumps/metrics.pkl')
         df_metric.to_csv('dumps/metrics.csv')
     return end - begin
-#create_metrics_dataframe()
+#reate_metrics_dataframe()

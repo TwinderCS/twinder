@@ -43,14 +43,14 @@ layout = html.Div(
 @callback(
     Output(component_id='my-output', component_property='children'),
     Input(component_id="submit", component_property="n_clicks"),
-    State(component_id="user",component_property="value")
+    State(component_id="user_state",component_property="value"),
+    prevent_initial_call=True    
 )
-def update_output_div(__,name: "string") -> "string":
+def update_output_div(__,name):
     """
     Update the output with the current text when the button is clicked
     """
+    print(name)
     button_clicked = ctx.triggered_id
-    with open("cookie.txt", "w") as cookie:
-        cookie.write(name)
     if button_clicked == 'submit':
         return f'Output: {name}'

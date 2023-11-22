@@ -11,10 +11,6 @@ sys.path.append("metrics_handlers")
 from metrics import get_closest_users, get_random_tweet_user
 dash.register_page(__name__)
 
-name = ""
-with open("cookie.txt", "r") as cookie:
-    name = cookie.readlines()
-
 #creation of a fake test dataset to be used by my app bc the AI dataset hasn't been downloaded yet 
 
 def user_data_creation(username, n = 10):
@@ -31,7 +27,6 @@ def user_data_creation(username, n = 10):
 
 #to create my interface im using the dash module from python and its functions
 
-users_df = user_data_creation(name)
 
 #to create my interface im using the dash module from python and its functions
 
@@ -55,13 +50,20 @@ heading = html.H4(
     className="bg-primary text-white p-2", style={'textAlign': 'center'}
 )
 
-layout = html.Div([
-    heading,
-    dcc.Store(id='user-index', data=user_index),
-    html.Div(id='user-profile', children=display_user_profile(users_df.iloc[user_index])),
-    dbc.Button("Yes", id='yes-button', color="success", className="mr-2"),
-    dbc.Button("No", id='no-button', color="danger", className="mr-2")
-])
+def serve_layout():
+    name_d = ""
+    with open("app/cookie.txt", "r") as cookie:
+        name_d = cookie.readline()
+    users_df = user_data_creation(name_d)
+
+    return html.Div([
+        dcc.Store(id='user-index', data=user_index),
+        html.Div(id='user-profile', children=display_user_profile(users_df.iloc[user_index])),
+        dbc.Button("Yes", id='yes-button', color="success", className="mr-2"),
+        dbc.Button("No", id='no-button', color="danger")
+    ])
+
+layout = serve_layout
 
 #im implementing a callback function which updates the page whenever the button yes or no is pushed. If the yes button is pushed, then the pretendant user id is put in an additional dataset
 

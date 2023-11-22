@@ -6,9 +6,10 @@ sys.path.append('dumps')
 sys.path.append('data_handling')
 #from models import *
 import numpy as np
+from text_analysis import get_classifier
 import pandas as pd
 from models import *
-from text_analysis import get_classifier
+import time
 
 
 polarity = ['negative', 'neutral', 'positive']
@@ -66,7 +67,7 @@ def get_metric_from_tweet(tweet : str, alpha = alpha, cl = cl):
     with alpha between 0.5 and 1 (more power to the polarity)
     """
     emotion = emotion_model(tweet)
-    topic = 'politics' #topic_model(tweet)
+    topic = topic_model(tweet)
     polarity = cl.classify(tweet)
 
     emotion_vector = emotion_dict[emotion]
@@ -81,7 +82,7 @@ def get_metric_from_user(user : str, df = df_tweets):
     """
     Iterates over all of the user's tweets to return the average of get_metric_from_tweet
     """
-
+    begin = time.time()
     user_tweets_df = df[df['user'] == user]
     #print(user_tweets_df.head(8))
     nb_tweets = 0
@@ -90,7 +91,8 @@ def get_metric_from_user(user : str, df = df_tweets):
         nb_tweets += 1
         user_metric += get_metric_from_tweet(tweet)
     mean_vector = user_metric/nb_tweets
-
+    end = time.time()
+    print(end - begin)
     return mean_vector
     #print(user_metric/nb_tweets)
 
@@ -130,3 +132,4 @@ def get_closest_users(username : str, n = 10, N = 100):
 def get_random_tweet_user(user : str, df = df_tweets):
     tweet = df[df['user'] == user]['text'].iloc[0]
     return tweet
+
