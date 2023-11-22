@@ -5,8 +5,8 @@ from text_analysis.text_analysis import cleaner
 from metrics_handlers.metrics import emotions, topics
 import numpy as np
 
-#topic= Model.load_from_checkpoint("dumps/topic_model.ckpt", vocab_len = len(vocab), output_dim = len(topics))
-#topic.eval()
+topic= Model.load_from_checkpoint("dumps/topic_model.ckpt", vocab_len = len(vocab), output_dim = len(topics))
+topic.eval()
 emotion = Model.load_from_checkpoint("dumps/emotion_model.ckpt", vocab_len = len(vocab), output_dim = len(emotions))
 emotion.eval()
 max_len = 280
