@@ -4,16 +4,17 @@ import sys
 sys.path.append('text_analysis')
 sys.path.append('dumps')
 sys.path.append('data_handling')
-#from models import *
+sys.path.append('metrics_handlers')
+import time
+from models import *
 import numpy as np
 from text_analysis import *
 import pandas as pd
-from text_analysis.text_analysis import get_classifier
+from text_analysis import get_classifier
 
 
-emotions = ["joy", "sadness", "fear", "anger", "surprise", "neutral", "shame", "disgust"]
+
 polarity = ['negative', 'neutral', 'positive']
-topics = ["politics", "health", "emotion", "financial", "sport", "science"]
 alpha = 0.7
 
 #Having dictionnaries is faster than implementing functions (only created once)
@@ -67,7 +68,7 @@ def get_metric_from_tweet(tweet : str, alpha = alpha, cl = cl):
     mind_state_vector = alpha * polarity_vector + (1-alpha) * emotion_vector
     with alpha between 0.5 and 1 (more power to the polarity)
     """
-    emotion = 'joy' #emotion_model(tweet)
+    emotion = emotion_model(tweet)
     topic = 'politics' #topic_model(tweet)
     polarity = cl.classify(tweet)
 
@@ -83,7 +84,7 @@ def get_metric_from_user(user : str, df = df_tweets):
     """
     Iterates over all of the user's tweets to return the average of get_metric_from_tweet
     """
-
+    begin = time.time()
     user_tweets_df = df[df['user'] == user]
     #print(user_tweets_df.head(8))
     nb_tweets = 0
@@ -92,7 +93,7 @@ def get_metric_from_user(user : str, df = df_tweets):
         nb_tweets += 1
         user_metric += get_metric_from_tweet(tweet)
     mean_vector = user_metric/nb_tweets
-
+    print(time.time() - begin)
     return mean_vector
     #print(user_metric/nb_tweets)
 
@@ -128,3 +129,6 @@ def get_closest_users(username, n = 10, N = 100):
     closest_users = user_with_dist[closest_arg, 1]
 
     return closest_users
+
+
+#print(get_metric_from_user("scotthamilton"))
