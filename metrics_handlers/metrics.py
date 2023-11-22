@@ -8,12 +8,11 @@ sys.path.append('data_handling')
 import numpy as np
 from text_analysis import *
 import pandas as pd
-from text_analysis.text_analysis import get_classifier
+from text_analysis import get_classifier
+from models import *
 
 
-emotions = ["joy", "sadness", "fear", "anger", "surprise", "neutral", "shame", "disgust"]
 polarity = ['negative', 'neutral', 'positive']
-topics = ["politics", "health", "emotion", "financial", "sport", "science"]
 alpha = 0.7
 
 #Having dictionnaries is faster than implementing functions (only created once)
@@ -67,7 +66,7 @@ def get_metric_from_tweet(tweet : str, alpha = alpha, cl = cl):
     mind_state_vector = alpha * polarity_vector + (1-alpha) * emotion_vector
     with alpha between 0.5 and 1 (more power to the polarity)
     """
-    emotion = 'joy' #emotion_model(tweet)
+    emotion = emotion_model(tweet)
     topic = 'politics' #topic_model(tweet)
     polarity = cl.classify(tweet)
 

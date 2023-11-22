@@ -7,6 +7,7 @@ import sys
 import time
 sys.path.append('dumps')
 sys.path.append('metrics_handlers')
+sys.path.append("text_analysis")
 from metrics import *
 
 def get_hashtags(text):
@@ -111,3 +112,4 @@ def create_metrics_dataframe(save = True):
         df_metric.to_pickle('dumps/metrics.pkl')
         df_metric.to_csv('dumps/metrics.csv')
     return end - begin
+create_metrics_dataframe()
