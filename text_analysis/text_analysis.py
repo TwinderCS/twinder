@@ -9,7 +9,8 @@ import numpy as np
 
 
 
-def cleaner(text):
+def cleaner(text : str):
+    '''cleans the text'''
     speller = Speller(lang='en')
     unpunctuated = re.sub("[^a-zA-Z\s]+", " ", text)
     lowered = unpunctuated.lower()
