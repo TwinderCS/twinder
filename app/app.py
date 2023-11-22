@@ -17,9 +17,10 @@ app.layout = html.Div([
 ])
 '''
 
-app.layout = html.Div(
-    dash.page_container
-)
+app.layout = html.Div([
+    dash.page_container,
+    dcc.Store(id="user")
+])
 
 if __name__ == '__main__':
     app.run(debug=True)
