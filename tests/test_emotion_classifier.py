@@ -17,7 +17,7 @@ input_tensor = torch.tensor(processed_phrase).unsqueeze(0)
     "Life is so great !"
 ])
 
-def test_positive_opinion_rate(positive_tweets):
+def test_positive_opinion_rate_MOD(positive_tweets):
     #rate = get_opinion_rate(positive_opinions)
     #assert rate.index(max(rate)) == 0
     assert True
@@ -26,7 +26,7 @@ def test_positive_opinion_rate(positive_tweets):
     "After 200+ hours of work, my projet didn't get selected, without any explanation. Man, I don't feel great!"
 ])
 
-def test_sad_tweets(sad_tweets):
+def test_sad_tweets_MOD(sad_tweets):
     #rate = get_opinion_rate(sad_tweets)
     #assert rate.index(max(rate)) == 0
     assert True
@@ -35,7 +35,7 @@ def test_sad_tweets(sad_tweets):
     "Happy birthday Mom ! I wish the best for you"
 ])
 
-def test_funny_tweets(funny_tweets):
+def test_funny_tweets_MOD(funny_tweets):
     #rate = get_opinion_rate(sad_tweets)
     #assert rate.index(max(rate)) == 0
     assert True
@@ -44,7 +44,7 @@ def test_funny_tweets(funny_tweets):
     "The sky is blue today, it's a color"
 ])
 
-def test_neutral_tweets(neutral_tweets):
+def test_neutral_tweets_MOD(neutral_tweets):
     #rate = get_opinion_rate(sad_tweets)
     #assert rate.index(max(rate)) == 0
     assert True
@@ -53,7 +53,7 @@ def test_neutral_tweets(neutral_tweets):
     "I just got a 3 for my philosophy test, don't know how to annonce that to my parents..."
 ])
 
-def test_anxious_tweets(anxious_tweets):
+def test_anxious_tweets_MOD(anxious_tweets):
     #rate = get_opinion_rate(sad_tweets)
     #assert rate.index(max(rate)) == 0
     assert True
@@ -62,7 +62,7 @@ def test_anxious_tweets(anxious_tweets):
     "My boyfriend just got us a kitten ! I didn't expexted this at all, and now i have to find a beautiful name for this cutie !"
 ])
 
-def test_surprised_tweets(surprised_tweets):
+def test_surprised_tweets_MOD(surprised_tweets):
     #rate = get_opinion_rate(sad_tweets)
     #assert rate.index(max(rate)) == 0
     assert True
@@ -71,7 +71,7 @@ def test_surprised_tweets(surprised_tweets):
     "I just landed ! Can't wait to explore Paris and get to taste some croissants :)"
 ])
 
-def test_joyful_tweets(joyful_tweets):
+def test_joyful_tweets_MOD(joyful_tweets):
     #rate = get_opinion_rate(sad_tweets)
     #assert rate.index(max(rate)) == 0
     assert True
@@ -80,7 +80,7 @@ def test_joyful_tweets(joyful_tweets):
     "How dare you ! Don't worry, you will get what you deserve before Christmas... "
 ])
 
-def test_hateful_tweets(hateful_tweets):
+def test_hateful_tweets_MOD(hateful_tweets):
     #rate = get_opinion_rate(sad_tweets)
     #assert rate.index(max(rate)) == 0
     assert True
@@ -94,7 +94,7 @@ def test_hateful_tweets(hateful_tweets):
    ["I haven't failed this test, my parents are going to be happy !", "I failed this test, my parents aren't going to be happy !"]
 ])
 
-def test_negation(negation_tweets):
+def test_negation_MOD(negation_tweets):
     #negation_tweets[0] != negation_tweets[1]
     assert True
 
@@ -103,6 +103,6 @@ def test_negation(negation_tweets):
     ["I just come from a shopping session with Sarah, she was so funny", "I just come from a shopping session with William, he was so funny"]
 ])
 
-def test_noised(noised_tweets):
+def test_noised_MOD(noised_tweets):
     #noised_tweets[0] != noised_tweets[1]
     assert True

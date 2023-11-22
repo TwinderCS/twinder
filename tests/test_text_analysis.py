@@ -4,21 +4,20 @@ import sys
 sys.path.append("text_analysis")
 from text_analysis import get_opinion_rate, get_new_classifier, get_classifier, cleaner
 
-# pytest --cov=app --cov-report=html:cov-reports
+# pytest --cov=text_analysis --cov-report=html:coverage_reports_text_analysis
+# pytest --cov=metrics_handlers --cov-report=html:coverage_reports_metrics_handlers
 
 def test_get_new_classifier():
     assert isinstance(get_new_classifier(), NaiveBayesClassifier)
-    assert True
 
 def test_get_classifier():
     assert isinstance(get_classifier(), NaiveBayesClassifier)
-    assert True
 
 @pytest.mark.parametrize("noisy_texts", [
     ["DOGS AND CATS !!!!!", "dog cat"]
 ])
 
-def test_cleaner(noisy_texts):
+def test_cleaner_MOD(noisy_texts):
     #assert cleaner(noisy_texts[0]) == noisy_texts[1]       #problem with wordnet import
     assert True
 
@@ -29,7 +28,7 @@ def test_cleaner(noisy_texts):
     "thank you so much"    #-> 2
 ])
 
-def test_positive_opinion_rate(positive_opinions):
+def test_positive_opinion_rate_MOD(positive_opinions):
     #rate = get_opinion_rate(positive_opinions, get_classifier())
     #assert rate.index(max(rate)) == 0
     assert True
@@ -40,7 +39,7 @@ def test_positive_opinion_rate(positive_opinions):
     "my name is Shadock"       #-> 2
 ])
 
-def test_neutral_opinion_rate(neutral_opinions):
+def test_neutral_opinion_rate_MOD(neutral_opinions):
     #rate = get_opinion_rate(neutral_opinions, get_classifier())
     #assert rate.index(max(rate)) == 1
     assert True
@@ -51,7 +50,7 @@ def test_neutral_opinion_rate(neutral_opinions):
     "the deutsch class is boring"
 ])
 
-def test_negative_opinion_rate(negative_opinions):
+def test_negative_opinion_rate_MOD(negative_opinions):
     #rate = get_opinion_rate(negative_opinions, get_classifier())
     #assert rate.index(max(rate)) == 2
     assert True
