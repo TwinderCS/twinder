@@ -8,11 +8,8 @@ from classifier import Model, vocab, tokenizer
 from text_analysis import cleaner
 import numpy as np
 
-
-emotions = ["joy", "sadness", "fear", "anger", "surprise", "neutral", "shame", "disgust"]
-topics = ["politics", "health", "emotion", "financial", "sport", "science"]
-#topic= Model.load_from_checkpoint("dumps/topic_model.ckpt", vocab_len = len(vocab), output_dim = len(topics))
-#topic.eval()
+topic= Model.load_from_checkpoint("dumps/topic_model.ckpt", vocab_len = len(vocab), output_dim = len(topics))
+topic.eval()
 emotion = Model.load_from_checkpoint("dumps/emotion_model.ckpt", vocab_len = len(vocab), output_dim = len(emotions))
 emotion.eval()
 max_len = 280
