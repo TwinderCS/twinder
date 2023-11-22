@@ -7,6 +7,7 @@ sys.path.append('data_handling')
 #from models import *
 import numpy as np
 import pandas as pd
+from models import *
 from text_analysis import get_classifier
 
 

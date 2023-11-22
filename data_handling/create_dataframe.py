@@ -112,4 +112,4 @@ def create_metrics_dataframe(save = True):
         df_metric.to_pickle('dumps/metrics.pkl')
         df_metric.to_csv('dumps/metrics.csv')
     return end - begin
-create_metrics_dataframe()
+#create_metrics_dataframe()
