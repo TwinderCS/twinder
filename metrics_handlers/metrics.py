@@ -8,10 +8,10 @@ sys.path.append('metrics_handlers')
 import time
 from models import *
 import numpy as np
+from text_analysis import get_classifier
 import pandas as pd
 from models import *
 import time
-from text_analysis import get_classifier
 
 
 polarity = ['negative', 'neutral', 'positive']
@@ -107,7 +107,7 @@ def distance(v1 : list, v2 : list):
 
     return np.sum([(v1[i] - v2[i])**2 for i in range(len(v1))])**(0.5)
 
-def get_closest_users(username : str, n = 10, N = 100):
+def get_closest_users(username : str, n = 10, N = 200):
     """
     Will only consider the first N users 
     Go throught the users and calculate the distances to the user's vector

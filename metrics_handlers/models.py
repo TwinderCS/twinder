@@ -4,7 +4,9 @@ sys.path.append('dumps')
 sys.path.append('data_handling')
 import torch
 import pytorch_lightning as pl
-from classifier import Model, emotion_vocab, topic_vocab, tokenizer
+import numpy as np
+sys.path.append("metrics_handlers")
+from classifier import Model, topic_vocab, tokenizer, emotion_vocab
 from text_analysis import cleaner
 import numpy as np
 
@@ -15,6 +17,7 @@ topic.eval()
 emotion = Model.load_from_checkpoint("dumps/emotion_model.ckpt", vocab = emotion_vocab, output_dim = len(emotions))
 emotion.eval()
 max_len = 280
+
 
 def topic_model(tweet : str, argmax=True, clean=True, int_output=False):
     global topics
