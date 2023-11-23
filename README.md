@@ -17,7 +17,6 @@ Create a programm that proposes some Twitter profiles to the user from its tweet
 > ...and then like or pass on the proposed profiles.
 
 ## The Twinder® Team
-**add work distribution**
 
 - Anas Lecaillon : Development of the torch Models, cleaning of their datasets (topic.csv, emotion.csv),
 training of the models, testing, cleaning of the text with lemmatizations, optimizations of many bits of code,
@@ -25,7 +24,7 @@ organization of code/module structure.
 - Mohamed Koucha : Page to submit a result, Style, Themes and tests of the pages
 - Balthazar : TextBlob classifier implementation for polarity (pos, neu, neg), training of the classifier, 
             combination of the classifier, the emotion model and the topic model to create each user's metric,
-            calculating closest users, and a little of dataframe cleaning, and create the metric dataframe
+            calculating closest users, testing, and a little of dataframe cleaning, and create the metric dataframe
 - Léna Pohier--Plantel: Tests and global problems, create the metric dataframe
 - Sarah Pouliquen
 - Martin Pupat : Frontend-backend connection, Code optimization, Team coordination

@@ -91,7 +91,7 @@ def distance(v1 : list, v2 : list):
 
     return np.sqrt(((v1-v2)**2).sum())
 
-def get_closest_users(username : str, n = 10, N = 'max'):
+def get_closest_users(username : str, n = 30, N = 'max'):
     """
     Will only consider the first N users 
     Go throught the users and calculate the distances to the user's vector
