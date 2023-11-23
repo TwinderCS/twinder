@@ -1,0 +1,4 @@
+{
+  "tests/test_text_analysis.py": true,
+  "tests/test_with_pytest.py": true
+}
