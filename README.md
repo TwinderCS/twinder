@@ -1,5 +1,9 @@
 # Project of the coding weeks 2020-2021 of the Twinder® Team
 
+## GitLab
+
+https://gitlab-cw4.centralesupelec.fr/twittos/twittos-s1/
+
 ## Description
 
 Create a programm that propose some Twitter profiles to the user from its tweets.
@@ -25,7 +29,12 @@ Create a programm that propose some Twitter profiles to the user from its tweets
 - `numpy`
 - `pandas`
 - `sys`
+- `ssl`
+- `time`
 
+## To run the first time
+
+Some libraires must be installed with nltk like the stopwords 
 
 ## To Execute
 ```bash
