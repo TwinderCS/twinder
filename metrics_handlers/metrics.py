@@ -1,5 +1,15 @@
 
-"""To have the text_analysis and the databases"""
+"""
+
+To config the metrics database and to modify the metric's config, with
+the different classifiers and models
+
+No need to run this otherwise.
+
+"""
+
+
+
 import sys
 sys.path.append('classifiers')
 sys.path.append('dumps')

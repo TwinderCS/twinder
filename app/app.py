@@ -8,13 +8,13 @@ from dash import Dash, html, Input, Output, State, callback, dcc
 import dash_bootstrap_components as dbc
 import pandas as pd
 sys.path.append("metrics_handlers")
-from metrics import get_closest_users, get_random_tweet_user
+from metrics_fetcher import get_closest_users, get_random_tweet_user
 
 LAYOUT_ID = "login"
 
 app = Dash(__name__,external_stylesheets=[dbc.themes.SPACELAB])
 
-def user_data_creation(username, n = 10):
+def user_data_creation(username, n = 50):
     """
     Creates a dataframe with the n closest users.
     string, int -> dataframe
