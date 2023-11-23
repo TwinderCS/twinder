@@ -47,6 +47,10 @@ python3 -m spacy download en
 
 Execute the app/app.py file
 
+## Username examples to test the app:
+
+scotthamilton, mimismo, erinx3leannexo, 2Hood4Hollywood, joy_wolf, lovesongwriter
+
 ## Current Project Structure
 ```
 ├── 1er_essai_interface_sarah.py
