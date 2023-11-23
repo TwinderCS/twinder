@@ -50,7 +50,7 @@ python3 -m spacy download en
 
 # To run the project
 
-Execute the app/app.py file
+Execute the __main__.py file
 
 ## Username examples to test the app:
 
