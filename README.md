@@ -17,7 +17,7 @@ Create a programm that propose some Twitter profiles to the user from its tweets
 - Balthazar Martin
 - Léna Pohier--Plantel
 - Sarah Pouliquen
-- Martin Pupat
+- Martin Pupat : Frontend-backend connection, Code optimization, Team coordination
 
 ## Dependencies
 - `dash`
