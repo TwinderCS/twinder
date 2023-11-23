@@ -1,13 +1,13 @@
 
 """To have the text_analysis and the databases"""
 import sys
-sys.path.append('text_analysis')
+sys.path.append('classifiers')
 sys.path.append('dumps')
 sys.path.append('data_handling')
 sys.path.append('metrics_handlers')
 from models import *
 import numpy as np
-from text_analysis import get_classifier
+from textblob_classifier import get_classifier
 import pandas as pd
 from models import *
 

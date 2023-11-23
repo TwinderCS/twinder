@@ -7,7 +7,8 @@ import sys
 import time
 sys.path.append('dumps')
 sys.path.append('metrics_handlers')
-sys.path.append("text_analysis")
+sys.path.append('classifiers')
+from cleaner import cleaner
 from metrics import *
 
 def get_hashtags(text : str):
@@ -55,17 +56,10 @@ def create_dataframe(location="../dumps/tweets.csv", save=True):
         df.to_pickle("../dumps/df.pkl")
     return df
 
-i = 0
-j = 0
 def create_emotion_dataframe(location = "dumps/emotion.csv", save = True):
     df = pd.read_csv(location)
     tot = len(df['text'])
-    def print_cleaner(text):
-        global i
-        print(i, "/", tot)
-        i += 1
-        return cleaner(text)
-    df['text'] = df['text'].map(print_cleaner)
+    df['text'] = df['text'].map(cleaner)
     if save:
         df.to_pickle('dumps/emotion.pkl')
     
@@ -81,12 +75,7 @@ def create_basic_dataframe(location, save_location=None, save = True, idx_col=No
 def create_topic_dataframe(location = "dumps/topic.csv", save = True):
     df = pd.read_csv(location)
     tot = len(df['text'])
-    def print_cleaner(text):
-        global j
-        print(j, "/", tot)
-        j += 1
-        return cleaner(text)
-    df['text'] = df['text'].map(print_cleaner)
+    df['text'] = df['text'].map(cleaner)
     if save:
         df.to_pickle('dumps/topic.pkl')
 
@@ -98,11 +87,7 @@ def create_tweets_dataframe(location = 'dumps/tweets.csv', save = True):
 def create_metrics_dataframe(save = True, nb_users = 300):
     df_tweets = pd.read_pickle('dumps/tweets.pkl')
     usernames = np.array(df_tweets['user'].unique())
-    #print(len(usernames))
-    #print(usernames[0:10])
     data = []
-
-
     vfunc = np.vectorize(get_metric_from_user, otypes=[np.ndarray])
     begin = time.time()
     vectors = vfunc(usernames[0:nb_users])
@@ -112,4 +97,3 @@ def create_metrics_dataframe(save = True, nb_users = 300):
         df_metric.to_pickle('dumps/metrics.pkl')
         df_metric.to_csv('dumps/metrics.csv')
     return end - begin
-#create_metrics_dataframe(True, 300)

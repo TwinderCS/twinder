@@ -1,13 +1,13 @@
 import sys
-sys.path.append('text_analysis')
+sys.path.append('classifiers')
 sys.path.append('dumps')
 sys.path.append('data_handling')
 import torch
 import pytorch_lightning as pl
 import numpy as np
 sys.path.append("metrics_handlers")
-from classifier import Model, topic_vocab, tokenizer, emotion_vocab
-from text_analysis import cleaner
+from nlp_models import Model, topic_vocab, tokenizer, emotion_vocab
+from cleaner import cleaner
 import numpy as np
 
 max_len = 280
