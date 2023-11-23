@@ -15,7 +15,7 @@ Create a programm that propose some Twitter profiles to the user from its tweets
 **add work distribution**
 
 - Anas Lecaillon 
-- Mohamed Koucha 
+- Mohamed Koucha : Page to submit a result, Style, Themes and tests of the pages
 - Balthazar : TextBlob classifier implementation for polarity (pos, neu, neg), training of the classifier, 
             combination of the classifier, the emotion model and the topic model to create each user's metric,
             calculating closest users, and a little of dataframe cleaning, and create the metric dataframe
