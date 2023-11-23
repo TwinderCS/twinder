@@ -1,3 +1,10 @@
+"""
+Gets the metric dataframe and uses it to generate the n closest users, get their tweets..
+It's the script called by app.py
+"""
+
+
+
 import numpy as np
 import pandas as pd
 
