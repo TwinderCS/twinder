@@ -150,5 +150,4 @@ def update_user_profile(yes_button, no_button, current_index):
 
 app.layout = serve_layout
 
-if __name__ == '__main__':
-    app.run(debug=True)
+app.run(debug=True)
