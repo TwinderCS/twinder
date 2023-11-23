@@ -12,8 +12,8 @@ df_tweets = pd.read_pickle('dumps/tweets.pkl')
 
 def distance(v1 : list, v2 : list):
     """Returns the euclidian distance of v1 and v2"""
-    assert(len(v1) == len(v2), "Error distance : vectors with different sizes")
-    assert(len(v1) != 0, "Error distance : empty vector")
+    assert len(v1) == len(v2), "Error distance : vectors with different sizes"
+    assert len(v1) != 0, "Error distance : empty vector"
 
     return np.sqrt(((v1-v2)**2).sum())
 
