@@ -1,4 +1,4 @@
-# Project of the coding weeks 2020-2021 of the Twinder® Team
+# Project of the coding weeks 2023 of the Twinder® Team
 
 ## GitLab and pwpt
 
@@ -10,7 +10,6 @@ https://gitlab-cw4.centralesupelec.fr/twittos/twittos-s1/
 
 Create a programm that propose some Twitter profiles to the user from its tweets.
 
-
 ## The Twinder® Team
 
 - Mohamed Koucha
@@ -21,19 +20,20 @@ Create a programm that propose some Twitter profiles to the user from its tweets
 - Martin Pupat
 
 ## Dependencies
-- `torch`
-- `torchtext`
-- `nltk`
 - `dash`
-- `spacy`
+- `dash_bootstrap_components`
 - `autocorrect`
-- `wandb`
-- `pytorch_lightning`
+- `nltk`
 - `numpy`
 - `pandas`
+- `pytorch_lightning`
+- `spacy`
 - `sys`
 - `ssl`
 - `time`
+- `torch`
+- `torchtext`
+- `wandb`
 
 # To run the first time and to execute
 
