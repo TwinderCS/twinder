@@ -30,6 +30,28 @@ organization of code/module structure.
 - Martin Pupat : Frontend-backend connection, Code optimization, Team coordination
 
 ## Dependencies
+
+### Run Dependencies
+
+- `dash`
+- `dash_bootstrap_components`
+- `pandas`
+- `numpy`
+
+#### Project Run Setup     
+
+1. Install dependencies
+```bash
+pip3 install dash dash_bootstrap_components numpy pandas
+```
+
+3. Clone the repository
+```bash
+git clone https://gitlab-cw4.centralesupelec.fr:twittos/twittos-s1.git
+```
+
+### Development Dependencies
+
 - `dash`
 - `dash_bootstrap_components`
 - `autocorrect`
@@ -42,7 +64,7 @@ organization of code/module structure.
 - `torchtext`
 - `wandb`
 
-## Project Setup     
+#### Project Development Setup     
 
 1. Install dependencies
 ```bash
@@ -89,12 +111,6 @@ twinder
 ├── app
 │   ├── app.py
 │   └── cookie.txt
-├── assets
-│   ├── fond-degrade-saint-valentin_23-2149242406.avif
-│   ├── improved-sarah-interface.py
-│   ├── newsarahcss.css
-│   ├── sarahdesign.png
-│   └── sarahwallpaper.png
 ├── classifiers
 │   ├── cleaner.py
 │   ├── nlp_models.py
@@ -149,7 +165,14 @@ twinder
 
 ## Informations about tests
 
+## MVP progression
+
+- Conception of the first interface where the user can enter its id and load the associated dataframe generated in backend using the dash module from python.
+- Design of the second page enabling the selection of pretendant lovers by also using the dash module from python.
+
 ## MVC
+
+
 
 ## What else could we have done if the Coding Weeks were longer ?
 
