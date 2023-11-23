@@ -10,16 +10,23 @@ from classifier import Model, topic_vocab, tokenizer, emotion_vocab
 from text_analysis import cleaner
 import numpy as np
 
+max_len = 280
 emotions = ["joy", "sadness", "fear", "anger", "surprise", "neutral", "shame", "disgust"]
 topics = ["politics", "health", "emotion", "financial", "sport", "science"]
-topic= Model.load_from_checkpoint("dumps/topic_model.ckpt", vocab = topic_vocab, output_dim = len(topics))
+
+topic = Model.load_from_checkpoint("dumps/topic_model.ckpt", vocab = topic_vocab, output_dim = len(topics))
 topic.eval()
 emotion = Model.load_from_checkpoint("dumps/emotion_model.ckpt", vocab = emotion_vocab, output_dim = len(emotions))
 emotion.eval()
-max_len = 280
 
 
-def topic_model(tweet : str, argmax=True, clean=True, int_output=False):
+def topic_model(tweet : str, argmax = True, clean = True, int_output = False):
+    """
+    Evaluates the string input through the topic torch NLP model and returns either:
+    - a non-normalized (i.e not in the range [0,1]) probability vector for each topic (argmax=False)
+    - a string output of the topic (argmax=True, int_output=False)
+    - an integer output of the topic (int_output=False)
+    """
     global topics
     global topic
     global tokenizer
@@ -45,6 +52,12 @@ def topic_model(tweet : str, argmax=True, clean=True, int_output=False):
         return topics[out.argmax()]
     
 def emotion_model(tweet : str, argmax=True, clean=True, int_output=False):
+    """
+    Evaluates the string input through the emotion torch NLP model and returns either:
+    - a non-normalized (i.e not in the range [0,1]) probability vector for each emotion (argmax=False)
+    - a string output of the emotion (argmax=True, int_output=False)
+    - an integer output of the emotion (int_output=False)
+    """
     global emotions
     global emotion
     global tokenizer

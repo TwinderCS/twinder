@@ -1,34 +1,29 @@
+"""
+Deprecated Code, used to test the training of the emotion classifier
+"""
 import pytorch_lightning as pl
 from pytorch_lightning.loggers import WandbLogger
 import wandb
 from torch.utils.data import Dataset
 from torch.utils.data import DataLoader
-from torchtext.data.utils import get_tokenizer
-from torchtext.vocab import build_vocab_from_iterator
 from torch import from_numpy
 import pytorch_lightning as pl
 import sys
-sys.path.append("data_handling")
 sys.path.append("text_analysis")
-from classifier import  Model, gen_dataset, split_dataset, yield_batches
-from create_dataframe import *   #create_topic_dataframe
-from os.path import isfile
+sys.path.append("data_handling")
+from classifier import Model, gen_dataset, split_dataset, yield_batches
 import pandas as pd
 
-if __name__ == "__main__":
-
-    if isfile("dumps/topic.pkl"):
-        topic = pd.read_pickle("dumps/topic.pkl")
-    else:
-        topic = create_dataframe()      #create_topic_dataframe
+def emotion_train():
+    emotion = pd.read_pickle("dumps/emotion.pkl")
 
     EPOCHS = 10
     LEARNING_RATE = 1e-3
     BATCH_SIZE = 64
-    TOPICS = ["politics", "health", "emotion", "financial", "sport", "science"]
+    EMOTIONS = ["joy", "sadness", "fear", "anger", "surprise", "neutral"]
     VOCAB_LEN = 10000
 
-    data_y, data_x = gen_dataset(topic, TOPICS, "topic")
+    data_y, data_x = gen_dataset(emotion, EMOTIONS, "emotion")
 
     train_x, test_x = split_dataset(data_x)
     train_y, test_y = split_dataset(data_y)
@@ -51,7 +46,7 @@ if __name__ == "__main__":
     wandb.login(key="68fded06a6651270206da4fc4c0f175085cadbd7")
 
     run = wandb.init(
-        project="twittos-topic",
+        project="twittos-emotion",
         config={
             "learning_rate": LEARNING_RATE,
             "epochs": EPOCHS,
@@ -67,11 +62,13 @@ if __name__ == "__main__":
     )
 
 
-    topic_model = Model(VOCAB_LEN, len(TOPICS), LEARNING_RATE)
+    emotion_model = Model(VOCAB_LEN, len(EMOTIONS), LEARNING_RATE)
 
     trainer.fit(
-        model=topic_model,
+        model=emotion_model,
         train_dataloaders=DataLoader(dataset=train_set, shuffle=True),
         test_dataloaders=DataLoader(dataset=test_set, shuffle=True)
     )
+
+
 
