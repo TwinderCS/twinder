@@ -2,7 +2,7 @@ import pytest
 import numpy as np
 import sys
 sys.path.append("metrics_handlers")
-from metrics import topic_to_vector, get_metric_from_tweet, get_metric_from_user, distance, get_closest_users
+from metrics import get_metric_from_tweet, get_metric_from_user, distance, get_closest_users
 
 @pytest.fixture
 def sample_tweet():
@@ -11,11 +11,6 @@ def sample_tweet():
 @pytest.fixture
 def sample_user():
     return "sample_user"
-
-def test_topic_to_vector():
-    topic_vector = topic_to_vector("politics")
-    assert isinstance(topic_vector, np.ndarray)
-    assert len(topic_vector) == 6  # Assuming there are 6 topics
 
 def test_get_metric_from_tweet(sample_tweet):
     metrics = get_metric_from_tweet(sample_tweet)
