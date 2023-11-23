@@ -118,12 +118,12 @@ def get_closest_users(username : str, n = 10, N = 200):
 
     metric = df_metric[df_metric['username'] == username]['metric'].iloc[0]
     
-    """Les 10 premiers users différents de celui donné en arg"""
+    """The first n users different from the one in argument"""
     users_with_metric = list(df_metric[df_metric['username'] != username][['username', 'metric']].itertuples(index=False, name=None))
 
 
     user_with_dist = np.array([[distance(metric, user_metric), username] for (username, user_metric) in users_with_metric[0:N]])
-    print(len(user_with_dist))
+    
 
     closest_arg = np.argpartition(user_with_dist, n, axis = 0)[:,0][:n]
 
@@ -132,14 +132,7 @@ def get_closest_users(username : str, n = 10, N = 200):
     return closest_users
 
 def get_random_tweet_user(user : str, df = df_tweets):
+    """Gets the first tweet of the user to later display it"""
+
     tweet = df[df['user'] == user]['text'].iloc[0]
     return tweet
-
-
-def get_random_tweet_user(user : str, df = df_tweets):
-    tweet = df[df['user'] == user]['text'].iloc[0]
-    return tweet
-
-
-
-#print(get_metric_from_user("scotthamilton"))

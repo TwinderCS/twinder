@@ -11,8 +11,8 @@ Create a programm that propose some Twitter profiles to the user from its tweets
 
 ## The Twinder® Team
 
-- Anas Lecaillon (Maitre de l'Univers (Entre autres))
-- Mohamed Koucha (Être humain (Je suppose))
+- Anas Lecaillon
+- Mohamed Koucha
 - Balthazar
 - Sarah
 - Léna
@@ -32,14 +32,17 @@ Create a programm that propose some Twitter profiles to the user from its tweets
 - `ssl`
 - `time`
 
-# To run the first time
+# To run the first time and to execute
 
 Run the config.py file and download the packages
 
-## To Execute
 ```bash
 python3 -m spacy download en
 ```
+
+# To run the project
+
+Execute the app/app.py file
 
 ## Current Project Structure
 ```
