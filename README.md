@@ -4,23 +4,29 @@
 
 https://docs.google.com/presentation/d/1eBpYBZ3qCNge3yiuCJ5f1ER0wrEK_rBEQPP6JIsN4SA/edit#slide=id.gc6f9e470d_0_0
 
-https://gitlab-cw4.centralesupelec.fr/twittos/twittos-s1/
-
 ## Description
 
-Create a programm that propose some Twitter profiles to the user from its tweets.
-**add infos**
+Create a programm that proposes some Twitter profiles to the user from its tweets.
+
+![First you write a username](images/twinder-1.png)
+
+> You first type in your username...
+
+![Then you get profiles proposed for you](images/twinder-2.png)
+
+> ...and then like or pass on the proposed profiles.
 
 ## The Twinder® Team
-**add work distribution**
 
-- Anas Lecaillon 
-- Mohamed Koucha 
+- Anas Lecaillon : Development of the torch Models, cleaning of their datasets (topic.csv, emotion.csv),
+training of the models, testing, cleaning of the text with lemmatizations, optimizations of many bits of code,
+organization of code/module structure.
+- Mohamed Koucha : Page to submit a result, Style, Themes and tests of the pages
 - Balthazar : TextBlob classifier implementation for polarity (pos, neu, neg), training of the classifier, 
             combination of the classifier, the emotion model and the topic model to create each user's metric,
-            calculating closest users, and a little of dataframe cleaning, and create the metric dataframe
+            calculating closest users, testing, and a little of dataframe cleaning, and create the metric dataframe
 - Léna Pohier--Plantel: Tests and global problems, create the metric dataframe
-- Sarah Pouliquen
+- Sarah Pouliquen : Conception of the user choosing interface. Refined the design of the interface using a css file.
 - Martin Pupat : Frontend-backend connection, Code optimization, Team coordination
 
 ## Dependencies
@@ -32,26 +38,46 @@ Create a programm that propose some Twitter profiles to the user from its tweets
 - `pandas`
 - `pytorch_lightning`
 - `spacy`
-- `sys`
-- `ssl`
-- `time`
 - `torch`
 - `torchtext`
 - `wandb`
 
-# To run the first time and to execute
+## Project Setup     
 
-Run the config.py file and download the packages
+1. Install dependencies
+```bash
+pip3 install dash dash_bootstrap_components autocorrect nltk numpy pandas torch pytorch_lightning spacy torchtext wandb
+```
 
-## To Execute       
-**explain how to run the project (git clone then what ?)**
+2. Download vocabularies
 ```bash
 python3 -m spacy download en
 ```
 
+3. Clone the repository
+```bash
+git clone https://gitlab-cw4.centralesupelec.fr:twittos/twittos-s1.git
+```
+
+4. Download stopwords and other nltk components:
+```bash
+python3 config.py
+```
+
+## Troubleshooting
+
+If files in dumps missing, use the `data_handling`'s `create_dataframe.py` methods
+to recreate them
+
+
 # To run the project
 
-Execute the __main__.py file
+Execute the `__main__.py` file or simply go into the root directory of the repository
+and type
+
+```bash
+python3 .
+```
 
 ## Username examples to test the app:
 
@@ -59,37 +85,26 @@ scotthamilton, mimismo, erinx3leannexo, 2Hood4Hollywood, joy_wolf, lovesongwrite
 
 ## Current Project Structure
 ```
-├── 1er_essai_interface_sarah.py
+twinder
 ├── app
 │   ├── app.py
-│   └── pages
-│       ├── feed.py
-│       ├── index.py
-│       ├── login.py
-│       └── metrics.py
+│   └── cookie.txt
 ├── assets
 │   ├── fond-degrade-saint-valentin_23-2149242406.avif
+│   ├── improved-sarah-interface.py
 │   ├── newsarahcss.css
 │   ├── sarahdesign.png
 │   └── sarahwallpaper.png
-├── coverage_reports
-├── coverage_reports_metrics_handlers
-├── coverage_reports_text_analysis
-├── dash
-│   ├── app_objects.py
-│   ├── app.py
-│   ├── demand.py
-│   ├── Input_interface.py
-│   ├── main_page.py
-│   ├── request.py
-│   └── update_candidate.py
+├── classifiers
+│   ├── cleaner.py
+│   ├── nlp_models.py
+│   └── textblob_classifier.py
+├── config.py
 ├── data_handling
-│   ├── create_dataframe.py
-│   ├── tweets.py
-│   └── users.py
-├── designsarah.css
+│   └── create_dataframe.py
 ├── dumps
 │   ├── check_topic.py
+│   ├── cl_data.obj
 │   ├── df.pkl
 │   ├── emotion.csv
 │   ├── emotion_lemmatized.pkl
@@ -99,53 +114,37 @@ scotthamilton, mimismo, erinx3leannexo, 2Hood4Hollywood, joy_wolf, lovesongwrite
 │   ├── font.ttf
 │   ├── metrics.csv
 │   ├── metrics.pkl
-│   ├── tinder_logo.png
 │   ├── topic.csv
 │   ├── topic_model.ckpt
 │   ├── topic.pkl
 │   ├── topic.vocab
 │   ├── tweet_emotions.csv
 │   ├── tweets.csv
-│   ├── tweets.pkl
-│   └── twitter_logo.png
+│   └── tweets.pkl
 ├── images
-│   ├── twinder100.png
-│   ├── twinder1024.png
-│   ├── twinder8192.png
-│   └── twinder.svg
-├── improved-sarah-interface.py
+│   ├── logo_non_transparent.png
+│   ├── logo_transparent.png
+│   ├── twinder-1.png
+│   └── twinder-2.png
+├── __main__.py
 ├── metrics_handlers
 │   ├── metrics.py
 │   └── models.py
 ├── model_notebooks
-│   └── emotion.ipynb
+│   ├── emotion_train.ipynb
+│   └── topic_train.ipynb
 ├── README.md
 ├── tests
-│   └── test_classifier.py
-│   └── test_emotion_classifer.py
-│   └── test_metrics.py
+│   ├── emotion_classifier.py
+│   ├── __init__.py
+│   ├── test_classifier.py
+│   ├── test_emotion_classifier.py
+│   ├── test_metrics.py
 │   ├── test_text_analysis.py
-│   ├── test_topic_classifier.py
-│   └── test_with_pytest.py
-├── text_analysis
-│   ├── classifier.py
-│   ├── cl_data.obj
-│   └── emotion_classifier.py
-│   └── text_analysis.py
+│   ├── test_with_pytest.py
 │   └── topic_classifier.py
-├── textblob
-│   └── blob.py
-├── tweet_collection
-│   ├── collection.py
-│   ├── credentials.py
-│   ├── tweet_collection.py
-│   └── twitter_connection.py
-├── tweet_visualization
-│   ├── seaborn_own.py
-│   └── tweet_visualization.py
-└── wordcloud
-    ├── __init__.py
-    └── wc.py
+└── Working docs
+    └── WhatsApp_Image_2023-11-23_at_10.32.55.jpeg
 ```
 
 ## Informations about tests

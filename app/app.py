@@ -8,13 +8,13 @@ from dash import Dash, html, Input, Output, State, callback, dcc
 import dash_bootstrap_components as dbc
 import pandas as pd
 sys.path.append("metrics_handlers")
-from metrics import get_closest_users, get_random_tweet_user
+from metrics_fetcher import get_closest_users, get_random_tweet_user
 
 LAYOUT_ID = "login"
 
 app = Dash(__name__,external_stylesheets=[dbc.themes.SPACELAB])
 
-def user_data_creation(username, n = 10):
+def user_data_creation(username, n = 50):
     """
     Creates a dataframe with the n closest users.
     string, int -> dataframe
@@ -63,8 +63,9 @@ def serve_layout():
             html.Div(id='my-output'),
             html.Div(id="yes-button"),
             html.Div(id="no-button"),
-            html.Div(id="user-index"),
-            html.Div(id="user-priofile")]
+            dbc.Row(id="user-profile"),
+            dcc.Store(id='user-index', data=user_index),
+]
         )
     if LAYOUT_ID == "feed":
         global users_df
@@ -113,7 +114,7 @@ def update_output_div(n_clicks,name):
         with open("app/cookie.txt", "w", encoding="utf-8") as cookie:
             cookie.write(name)
         LAYOUT_ID = "feed"
-        app.run(debug=False)
+        app.run(debug=True)
 
 app = dash.Dash(__name__, external_stylesheets=[dbc.themes.BOOTSTRAP])
 
@@ -149,5 +150,4 @@ def update_user_profile(yes_button, no_button, current_index):
 
 app.layout = serve_layout
 
-if __name__ == '__main__':
-    app.run(debug=False)
+app.run(debug=True)
