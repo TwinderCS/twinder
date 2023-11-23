@@ -32,9 +32,9 @@ Create a programm that propose some Twitter profiles to the user from its tweets
 - `ssl`
 - `time`
 
-## To run the first time
+# To run the first time
 
-Some libraires must be installed with nltk like the stopwords 
+Run the config.py file and download the packages
 
 ## To Execute
 ```bash
