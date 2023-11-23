@@ -88,37 +88,26 @@ scotthamilton, mimismo, erinx3leannexo, 2Hood4Hollywood, joy_wolf, lovesongwrite
 
 ## Current Project Structure
 ```
-├── 1er_essai_interface_sarah.py
+twinder
 ├── app
 │   ├── app.py
-│   └── pages
-│       ├── feed.py
-│       ├── index.py
-│       ├── login.py
-│       └── metrics.py
+│   └── cookie.txt
 ├── assets
 │   ├── fond-degrade-saint-valentin_23-2149242406.avif
+│   ├── improved-sarah-interface.py
 │   ├── newsarahcss.css
 │   ├── sarahdesign.png
 │   └── sarahwallpaper.png
-├── coverage_reports
-├── coverage_reports_metrics_handlers
-├── coverage_reports_text_analysis
-├── dash
-│   ├── app_objects.py
-│   ├── app.py
-│   ├── demand.py
-│   ├── Input_interface.py
-│   ├── main_page.py
-│   ├── request.py
-│   └── update_candidate.py
+├── classifiers
+│   ├── cleaner.py
+│   ├── nlp_models.py
+│   └── textblob_classifier.py
+├── config.py
 ├── data_handling
-│   ├── create_dataframe.py
-│   ├── tweets.py
-│   └── users.py
-├── designsarah.css
+│   └── create_dataframe.py
 ├── dumps
 │   ├── check_topic.py
+│   ├── cl_data.obj
 │   ├── df.pkl
 │   ├── emotion.csv
 │   ├── emotion_lemmatized.pkl
@@ -128,53 +117,37 @@ scotthamilton, mimismo, erinx3leannexo, 2Hood4Hollywood, joy_wolf, lovesongwrite
 │   ├── font.ttf
 │   ├── metrics.csv
 │   ├── metrics.pkl
-│   ├── tinder_logo.png
 │   ├── topic.csv
 │   ├── topic_model.ckpt
 │   ├── topic.pkl
 │   ├── topic.vocab
 │   ├── tweet_emotions.csv
 │   ├── tweets.csv
-│   ├── tweets.pkl
-│   └── twitter_logo.png
+│   └── tweets.pkl
 ├── images
-│   ├── twinder100.png
-│   ├── twinder1024.png
-│   ├── twinder8192.png
-│   └── twinder.svg
-├── improved-sarah-interface.py
+│   ├── logo_non_transparent.png
+│   ├── logo_transparent.png
+│   ├── twinder-1.png
+│   └── twinder-2.png
+├── __main__.py
 ├── metrics_handlers
 │   ├── metrics.py
 │   └── models.py
 ├── model_notebooks
-│   └── emotion.ipynb
+│   ├── emotion_train.ipynb
+│   └── topic_train.ipynb
 ├── README.md
 ├── tests
-│   └── test_classifier.py
-│   └── test_emotion_classifer.py
-│   └── test_metrics.py
+│   ├── emotion_classifier.py
+│   ├── __init__.py
+│   ├── test_classifier.py
+│   ├── test_emotion_classifier.py
+│   ├── test_metrics.py
 │   ├── test_text_analysis.py
-│   ├── test_topic_classifier.py
-│   └── test_with_pytest.py
-├── text_analysis
-│   ├── classifier.py
-│   ├── cl_data.obj
-│   └── emotion_classifier.py
-│   └── text_analysis.py
+│   ├── test_with_pytest.py
 │   └── topic_classifier.py
-├── textblob
-│   └── blob.py
-├── tweet_collection
-│   ├── collection.py
-│   ├── credentials.py
-│   ├── tweet_collection.py
-│   └── twitter_connection.py
-├── tweet_visualization
-│   ├── seaborn_own.py
-│   └── tweet_visualization.py
-└── wordcloud
-    ├── __init__.py
-    └── wc.py
+└── Working docs
+    └── WhatsApp_Image_2023-11-23_at_10.32.55.jpeg
 ```
 
 ## Informations about tests
