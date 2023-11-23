@@ -95,21 +95,21 @@ def create_tweets_dataframe(location = 'dumps/tweets.csv', save = True):
     if save:
         df.to_pickle('dumps/tweets.pkl')
 
-def create_metrics_dataframe(save = True):
+def create_metrics_dataframe(save = True, nb_users = 300):
     df_tweets = pd.read_pickle('dumps/tweets.pkl')
     usernames = np.array(df_tweets['user'].unique())
     #print(len(usernames))
     #print(usernames[0:10])
     data = []
-    
-    
+
+
     vfunc = np.vectorize(get_metric_from_user, otypes=[np.ndarray])
     begin = time.time()
-    vectors = vfunc(usernames[0:300])
-    df_metric = pd.DataFrame({'username' : usernames[:300], 'metric' : vectors})
+    vectors = vfunc(usernames[0:nb_users])
+    df_metric = pd.DataFrame({'username' : usernames[:nb_users], 'metric' : vectors})
     end = time.time()
     if save:
         df_metric.to_pickle('dumps/metrics.pkl')
         df_metric.to_csv('dumps/metrics.csv')
     return end - begin
-create_metrics_dataframe()
+#create_metrics_dataframe(True, 300)
