@@ -13,11 +13,12 @@ Create a programm that propose some Twitter profiles to the user from its tweets
 
 ## The Twinder® Team
 
-- Anas Lecaillon
 - Mohamed Koucha
-- Balthazar
-- Sarah
-- Léna
+- Anas Lecaillon
+- Balthazar Martin
+- Léna Pohier--Plantel
+- Sarah Pouliquen
+- Martin Pupat
 
 ## Dependencies
 - `torch`

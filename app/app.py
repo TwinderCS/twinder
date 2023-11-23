@@ -27,10 +27,7 @@ app = Dash(__name__, use_pages=True, external_stylesheets=[dbc.themes.QUARTZ])
 def user_data_creation(username, n = 10):
     user_array = get_closest_users(username, n)
     user_data = {
-        'user_id_closest' : [user_array[i] for i in range(n)],
-        #'name' : [user_array[i][1] for i in range(n)],
-        #'age': [20 + i % 10 for i in range(1, 101)],
-        #'bio': [f'This is a bio of User {i}' for i in range(1, 101)]
+        'user_id_closest' : [user_array[i] for i in range(n)]
     }
     users_df = pd.DataFrame(user_data)
     return users_df
@@ -124,11 +121,6 @@ def update_output_div(n_clicks,name):
         app.run(debug=True)
 
 
-
-
-#to create my interface im using the dash module from python and its functions
-
-
 #to create my interface im using the dash module from python and its functions
 
 app = dash.Dash(__name__, external_stylesheets=[dbc.themes.BOOTSTRAP])
@@ -144,7 +136,6 @@ def display_user_profile(user):
 
 user_index = 0
 
-#skibidi
 #im adjusting the layout so as to make it more beautiful or in the current extent at least acceptable
 #im implementing a callback function which updates the page whenever the button yes or no is pushed. If the yes button is pushed, then the pretendant user id is put in an additional dataset
 
@@ -155,9 +146,12 @@ user_index = 0
     Input('no-button', 'n_clicks'),
     State('user-index', 'data'),
     prevent_initial_call = True
-    
 )
+
+
 # i adjust my callback function so as to limit the suggestions to 50 profiles (to improve the quality of the AI generated selection)
+
+
 def update_user_profile(yes_clicks, no_clicks, current_index):
     new_index = (current_index + 1) % len(users_df)
 
