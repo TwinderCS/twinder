@@ -52,7 +52,7 @@ python3 -m spacy download en
 
 3. Clone the repository
 ```bash
-git clone ...
+git clone https://gitlab-cw4.centralesupelec.fr:twittos/twittos-s1.git
 ```
 
 4. Download stopwords and other nltk components:
