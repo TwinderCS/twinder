@@ -14,7 +14,9 @@ Create a programm that propose some Twitter profiles to the user from its tweets
 ## The Twinder® Team
 **add work distribution**
 
-- Anas Lecaillon 
+- Anas Lecaillon : Development of the torch Models, cleaning of their datasets (topic.csv, emotion.csv),
+training of the models, testing, cleaning of the text with lemmatizations, optimizations of many bits of code,
+organization of code/module structure.
 - Mohamed Koucha : Page to submit a result, Style, Themes and tests of the pages
 - Balthazar : TextBlob classifier implementation for polarity (pos, neu, neg), training of the classifier, 
             combination of the classifier, the emotion model and the topic model to create each user's metric,
@@ -32,26 +34,46 @@ Create a programm that propose some Twitter profiles to the user from its tweets
 - `pandas`
 - `pytorch_lightning`
 - `spacy`
-- `sys`
-- `ssl`
-- `time`
 - `torch`
 - `torchtext`
 - `wandb`
 
-# To run the first time and to execute
+## Project Setup     
 
-Run the config.py file and download the packages
+1. Install dependencies
+```bash
+pip3 install dash dash_bootstrap_components autocorrect nltk numpy pandas torch pytorch_lightning spacy torchtext wandb
+```
 
-## To Execute       
-**explain how to run the project (git clone then what ?)**
+2. Download vocabularies
 ```bash
 python3 -m spacy download en
 ```
 
+3. Clone the repository
+```bash
+git clone ...
+```
+
+4. Download stopwords and other nltk components:
+```bash
+python3 config.py
+```
+
+## Troubleshooting
+
+If files in dumps missing, use the `data_handling`'s `create_dataframe.py` methods
+to recreate them
+
+
 # To run the project
 
-Execute the __main__.py file
+Execute the `__main__.py` file or simply go into the root directory of the repository
+and type
+
+```bash
+python3 .
+```
 
 ## Username examples to test the app:
 
