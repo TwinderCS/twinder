@@ -1,5 +1,11 @@
 # Project of the coding weeks 2020-2021 of the Twinder® Team
 
+## GitLab and pwpt
+
+https://docs.google.com/presentation/d/1eBpYBZ3qCNge3yiuCJ5f1ER0wrEK_rBEQPP6JIsN4SA/edit#slide=id.gc6f9e470d_0_0
+
+https://gitlab-cw4.centralesupelec.fr/twittos/twittos-s1/
+
 ## Description
 
 Create a programm that propose some Twitter profiles to the user from its tweets.
@@ -7,8 +13,8 @@ Create a programm that propose some Twitter profiles to the user from its tweets
 
 ## The Twinder® Team
 
-- Anas Lecaillon (Maitre de l'Univers (Entre autres))
-- Mohamed Koucha (Être humain (Je suppose))
+- Anas Lecaillon
+- Mohamed Koucha
 - Balthazar
 - Sarah
 - Léna
@@ -25,12 +31,20 @@ Create a programm that propose some Twitter profiles to the user from its tweets
 - `numpy`
 - `pandas`
 - `sys`
+- `ssl`
+- `time`
 
+# To run the first time and to execute
 
-## To Execute
+Run the config.py file and download the packages
+
 ```bash
 python3 -m spacy download en
 ```
+
+# To run the project
+
+Execute the app/app.py file
 
 ## Current Project Structure
 ```

@@ -45,6 +45,11 @@ user_index = 0
 
 #im adjusting the layout so as to make it more beautiful or in the current extent at least acceptable
 
+heading = html.H4(
+    "Twinder, l'application qui réunit passion et amour",
+    className="bg-primary text-white p-2", style={'textAlign': 'center'}
+)
+
 def serve_layout():
     name_d = ""
     with open("app/cookie.txt", "r") as cookie:

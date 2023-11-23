@@ -4,7 +4,9 @@ import sys
 sys.path.append('text_analysis')
 sys.path.append('dumps')
 sys.path.append('data_handling')
-#from models import *
+sys.path.append('metrics_handlers')
+import time
+from models import *
 import numpy as np
 from text_analysis import get_classifier
 import pandas as pd
@@ -43,17 +45,6 @@ topic_dict = {topics[i] : np.array([0] * i + [1] + (len(topics)-i - 1) * [0], dt
 cl = get_classifier()
 df_tweets = pd.read_csv('dumps/tweets.csv')
 
-def topic_to_vector(topic : str):
-    """
-    Same function as before for the topics
-    """
-    for i in range(len(topics)):
-        if topic == topics[i]:
-            arg = i
-    topic_vector = np.zeros(len(topics))
-    topic_vector[arg] = 1
-    return topic_vector
-
 def get_metric_from_tweet(tweet : str, alpha = alpha, cl = cl):
     """
     Returns the vector that represents the tweets thanks to the classifier and the 2 networks
@@ -71,7 +62,7 @@ def get_metric_from_tweet(tweet : str, alpha = alpha, cl = cl):
     polarity = cl.classify(tweet)
 
     emotion_vector = emotion_dict[emotion]
-    topic_vector = topic_to_vector(topic)
+    topic_vector = topic_dict[topic]
     pol_vector = polarity_dict[polarity]
 
     mind_state_vector = alpha * pol_vector + (1-alpha) * emotion_vector
@@ -105,7 +96,7 @@ def distance(v1 : list, v2 : list):
 
     return np.sum([(v1[i] - v2[i])**2 for i in range(len(v1))])**(0.5)
 
-def get_closest_users(username : str, n = 10, N = 100):
+def get_closest_users(username : str, n = 10, N = 200):
     """
     Will only consider the first N users 
     Go throught the users and calculate the distances to the user's vector
@@ -116,12 +107,12 @@ def get_closest_users(username : str, n = 10, N = 100):
 
     metric = df_metric[df_metric['username'] == username]['metric'].iloc[0]
     
-    """Les 10 premiers users différents de celui donné en arg"""
+    """The first n users different from the one in argument"""
     users_with_metric = list(df_metric[df_metric['username'] != username][['username', 'metric']].itertuples(index=False, name=None))
 
 
     user_with_dist = np.array([[distance(metric, user_metric), username] for (username, user_metric) in users_with_metric[0:N]])
-    print(len(user_with_dist))
+    
 
     closest_arg = np.argpartition(user_with_dist, n, axis = 0)[:,0][:n]
 
@@ -130,6 +121,7 @@ def get_closest_users(username : str, n = 10, N = 100):
     return closest_users
 
 def get_random_tweet_user(user : str, df = df_tweets):
+    """Gets the first tweet of the user to later display it"""
+
     tweet = df[df['user'] == user]['text'].iloc[0]
     return tweet
-

@@ -72,13 +72,27 @@ def serve_layout():
         with open("app/cookie.txt", "r", encoding="utf-8") as cookie:
             name_d = cookie.readline()
             users_df = user_data_creation(name_d)
+        
+        yes_button = dbc.Button("Yes", id='yes-button', color="success", className="mr-2", style={"border-radius": "50%"})
+        no_button = dbc.Button("No", id='no-button', color="danger", style={"border-radius": "50%"})
 
-        return html.Div([
+        display =  html.Div([
             dcc.Store(id='user-index', data=user_index),
             html.Div(id='user-profile', children=display_user_profile(users_df.iloc[user_index])),
-            dbc.Button("Yes", id='yes-button', color="success", className="mr-2"),
-            dbc.Button("No", id='no-button', color="danger")
-        ])
+            html.Div([yes_button, no_button], className='d-flex justify-content-center')
+            ], className='mt-2', style={'textAlign': 'center'})
+        
+        display_panel = dbc.Card(
+            dbc.CardBody(
+                [display],
+                className="bg-light",
+                )
+        )
+        
+        return html.Div(
+            [heading,
+            dbc.Row([dbc.Col(display_panel, md = 4)],justify = "center"),]
+        )
     return html.H1("AAAA")
 
 heading = html.H4(
