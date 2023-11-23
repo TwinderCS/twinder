@@ -9,13 +9,17 @@ https://gitlab-cw4.centralesupelec.fr/twittos/twittos-s1/
 ## Description
 
 Create a programm that propose some Twitter profiles to the user from its tweets.
+**add infos**
 
 ## The Twinder® Team
+**add work distribution**
 
-- Mohamed Koucha
-- Anas Lecaillon
-- Balthazar Martin
-- Léna Pohier--Plantel
+- Anas Lecaillon 
+- Mohamed Koucha : Page to submit a result, Style, Themes and tests of the pages
+- Balthazar : TextBlob classifier implementation for polarity (pos, neu, neg), training of the classifier, 
+            combination of the classifier, the emotion model and the topic model to create each user's metric,
+            calculating closest users, and a little of dataframe cleaning, and create the metric dataframe
+- Léna Pohier--Plantel: Tests and global problems, create the metric dataframe
 - Sarah Pouliquen
 - Martin Pupat : Frontend-backend connection, Code optimization, Team coordination
 
@@ -39,13 +43,15 @@ Create a programm that propose some Twitter profiles to the user from its tweets
 
 Run the config.py file and download the packages
 
+## To Execute       
+**explain how to run the project (git clone then what ?)**
 ```bash
 python3 -m spacy download en
 ```
 
 # To run the project
 
-Execute the app/app.py file
+Execute the __main__.py file
 
 ## Username examples to test the app:
 
@@ -66,6 +72,9 @@ scotthamilton, mimismo, erinx3leannexo, 2Hood4Hollywood, joy_wolf, lovesongwrite
 │   ├── newsarahcss.css
 │   ├── sarahdesign.png
 │   └── sarahwallpaper.png
+├── coverage_reports
+├── coverage_reports_metrics_handlers
+├── coverage_reports_text_analysis
 ├── dash
 │   ├── app_objects.py
 │   ├── app.py
@@ -112,15 +121,17 @@ scotthamilton, mimismo, erinx3leannexo, 2Hood4Hollywood, joy_wolf, lovesongwrite
 │   └── emotion.ipynb
 ├── README.md
 ├── tests
-│   ├── test_emotion_classifier.py
+│   └── test_classifier.py
+│   └── test_emotion_classifer.py
+│   └── test_metrics.py
 │   ├── test_text_analysis.py
 │   ├── test_topic_classifier.py
 │   └── test_with_pytest.py
 ├── text_analysis
 │   ├── classifier.py
 │   ├── cl_data.obj
-│   ├── emotion_classifier.py
-│   ├── text_analysis.py
+│   └── emotion_classifier.py
+│   └── text_analysis.py
 │   └── topic_classifier.py
 ├── textblob
 │   └── blob.py
@@ -136,3 +147,15 @@ scotthamilton, mimismo, erinx3leannexo, 2Hood4Hollywood, joy_wolf, lovesongwrite
     ├── __init__.py
     └── wc.py
 ```
+
+## Informations about tests
+
+## MVC
+
+## What else could we have done if the Coding Weeks were longer ?
+
+- Limitations of the database : geolocalisation, if all users are active (date of the last tweet)
+- Work on the classifier models
+- Limitations of the API, instead add an implementation fonctionnality : an user can upload its tweets and get the compatibility with all the users in the database and is added to the database
+- adaptive metric depending on the choice previously made by the user
+- if the following system is taken into account, add it to the metric system

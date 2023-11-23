@@ -86,8 +86,8 @@ def get_metric_from_user(user : str, df = df_tweets, debug = False):
 
 def distance(v1 : list, v2 : list):
     """Returns the euclidian distance of v1 and v2"""
-    assert(len(v1) != len(v2), "Error distance : vectors with different sizes")
-    assert(len(v1) == 0, "Error distance : empty vector")
+    assert(len(v1) == len(v2), "Error distance : vectors with different sizes")
+    assert(len(v1) != 0, "Error distance : empty vector")
 
     return np.sqrt(((v1-v2)**2).sum())
 
