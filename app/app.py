@@ -1,41 +1,39 @@
+"""
+Code responsible for rendering the app and calling the database to interact with the user.
+"""
+
+import sys
 import dash
-from dash import Dash, html, dcc
-import dash_mantine_components as dmc
-import dash_bootstrap_components as dbc
-import dash
-import dash_bootstrap_components as dbc
-from dash import Dash, html, Input, Output, State, ctx, callback, dcc
-import dash
-from dash import html, dcc, Output, Input, State
+from dash import Dash, html, Input, Output, State, callback, dcc
 import dash_bootstrap_components as dbc
 import pandas as pd
-import dash
-import dash_bootstrap_components as dbc
-from dash import Dash, html, Input, Output, State, ctx, callback, dcc
-import sys
 sys.path.append("metrics_handlers")
 from metrics import get_closest_users, get_random_tweet_user
-from random import randint 
 
+LAYOUT_ID = "login"
 
-global layout_id
-layout_id = "login"
-print("bonjour")
-
-app = Dash(__name__, use_pages=True, external_stylesheets=[dbc.themes.QUARTZ])
+app = Dash(__name__,external_stylesheets=[dbc.themes.SPACELAB])
 
 def user_data_creation(username, n = 10):
+    """
+    Creates a dataframe with the n closest users.
+    string, int -> dataframe
+    """
     user_array = get_closest_users(username, n)
     user_data = {
-        'user_id_closest' : [user_array[i] for i in range(n)]
+        'user_id_closest' : [user_array[i] for i in range(n)],
     }
-    users_df = pd.DataFrame(user_data)
-    return users_df
+    data = pd.DataFrame(user_data)
+    return data
 user_id = html.Div(
     [dbc.Label("User ID",html_for="User"), dbc.Input(id ="user_state", type="text",value="")],
     className="mt-2",
 )
 
+users_df = user_data_creation("scotthamilton")
+"""
+Initializing a default user dataframe
+"""
 
 control_panel = dbc.Card(
     dbc.CardBody(
@@ -43,8 +41,6 @@ control_panel = dbc.Card(
         className="bg-light",
     )
 )
-
-
 
 button = dbc.Button(
     id='submit',
@@ -54,22 +50,26 @@ button = dbc.Button(
     className="mt-2",
 )
 
-users_df = user_data_creation("scotthamilton")
-
 def serve_layout():
-    if layout_id == "login":
-        print("login")
+    """
+    Wrapper that renders the different pages of the app
+    None -> html.Div
+    """
+    if LAYOUT_ID == "login":
         return html.Div(
             [heading,
             dbc.Row([dbc.Col(control_panel, md = 4)],justify = "center"),
             dbc.Row([dbc.Col(button,md=4)],justify="center"),
-            html.Div(id='my-output')]
+            html.Div(id='my-output'),
+            html.Div(id="yes-button"),
+            html.Div(id="no-button"),
+            html.Div(id="user-index"),
+            html.Div(id="user-priofile")]
         )
-    if layout_id == "feed":
+    if LAYOUT_ID == "feed":
         global users_df
-        print("feed")
         name_d = ""
-        with open("app/cookie.txt", "r") as cookie:
+        with open("app/cookie.txt", "r", encoding="utf-8") as cookie:
             name_d = cookie.readline()
             users_df = user_data_creation(name_d)
         
@@ -111,33 +111,26 @@ def update_output_div(n_clicks,name):
     """
     Update the output with the current text when the button is clicked
     """
-    print(name)
-    global layout_id
+    global LAYOUT_ID
     if n_clicks > 0:
-        with open("app/cookie.txt", "w") as cookie:
+        with open("app/cookie.txt", "w", encoding="utf-8") as cookie:
             cookie.write(name)
-        layout_id = "feed"
-        print("AAAAAA")
+        LAYOUT_ID = "feed"
         app.run(debug=True)
-
-
-#to create my interface im using the dash module from python and its functions
 
 app = dash.Dash(__name__, external_stylesheets=[dbc.themes.BOOTSTRAP])
 
-#i need to create a graphic function showing off the pretendant profile after tking the original user id as an argument
-
 def display_user_profile(user):
+    """
+    Wrapper defining the layout of a user card.
+    string(username) -> html.Div
+    """
     return html.Div([
         html.H3(user["user_id_closest"]),
-        html.P(f"Age: {randint(15,30)}"),  #html.P(f"Age: {user['age']}"),
-        html.P(get_random_tweet_user(user['user_id_closest'])) #html.P(user['bio'])
+        html.P(get_random_tweet_user(user['user_id_closest']))
     ])
 
 user_index = 0
-
-#im adjusting the layout so as to make it more beautiful or in the current extent at least acceptable
-#im implementing a callback function which updates the page whenever the button yes or no is pushed. If the yes button is pushed, then the pretendant user id is put in an additional dataset
 
 @callback(
     Output('user-profile', 'children', allow_duplicate=True),
@@ -145,20 +138,17 @@ user_index = 0
     Input('yes-button', 'n_clicks'),
     Input('no-button', 'n_clicks'),
     State('user-index', 'data'),
-    prevent_initial_call = True
+    prevent_initial_call = True,
 )
-
-
-# i adjust my callback function so as to limit the suggestions to 50 profiles (to improve the quality of the AI generated selection)
-
-
-def update_user_profile(yes_clicks, no_clicks, current_index):
+def update_user_profile(yes_button, no_button, current_index):
+    """
+    Callback function that retrieves the input of the yes/no buttons and returns the next profile.
+    WIP: The buttons don't do anything now except switching to the next profile.
+    callback.Input, callback.Input, callback.State -> html.Div, int 
+    """
     new_index = (current_index + 1) % len(users_df)
 
-    if yes_clicks and new_index < 50:
-        matched_user = users_df.iloc[current_index]
     return display_user_profile(users_df.iloc[new_index]), new_index
-
 
 app.layout = serve_layout
 
