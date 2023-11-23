@@ -45,17 +45,6 @@ topic_dict = {topics[i] : np.array([0] * i + [1] + (len(topics)-i - 1) * [0], dt
 cl = get_classifier()
 df_tweets = pd.read_csv('dumps/tweets.csv')
 
-def topic_to_vector(topic : str):
-    """
-    Same function as before for the topics
-    """
-    for i in range(len(topics)):
-        if topic == topics[i]:
-            arg = i
-    topic_vector = np.zeros(len(topics))
-    topic_vector[arg] = 1
-    return topic_vector
-
 def get_metric_from_tweet(tweet : str, alpha = alpha, cl = cl):
     """
     Returns the vector that represents the tweets thanks to the classifier and the 2 networks
@@ -73,7 +62,7 @@ def get_metric_from_tweet(tweet : str, alpha = alpha, cl = cl):
     polarity = cl.classify(tweet)
 
     emotion_vector = emotion_dict[emotion]
-    topic_vector = topic_to_vector(topic)
+    topic_vector = topic_dict[topic]
     pol_vector = polarity_dict[polarity]
 
     mind_state_vector = alpha * pol_vector + (1-alpha) * emotion_vector
