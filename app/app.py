@@ -113,7 +113,7 @@ def update_output_div(n_clicks,name):
         with open("app/cookie.txt", "w", encoding="utf-8") as cookie:
             cookie.write(name)
         LAYOUT_ID = "feed"
-        app.run(debug=True)
+        app.run(debug=False)
 
 app = dash.Dash(__name__, external_stylesheets=[dbc.themes.BOOTSTRAP])
 
@@ -150,4 +150,4 @@ def update_user_profile(yes_button, no_button, current_index):
 app.layout = serve_layout
 
 if __name__ == '__main__':
-    app.run(debug=True)
+    app.run(debug=False)
