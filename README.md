@@ -30,6 +30,28 @@ organization of code/module structure.
 - Martin Pupat : Frontend-backend connection, Code optimization, Team coordination
 
 ## Dependencies
+
+### Run Dependencies
+
+- `dash`
+- `dash_bootstrap_components`
+- `pandas`
+- `numpy`
+
+#### Project Run Setup     
+
+1. Install dependencies
+```bash
+pip3 install dash dash_bootstrap_components numpy pandas
+```
+
+3. Clone the repository
+```bash
+git clone https://gitlab-cw4.centralesupelec.fr:twittos/twittos-s1.git
+```
+
+### Development Dependencies
+
 - `dash`
 - `dash_bootstrap_components`
 - `autocorrect`
@@ -42,7 +64,7 @@ organization of code/module structure.
 - `torchtext`
 - `wandb`
 
-## Project Setup     
+#### Project Development Setup     
 
 1. Install dependencies
 ```bash
