@@ -4,8 +4,6 @@
 
 https://docs.google.com/presentation/d/1eBpYBZ3qCNge3yiuCJ5f1ER0wrEK_rBEQPP6JIsN4SA/edit#slide=id.gc6f9e470d_0_0
 
-https://gitlab-cw4.centralesupelec.fr/twittos/twittos-s1/
-
 ## Description
 
 Create a programm that proposes some Twitter profiles to the user from its tweets.
@@ -29,7 +27,7 @@ organization of code/module structure.
             combination of the classifier, the emotion model and the topic model to create each user's metric,
             calculating closest users, and a little of dataframe cleaning, and create the metric dataframe
 - Léna Pohier--Plantel: Tests and global problems, create the metric dataframe
-- Sarah Pouliquen
+- Sarah Pouliquen : Conception of the user choosing interface. Refined the design of the interface using a css file.
 - Martin Pupat : Frontend-backend connection, Code optimization, Team coordination
 
 ## Dependencies
