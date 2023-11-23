@@ -111,12 +111,6 @@ twinder
 ├── app
 │   ├── app.py
 │   └── cookie.txt
-├── assets
-│   ├── fond-degrade-saint-valentin_23-2149242406.avif
-│   ├── improved-sarah-interface.py
-│   ├── newsarahcss.css
-│   ├── sarahdesign.png
-│   └── sarahwallpaper.png
 ├── classifiers
 │   ├── cleaner.py
 │   ├── nlp_models.py
