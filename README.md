@@ -4,8 +4,6 @@
 
 https://docs.google.com/presentation/d/1eBpYBZ3qCNge3yiuCJ5f1ER0wrEK_rBEQPP6JIsN4SA/edit#slide=id.gc6f9e470d_0_0
 
-https://gitlab-cw4.centralesupelec.fr/twittos/twittos-s1/
-
 ## Description
 
 Create a programm that proposes some Twitter profiles to the user from its tweets.
