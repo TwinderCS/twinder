@@ -8,10 +8,15 @@ https://gitlab-cw4.centralesupelec.fr/twittos/twittos-s1/
 
 ## Description
 
-Create a programm that propose some Twitter profiles to the user from its tweets.
+Create a programm that proposes some Twitter profiles to the user from its tweets.
 
 ![First you write a username](images/twinder-1.png)
+
+> You first type in your username...
+
 ![Then you get profiles proposed for you](images/twinder-2.png)
+
+> ...and then like or pass on the proposed profiles.
 
 ## The Twinder® Team
 **add work distribution**
