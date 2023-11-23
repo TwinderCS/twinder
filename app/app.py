@@ -72,7 +72,6 @@ def serve_layout():
         with open("app/cookie.txt", "r", encoding="utf-8") as cookie:
             name_d = cookie.readline()
             users_df = user_data_creation(name_d)
-        
         yes_button = dbc.Button("Yes", id='yes-button', color="success", className="mr-2", style={"border-radius": "50%"})
         no_button = dbc.Button("No", id='no-button', color="danger", style={"border-radius": "50%"})
 
@@ -81,14 +80,12 @@ def serve_layout():
             html.Div(id='user-profile', children=display_user_profile(users_df.iloc[user_index])),
             html.Div([yes_button, no_button], className='d-flex justify-content-center')
             ], className='mt-2', style={'textAlign': 'center'})
-        
         display_panel = dbc.Card(
             dbc.CardBody(
                 [display],
                 className="bg-light",
                 )
         )
-        
         return html.Div(
             [heading,
             dbc.Row([dbc.Col(display_panel, md = 4)],justify = "center"),]
@@ -116,7 +113,7 @@ def update_output_div(n_clicks,name):
         with open("app/cookie.txt", "w", encoding="utf-8") as cookie:
             cookie.write(name)
         LAYOUT_ID = "feed"
-        app.run(debug=True)
+        app.run(debug=False)
 
 app = dash.Dash(__name__, external_stylesheets=[dbc.themes.BOOTSTRAP])
 
@@ -153,4 +150,4 @@ def update_user_profile(yes_button, no_button, current_index):
 app.layout = serve_layout
 
 if __name__ == '__main__':
-    app.run(debug=True)
+    app.run(debug=False)

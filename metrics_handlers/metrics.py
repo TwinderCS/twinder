@@ -5,13 +5,11 @@ sys.path.append('text_analysis')
 sys.path.append('dumps')
 sys.path.append('data_handling')
 sys.path.append('metrics_handlers')
-import time
 from models import *
 import numpy as np
 from text_analysis import get_classifier
 import pandas as pd
 from models import *
-import time
 
 
 polarity = ['negative', 'neutral', 'positive']
@@ -69,34 +67,31 @@ def get_metric_from_tweet(tweet : str, alpha = alpha, cl = cl):
     metrics = np.concatenate((mind_state_vector, topic_vector))
     return metrics
 
-def get_metric_from_user(user : str, df = df_tweets):
+def get_metric_from_user(user : str, df = df_tweets, debug = False):
     """
     Iterates over all of the user's tweets to return the average of get_metric_from_tweet
     """
-    begin = time.time()
     user_tweets_df = df[df['user'] == user]
-    #print(user_tweets_df.head(8))
+    if debug:
+        print(user_tweets_df.head(8))
     nb_tweets = 0
     user_metric = np.zeros(14, dtype=float)
     for tweet in user_tweets_df['text']:
         nb_tweets += 1
         user_metric += get_metric_from_tweet(tweet)
     mean_vector = user_metric/nb_tweets
-    end = time.time()
-    print(end - begin)
     return mean_vector
-    #print(user_metric/nb_tweets)
+    if debug:
+        print(user_metric/nb_tweets)
 
 def distance(v1 : list, v2 : list):
     """Returns the euclidian distance of v1 and v2"""
-    if len(v1) != len(v2):
-        print("Error distance : vectors with different sizes")
-    if len(v1) == 0:
-        print("Error distance : empty vector")
+    assert(len(v1) != len(v2), "Error distance : vectors with different sizes")
+    assert(len(v1) == 0, "Error distance : empty vector")
 
-    return np.sum([(v1[i] - v2[i])**2 for i in range(len(v1))])**(0.5)
+    return np.sqrt(((v1-v2)**2).sum())
 
-def get_closest_users(username : str, n = 10, N = 200):
+def get_closest_users(username : str, n = 10, N = 'max'):
     """
     Will only consider the first N users 
     Go throught the users and calculate the distances to the user's vector
@@ -106,10 +101,12 @@ def get_closest_users(username : str, n = 10, N = 200):
     df_metric = pd.read_pickle("dumps/metrics.pkl")
 
     metric = df_metric[df_metric['username'] == username]['metric'].iloc[0]
+
     
     """The first n users different from the one in argument"""
     users_with_metric = list(df_metric[df_metric['username'] != username][['username', 'metric']].itertuples(index=False, name=None))
-
+    if N == 'max':
+        N = len(users_with_metric)
 
     user_with_dist = np.array([[distance(metric, user_metric), username] for (username, user_metric) in users_with_metric[0:N]])
     
