@@ -1,6 +1,8 @@
 # Project of the coding weeks 2020-2021 of the Twinder® Team
 
-## GitLab
+## GitLab and pwpt
+
+https://docs.google.com/presentation/d/1eBpYBZ3qCNge3yiuCJ5f1ER0wrEK_rBEQPP6JIsN4SA/edit#slide=id.gc6f9e470d_0_0
 
 https://gitlab-cw4.centralesupelec.fr/twittos/twittos-s1/
 
