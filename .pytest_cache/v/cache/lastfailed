@@ -1,7 +1,0 @@
-{
-<<<<<<< HEAD
-  "tests/test_metrics.py": true,
-=======
->>>>>>> c4ae128e5bd0c5d8da24f2a6eef1352e380d920f
-  "tests/test_text_analysis.py": true
-}

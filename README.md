@@ -14,13 +14,14 @@ Create a programm that propose some Twitter profiles to the user from its tweets
 ## The Twinder® Team
 **add work distribution**
 
-- Anas Lecaillon (Maitre de l'Univers (Entre autres))
-- Mohamed Koucha (Être humain (Je suppose))
-- Balthazar (TextBlob classifier implementation for polarity (pos, neu, neg), training of the classifier, 
+- Anas Lecaillon 
+- Mohamed Koucha 
+- Balthazar : TextBlob classifier implementation for polarity (pos, neu, neg), training of the classifier, 
             combination of the classifier, the emotion model and the topic model to create each user's metric,
-            calculating closest users, and a little of dataframe cleaning, and create the metric dataframe)
-- Sarah
-- Léna (Tests and global problems, create the metric dataframe)
+            calculating closest users, and a little of dataframe cleaning, and create the metric dataframe
+- Léna Pohier--Plantel: Tests and global problems, create the metric dataframe
+- Sarah Pouliquen
+- Martin Pupat : Frontend-backend connection, Code optimization, Team coordination
 
 ## Dependencies
 - `dash`
