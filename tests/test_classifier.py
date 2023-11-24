@@ -5,8 +5,8 @@ from torchtext.vocab import build_vocab_from_iterator
 import pytest
 import pandas as pd
 import sys
-sys.path.append("text_analysis")
-from classifier import gen_dataset, split_dataset, yield_batches, NLPModel, Model
+sys.path.append("classifiers")
+from nlp_models import gen_dataset, split_dataset, yield_batches, NLPModel, Model
 
 # Assuming 'dumps/df.pkl' contains a pickled DataFrame with 'text' and 'class' columns
 

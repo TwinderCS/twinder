@@ -1,11 +1,14 @@
 import pytest
 from textblob.classifiers import NaiveBayesClassifier
 import sys
-sys.path.append("text_analysis")
-from text_analysis import get_opinion_rate, get_new_classifier, get_classifier, cleaner
+sys.path.append("classifiers")
+from textblob_classifier import get_new_classifier, get_classifier
+from cleaner import cleaner
 
 # pytest --cov=text_analysis --cov-report=html:coverage_reports_text_analysis
 # pytest --cov=metrics_handlers --cov-report=html:coverage_reports_metrics_handlers
+
+# get_opinion rate now obsolete
 
 def test_get_new_classifier():
     assert isinstance(get_new_classifier(), NaiveBayesClassifier)

@@ -165,7 +165,14 @@ twinder
 
 ## Informations about tests
 
+## MVP progression
+
+- Conception of the first interface where the user can enter its id and load the associated dataframe generated in backend using the dash module from python.
+- Design of the second page enabling the selection of pretendant lovers by also using the dash module from python.
+
 ## MVC
+
+
 
 ## What else could we have done if the Coding Weeks were longer ?
 

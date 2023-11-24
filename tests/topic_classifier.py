@@ -12,8 +12,8 @@ from torch import from_numpy
 import pytorch_lightning as pl
 import sys
 sys.path.append("data_handling")
-sys.path.append("text_analysis")
-from classifier import  Model, gen_dataset, split_dataset, yield_batches
+sys.path.append("classifiers")
+from nlp_models import  Model, gen_dataset, split_dataset, yield_batches
 import pandas as pd
 
 def topic_train():
