@@ -145,6 +145,7 @@ twinder
 ├── __main__.py
 ├── metrics_handlers
 │   ├── metrics.py
+│   ├── metrics_fetcher.py
 │   └── models.py
 ├── model_notebooks
 │   ├── emotion_train.ipynb
@@ -160,7 +161,8 @@ twinder
 │   ├── test_with_pytest.py
 │   └── topic_classifier.py
 └── Working docs
-    └── WhatsApp_Image_2023-11-23_at_10.32.55.jpeg
+    ├── WhatsApp_Image_2023-11-23_at_10.32.55.jpeg
+    ├── IMG_0324.mov
 ```
 
 ## Informations about tests
