@@ -86,12 +86,6 @@ git clone https://gitlab-cw4.centralesupelec.fr:twittos/twittos-s1.git
 python3 config.py
 ```
 
-## Troubleshooting
-
-If files in dumps missing, use the `data_handling`'s `create_dataframe.py` methods
-to recreate them
-
-
 # To run the project
 
 Execute the `__main__.py` file or simply go into the root directory of the repository
@@ -104,6 +98,12 @@ python3 .
 ## Username examples to test the app:
 
 scotthamilton, mimismo, erinx3leannexo, 2Hood4Hollywood, joy_wolf, lovesongwriter
+
+## Troubleshooting
+
+If files in dumps missing, use the `data_handling`'s `create_dataframe.py` methods
+to recreate them
+
 
 ## Current Project Structure
 ```
