@@ -1,9 +1,5 @@
 # Project of the coding weeks 2023 of the Twinder® Team
 
-## GitLab and pwpt
-
-https://docs.google.com/presentation/d/1eBpYBZ3qCNge3yiuCJ5f1ER0wrEK_rBEQPP6JIsN4SA/edit#slide=id.gc6f9e470d_0_0
-
 ## Description
 
 Create a programm that proposes some Twitter profiles to the user from its tweets.
@@ -45,9 +41,14 @@ organization of code/module structure.
 pip3 install dash dash_bootstrap_components numpy pandas
 ```
 
-3. Clone the repository
+2. Clone the repository
 ```bash
 git clone https://gitlab-cw4.centralesupelec.fr:twittos/twittos-s1.git
+```
+
+3. Run
+```bash
+python3 .
 ```
 
 ### Development Dependencies
@@ -85,6 +86,7 @@ git clone https://gitlab-cw4.centralesupelec.fr:twittos/twittos-s1.git
 ```bash
 python3 config.py
 ```
+5. Download files from [Releases](https://github.com/anonx3247/twinder/releases/tag/data) and put them in `/dumps`
 
 # To run the project
 
